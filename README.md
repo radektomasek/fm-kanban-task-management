@@ -21,6 +21,7 @@ The frontend part of the app will be available in the [web-client](./web-client)
 - [React 18](https://react.dev/blog/2022/03/29/react-v18)
 - [TypeScript](https://www.typescriptlang.org)
 - [React Query](https://tanstack.com/query/latest/docs/framework/react/overview)
+- [Storybook](https://storybook.js.org)
 - [TailwindCSS](https://tailwindcss.com)
 - [Vite.js](https://vitejs.dev)
 
