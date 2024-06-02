@@ -5,11 +5,13 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
-## Unreleased - [0.2.2]
+## Unreleased - [0.3.0]
 
 ### Added
 
-- [web-client](./web-client) PATCH added a checkbox component
+- [web-client](./web-client) MINOR added a set of new components (checkbox, Dropdown, TextField) component
+- [web-client](./web-client) MINOR added a support for SVG files and exported first two assets from the Figma design
+- [web-client](./web-client) MINOR created a simple assert function for the HTML Node type check
 
 ### Changed
 

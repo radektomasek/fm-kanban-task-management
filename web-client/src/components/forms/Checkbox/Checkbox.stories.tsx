@@ -25,6 +25,6 @@ export const Completed: Story = {
   args: {
     id: "completed-example",
     label: "Completed",
-    defaultValue: true,
+    default: true,
   },
 }

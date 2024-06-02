@@ -1,39 +1,51 @@
-import { useState, forwardRef, type ComponentProps } from "react"
-import { cva, VariantProps } from "class-variance-authority"
+import { useState, forwardRef, type ComponentProps, MouseEvent } from "react"
 import { cn } from "@/utils/helpers/styles.helpers"
 
-const checkboxStyles = cva([], {
-  variants: {},
-  defaultVariants: {},
-})
-
-type CheckboxProps = Omit<ComponentProps<"input">, "type"> &
-  VariantProps<typeof checkboxStyles> & {
-    label: string
-    defaultValue?: boolean
-  }
+type CheckboxProps = Omit<ComponentProps<"input">, "type"> & {
+  testId?: string
+  label: string
+  default?: boolean
+}
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ id, label, ...props }, ref) => {
-    const [checked, setChecked] = useState<boolean>(props.defaultValue ?? false)
+  ({ id, label, testId, ...props }, ref) => {
+    const [checked, setChecked] = useState<boolean>(props.default ?? false)
 
-    const handleChange = () => {
+    const handleDivClick = (event: MouseEvent<HTMLDivElement>) => {
+      if (
+        (event.target instanceof HTMLInputElement &&
+          event.target.type === "checkbox") ||
+        event.target instanceof HTMLLabelElement
+      ) {
+        return
+      }
+
       setChecked(!checked)
+      /**
+       * @TODO: add a callback function that pass data towards the centralized state (e.g. via callback)
+       */
+    }
+
+    const handleInputChange = () => {
+      setChecked(!checked)
+      /**
+       * @TODO: add a callback function that pass data towards the centralized state (e.g. via callback)
+       */
     }
 
     return (
-      <div className="flex min-w-96 bg-custom-light-grey p-3 gap-4 rounded hover:bg-custom-light-purple-25 focus:bg-custom-light-purple-25 cursor-pointer">
+      <div
+        data-testid={testId}
+        onClick={handleDivClick}
+        className="flex min-w-96 bg-custom-light-grey p-3 gap-4 rounded hover:bg-custom-light-purple-25 focus:bg-custom-light-purple-25 cursor-pointer"
+      >
         <input
           id={id}
           ref={ref}
           type="checkbox"
           checked={checked}
-          onChange={handleChange}
-          className={cn(
-            "w-4 h-4 rounded-sm",
-            checked && "accent-custom-dark-purple",
-            !checked && "border border-custom-medium-grey"
-          )}
+          onChange={handleInputChange}
+          className="text-custom-dark-purple focus:custom-dark-purple border-custom-medium-grey peer rounded-sm w-4 h-4"
           {...props}
         />
         <label

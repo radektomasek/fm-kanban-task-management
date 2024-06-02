@@ -1,5 +1,7 @@
 /** @type {import('tailwindcss').Config} */
 
+import tailwindFormPlugin from "@tailwindcss/forms"
+
 module.exports = {
   darkMode: ["class"],
   content: ["./src/**/*.{ts,tsx}", "index.html"],
@@ -54,6 +56,7 @@ module.exports = {
           "dark-grey": "hsl(235, 12%, 19%)",
           "dark-lines": "hsl(236, 11%, 27%)",
           "medium-grey": "hsl(216, 15%, 57%)",
+          "medium-grey-25": "hsla(216, 15%, 57%, 0.25)",
           "medium-lines": "hsl(221, 69%, 94%)",
           "light-grey": "hsl(220, 69%, 97%)",
           white: "hsl(0, 0%, 100%)",
@@ -66,5 +69,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [tailwindFormPlugin],
 }
