@@ -6,6 +6,11 @@ const meta: Meta<typeof Dropdown> = {
   component: Dropdown,
   parameters: {
     layout: "centered",
+    docs: {
+      story: {
+        height: "12rem",
+      },
+    },
   },
   tags: ["autodocs"],
 }
