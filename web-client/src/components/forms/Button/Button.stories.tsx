@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react"
 import { Button } from "./Button.component"
 
 const meta: Meta<typeof Button> = {
-  title: "Components/Button",
+  title: "Components/Forms/Button",
   component: Button,
   parameters: {
     layout: "centered",
@@ -42,9 +42,18 @@ export const Regular: Story = {
   },
 }
 
+export const Sidebar: Story = {
+  args: {
+    intent: "sidebar",
+    children: "Platform Launch",
+    active: true,
+  },
+}
+
 export const Large: Story = {
   args: {
     size: "large",
+    rounded: "large",
     children: "Button Primary (L)",
   },
 }
