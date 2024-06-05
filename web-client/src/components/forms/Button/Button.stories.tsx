@@ -42,7 +42,7 @@ export const Regular: Story = {
   },
 }
 
-export const Sidebar: Story = {
+export const SidebarActive: Story = {
   args: {
     intent: "sidebar",
     children: "Platform Launch",
@@ -50,10 +50,37 @@ export const Sidebar: Story = {
   },
 }
 
+export const SidebarInactive: Story = {
+  args: {
+    intent: "sidebar",
+    children: "Platform Launch",
+    active: false,
+  },
+}
+
+export const SidebarToggleDefault: Story = {
+  args: {
+    intent: "sidebar",
+    children: "Hide Sidebar",
+    iconName: "eye",
+    wrapped: false,
+    active: false,
+  },
+}
+
+export const SidebarToggleWrapped: Story = {
+  args: {
+    intent: "sidebar",
+    children: "Hide Sidebar",
+    iconName: "eye",
+    wrapped: true,
+    active: false,
+  },
+}
+
 export const Large: Story = {
   args: {
     size: "large",
-    rounded: "large",
     children: "Button Primary (L)",
   },
 }
