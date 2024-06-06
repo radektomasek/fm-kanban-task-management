@@ -1,7 +1,15 @@
+import { BoardPage } from "@/views/Board"
+import { Logo } from "@/components/layout/logo"
+
 function App() {
   return (
     <>
-      <h1 className="text-2xl font-bold">Project init</h1>
+      <header>
+        <Logo />
+      </header>
+      <main>
+        <BoardPage />
+      </main>
     </>
   )
 }

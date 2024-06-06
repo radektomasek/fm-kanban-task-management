@@ -1,8 +1,8 @@
-import { type Board } from "@/utils/mocks/boards.mocks"
+import { useState } from "react"
 import { SidebarHeader, ThemeSwitcher } from "@/components/layout/menu"
 import { Button } from "@/components/forms"
+import { type Board } from "@/utils/mocks/boards.mocks"
 import { cn } from "@/utils/helpers/styles.helpers"
-import { useState } from "react"
 
 type Props = {
   boards: Board[]
@@ -26,28 +26,33 @@ export const Sidebar = ({ boards }: Props) => {
     toggleShowSidebar((showSidebar) => !showSidebar)
 
   return (
-    <>
+    <div className="w-[18.75rem] border-r-2">
       <div
         className={cn(
-          "flex flex-col bg-custom-white justify-between min-h-[calc(100vh-6rem)] relative",
-          !showSidebar && "hidden",
-          showSidebar && "w-72"
+          "flex flex-col bg-custom-white justify-between min-h-[calc(100vh-10rem)] relative pr-4 ",
+          !showSidebar && "hidden"
         )}
       >
         <div>
-          <SidebarHeader title={"All Boards"} numberOfBoards={boards.length} />
+          <SidebarHeader
+            className="ml-8 mb-3"
+            title={"All Boards"}
+            numberOfBoards={boards.length}
+          />
           {getBoardButtonLinks(boards, boards[0])}
           <Button
-            intent={"sidebar"}
             active={false}
+            intent={"sidebar"}
             className="text-custom-dark-purple"
           >
             + Create New Board
           </Button>
         </div>
-        <ThemeSwitcher />
+        <ThemeSwitcher className={"ml-8"} />
       </div>
+
       <Button
+        className={"mt-4"}
         intent={"sidebar"}
         active={false}
         wrapped={!showSidebar}
@@ -56,6 +61,6 @@ export const Sidebar = ({ boards }: Props) => {
       >
         Hide Sidebar
       </Button>
-    </>
+    </div>
   )
 }
