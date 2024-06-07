@@ -1,6 +1,9 @@
 import { forwardRef, type ComponentProps } from "react"
 import { cva, VariantProps } from "class-variance-authority"
 import { cn } from "@/utils/helpers/styles.helpers"
+import FluentBoard from "@/assets/fluent-board.svg"
+import EyeOpen from "@/assets/eye-open.svg"
+import EyeSlash from "@/assets/eye-slash.svg"
 
 const buttonStyles = cva(
   [
@@ -22,17 +25,67 @@ const buttonStyles = cva(
     variants: {
       intent: {
         primary:
-          "bg-custom-dark-purple text-custom-white hover:bg-custom-light-purple",
+          "bg-custom-dark-purple text-custom-white hover:bg-custom-light-purple justify-center",
         secondary:
-          "bg-custom-light-purple-10 text-custom-dark-purple hover:bg-custom-light-purple-25",
+          "bg-custom-light-purple-10 text-custom-dark-purple hover:bg-custom-light-purple-25 justify-center",
         destructive:
-          "bg-custom-red text-custom-white hover:bg-custom-light-red",
+          "bg-custom-red text-custom-white hover:bg-custom-light-red justify-center",
+        sidebar: "gap-4 text-base h-12 justify-start",
       },
       size: {
-        large: "text-base h-12 px-[3.844rem] rounded-3xl",
-        regular: "text-xs h-10 px-[4.344rem] rounded-[1.25rem]",
+        large: "text-base h-12",
+        regular: "text-xs h-10",
+        wrapped: "text-xs h-10 justify-center",
+      },
+      active: {
+        false:
+          "text-custom-medium-grey hover:bg-custom-light-purple-10 hover:text-custom-dark-purple",
+        true: "bg-custom-dark-purple text-custom-white",
       },
     },
+    compoundVariants: [
+      {
+        intent: "primary",
+        size: "regular",
+        className: "w-[15.9375rem] rounded-[1.25rem]",
+      },
+      {
+        intent: "secondary",
+        size: "regular",
+        className: "w-[15.9375rem] rounded-[1.25rem]",
+      },
+      {
+        intent: "destructive",
+        size: "regular",
+        className: "w-[15.9375rem] rounded-[1.25rem]",
+      },
+      {
+        intent: "primary",
+        size: "large",
+        className: "w-[17.25rem] rounded-3xl",
+      },
+      {
+        intent: "secondary",
+        size: "large",
+        className: "w-[17.25rem] rounded-3xl",
+      },
+      {
+        intent: "destructive",
+        size: "large",
+        className: "w-[17.25rem] rounded-3xl",
+      },
+      {
+        intent: "sidebar",
+        size: "large",
+        className: "w-[17.25rem] pl-8 rounded-r-3xl",
+      },
+      {
+        intent: "sidebar",
+        size: "wrapped",
+        className:
+          "w-14 rounded-r-3xl bg-custom-dark-purple text-custom-white fixed bottom-2 left-0",
+      },
+    ],
     defaultVariants: {
       intent: "primary",
       size: "regular",
@@ -40,10 +93,47 @@ const buttonStyles = cva(
   }
 )
 
-type ButtonProps = ComponentProps<"button"> & VariantProps<typeof buttonStyles>
+type IconName = "board" | "eye"
+
+type ButtonProps = ComponentProps<"button"> &
+  VariantProps<typeof buttonStyles> & {
+    wrapped?: boolean
+    iconName?: IconName
+  }
+
+const getButtonSvgIcon = (name?: IconName, wrapped: boolean = false) => {
+  switch (name) {
+    case "eye":
+      return wrapped ? <EyeOpen /> : <EyeSlash />
+    case "board":
+    default:
+      return <FluentBoard />
+  }
+}
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
-  ({ intent, size, className, ...props }, ref) => {
+  ({ intent, size, active, className, iconName, wrapped, ...props }, ref) => {
+    const isWrapped = wrapped === true
+    if (intent === "sidebar") {
+      return (
+        <button
+          ref={ref}
+          className={cn(
+            buttonStyles({
+              intent,
+              active: !isWrapped ? active : true,
+              size: isWrapped ? "wrapped" : "large",
+              className,
+            })
+          )}
+          {...props}
+        >
+          {getButtonSvgIcon(iconName, wrapped)}
+          {!isWrapped && <span>{props.children}</span>}
+        </button>
+      )
+    }
+
     return (
       <button
         ref={ref}

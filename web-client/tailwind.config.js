@@ -8,6 +8,9 @@ module.exports = {
   prefix: "",
   theme: {
     extend: {
+      width: {
+        75: "18.75rem",
+      },
       fontSize: {
         "2xs": [
           "0.75rem",
@@ -58,6 +61,7 @@ module.exports = {
           "medium-grey": "hsl(216, 15%, 57%)",
           "medium-grey-25": "hsla(216, 15%, 57%, 0.25)",
           "medium-lines": "hsl(221, 69%, 94%)",
+          "light-lines": "hsl(196, 69%, 94%)",
           "light-grey": "hsl(220, 69%, 97%)",
           white: "hsl(0, 0%, 100%)",
           red: "hsl(0, 78%, 63%)",

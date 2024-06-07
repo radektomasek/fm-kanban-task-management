@@ -2,52 +2,31 @@
 
 All notable changes to this project will be documented in this file.
 
-The format is based on [Keep a Changelog](http://keepachangelog.com/)
-and this project adheres to [Semantic Versioning](http://semver.org/).
+## [0.4.0]
 
-## Unreleased - [0.3.0]
+- [web-client](./web-client) FEATURE: added components related to Sidebar and bits of Header (Logo)
+- [web-client](./web-client) FEATURE: added SVG assets to cover the sidebar functionality
+- [web-client](./web-client) CHANGE: extended the folder structure to accommodate new elements (layout components) 
+- [web-client](./web-client) CHANGE: incorporate new options for the form element to serve the Sidebar features
+- [web-client](./web-client) CHANGE: simplify the changelog
 
-### Added
+## [0.3.0]
 
-- [web-client](./web-client) MINOR added a set of new components (checkbox, Dropdown, TextField) component
-- [web-client](./web-client) MINOR added a support for SVG files and exported first two assets from the Figma design
-- [web-client](./web-client) MINOR created a simple assert function for the HTML Node type check
-
-### Changed
-
-### Fixed
+- [web-client](./web-client) FEATURE: added a set of new components (checkbox, Dropdown, TextField) component
+- [web-client](./web-client) FEATURE: added a support for SVG files and exported first two assets from the Figma design
+- [web-client](./web-client) FEATURE: created a simple assert function for the HTML Node type check
 
 ## [0.2.1]
 
-### Added
-
-- [web-client](./web-client) MINOR created a component structure and added a Button component
-- [web-client](./web-client) MINOR tweaked the Tailwind configuration to match the settings from the Design system
-
-### Changed
-
-- [web-client](./web-client) PATCH expanded the unit test settings to be able to run the Vitest
-
-### Fixed
-
-- [web-client](./web-client) PATCH updated the configs to resolve imports "@/"
+- [web-client](./web-client) FEATURE: created a component structure and added a Button component
+- [web-client](./web-client) CHANGE: tweaked the Tailwind configuration to match the settings from the Design system
+- [web-client](./web-client) FIX: expanded the unit test settings to be able to run the Vitest
+- [web-client](./web-client) FIX: updated the configs to resolve imports "@/"
 
 ## [0.2.0] - 2024-05-30
 
-### Added
-
-- [web-client](./web-client) MINOR initialized the Storybook
-
-### Changed
-
-### Fixed
+- [web-client](./web-client) FEATURE: initialized the Storybook
 
 ## [0.1.0] - 2024-05-29
 
-### Added
-
-- [web-client](./web-client) MINOR initialized the React project and add a basic structure
-
-### Changed
-
-### Fixed
+- [web-client](./web-client) FEATURE: initialized the React project and add a basic structure

@@ -6,10 +6,10 @@ import Chevron from "@/assets/chevron.svg"
 type InteractionType = "mouse" | "keyboard"
 
 type DropdownProps = {
-  testId?: string
   items: string[]
-  default?: string
   onItemSelect?: (item: string) => void
+  readonly testId?: string
+  readonly default?: string
 }
 
 export const Dropdown = (props: DropdownProps) => {
