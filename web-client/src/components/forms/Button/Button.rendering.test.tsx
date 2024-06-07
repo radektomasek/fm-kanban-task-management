@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react"
-import { Button } from "./Button.component"
+import { Button } from "@/components/forms"
 
 describe("Button.component: rendering", () => {
   it("renders a Button component with a defined text", () => {

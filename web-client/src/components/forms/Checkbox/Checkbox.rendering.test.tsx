@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react"
-import { Checkbox } from "./Checkbox.component"
+import { Checkbox } from "@/components/forms"
 import { nanoid } from "nanoid"
 
 describe("Checkbox.component: rendering", () => {

@@ -2,14 +2,22 @@ import { useState, forwardRef, type ComponentProps, MouseEvent } from "react"
 import { cn } from "@/utils/helpers/styles.helpers"
 
 type CheckboxProps = Omit<ComponentProps<"input">, "type"> & {
-  testId?: string
   label: string
-  default?: boolean
+  onUpdate?: (value: boolean) => void
+  readonly testId?: string
+  readonly default?: boolean
 }
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ id, label, testId, ...props }, ref) => {
+  ({ id, label, testId, onUpdate, ...props }, ref) => {
     const [checked, setChecked] = useState<boolean>(props.default ?? false)
+
+    const handleStateUpdate = (newValue: boolean) => {
+      setChecked(newValue)
+      if (onUpdate) {
+        onUpdate(newValue)
+      }
+    }
 
     const handleDivClick = (event: MouseEvent<HTMLDivElement>) => {
       if (
@@ -20,17 +28,11 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
         return
       }
 
-      setChecked(!checked)
-      /**
-       * @TODO: add a callback function that pass data towards the centralized state (e.g. via callback)
-       */
+      handleStateUpdate(!checked)
     }
 
     const handleInputChange = () => {
-      setChecked(!checked)
-      /**
-       * @TODO: add a callback function that pass data towards the centralized state (e.g. via callback)
-       */
+      handleStateUpdate(!checked)
     }
 
     return (

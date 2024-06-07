@@ -1,9 +1,9 @@
-import { render, screen } from "@testing-library/react"
-import { TextField } from "./TextField.component"
 import { nanoid } from "nanoid"
+import { render, screen } from "@testing-library/react"
+import { TextField } from "@/components/forms"
 
 describe("Checkbox.component: rendering", () => {
-  describe("when the component is rendered with no error", () => {
+  describe("when the component is loaded with no error", () => {
     it("renders the component with no error message", () => {
       const testId = nanoid()
 
@@ -17,7 +17,7 @@ describe("Checkbox.component: rendering", () => {
     })
   })
 
-  describe("when the component is rendered with an error", () => {
+  describe("when the component is loaded with an error", () => {
     it("renders the component with an error message displayed", () => {
       const testId = nanoid()
 

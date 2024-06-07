@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react"
-import { SidebarHeader } from "./SidebarHeader.component"
+import { SidebarHeader } from "@/components/layout/menu"
 
 describe("SidebarHeader.component: rendering", () => {
   it("render the header including the numeric parameter and capitalized style", () => {

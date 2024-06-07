@@ -83,7 +83,7 @@ const buttonStyles = cva(
         intent: "sidebar",
         size: "wrapped",
         className:
-          "w-14 rounded-r-3xl bg-custom-dark-purple text-custom-white fixed bottom-4 left-0",
+          "w-14 rounded-r-3xl bg-custom-dark-purple text-custom-white fixed bottom-2 left-0",
       },
     ],
     defaultVariants: {

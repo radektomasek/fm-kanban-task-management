@@ -2,11 +2,15 @@ import { ComponentProps, forwardRef, useState, type ChangeEvent } from "react"
 import { cn } from "@/utils/helpers/styles.helpers"
 
 type TextFieldProps = Omit<ComponentProps<"input">, "type"> & {
-  testId?: string
   placeholder: string
   errorText?: string
-  default?: string
+  readonly testId?: string
+  readonly default?: string
 }
+
+/**
+ * @TODO: The way how to pass data to the higher level components still TBC as still deciding about the final structure.
+ */
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   ({ testId, errorText, ...props }, ref) => {
@@ -14,9 +18,6 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
 
     const handleInputChange = (event: ChangeEvent<HTMLInputElement>) => {
       setValue(event.target.value)
-      /**
-       * @TODO: add a callback function that pass data towards the centralized state (e.g. via callback)
-       */
     }
 
     const canDisplayError = (): boolean => {

@@ -29,7 +29,7 @@ export const Sidebar = ({ boards }: Props) => {
     <div className="w-[18.75rem] border-r-2">
       <div
         className={cn(
-          "flex flex-col bg-custom-white justify-between min-h-[calc(100vh-10rem)] relative pr-4 ",
+          "flex flex-col bg-custom-white justify-between min-h-[calc(100vh-10rem)] relative pr-4",
           !showSidebar && "hidden"
         )}
       >
@@ -48,13 +48,13 @@ export const Sidebar = ({ boards }: Props) => {
             + Create New Board
           </Button>
         </div>
-        <ThemeSwitcher className={"ml-8"} />
+        <ThemeSwitcher className={"ml-8"} onCha />
       </div>
 
       <Button
+        active={false}
         className={"mt-4"}
         intent={"sidebar"}
-        active={false}
         wrapped={!showSidebar}
         iconName={"eye"}
         onClick={toggleShowSidebarHandler}

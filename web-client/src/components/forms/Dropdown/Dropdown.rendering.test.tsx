@@ -1,6 +1,6 @@
+import { nanoid } from "nanoid"
 import { render, screen } from "@testing-library/react"
 import { Dropdown } from "@/components/forms"
-import { nanoid } from "nanoid"
 
 describe("Dropdown.component: rendering", () => {
   describe("when the component is rendered by default", () => {

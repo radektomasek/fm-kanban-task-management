@@ -2,9 +2,9 @@ import type { ComponentProps } from "react"
 import { cn } from "@/utils/helpers/styles.helpers"
 
 type Props = {
-  testId?: string
   title: string
   numberOfBoards: number
+  readonly testId?: string
 } & ComponentProps<"h3">
 
 export const SidebarHeader = ({
