@@ -1,11 +1,11 @@
 import { BoardPage } from "@/views/Board"
-import { Logo } from "@/components/layout/logo"
+import { Navbar } from "@/components/layout/navbar"
 
 function App() {
   return (
     <>
       <header>
-        <Logo />
+        <Navbar boardName="Platform Launch" />
       </header>
       <main>
         <BoardPage />

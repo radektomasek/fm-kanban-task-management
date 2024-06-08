@@ -48,7 +48,7 @@ export const Sidebar = ({ boards }: Props) => {
             + Create New Board
           </Button>
         </div>
-        <ThemeSwitcher className={"ml-8"} onCha />
+        <ThemeSwitcher className={"ml-8"} />
       </div>
 
       <Button
