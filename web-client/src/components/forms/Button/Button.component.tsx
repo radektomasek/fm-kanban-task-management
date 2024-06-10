@@ -32,7 +32,7 @@ const buttonStyles = cva(
         destructive:
           "bg-custom-red text-custom-white hover:bg-custom-light-red justify-center",
         sidebar: "gap-4 text-base h-12 justify-start",
-        svgOnly: "h-10 inline-flex items-center justify-center",
+        svgOnly: "h-10 inline-flex items-center justify-center cursor-pointer",
       },
       size: {
         large: "text-base h-12",
@@ -85,7 +85,7 @@ const buttonStyles = cva(
         intent: "sidebar",
         size: "wrapped",
         className:
-          "w-14 rounded-r-3xl bg-custom-dark-purple text-custom-white fixed bottom-2 left-0",
+          "w-14 rounded-r-3xl bg-custom-dark-purple text-custom-white fixed bottom-6 left-0",
       },
     ],
     defaultVariants: {

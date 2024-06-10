@@ -1,12 +1,7 @@
-import { Sidebar } from "@/components/layout/menu"
-import { boards } from "@/utils/mocks/boards.mocks"
-
 export const BoardPage = () => {
   return (
-    <>
-      <aside>
-        <Sidebar boards={boards} />
-      </aside>
-    </>
+    <div className="bg-custom-light-grey flex-grow h-[calc(100vh-6rem)] border-t-2">
+      This is the board
+    </div>
   )
 }
