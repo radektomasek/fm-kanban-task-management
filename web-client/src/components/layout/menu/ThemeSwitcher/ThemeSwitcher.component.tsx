@@ -1,6 +1,11 @@
+import {
+  forwardRef,
+  useState,
+  type ComponentProps,
+  type KeyboardEvent,
+} from "react"
 import Sun from "@/assets/sun.svg"
 import Moon from "@/assets/moon.svg"
-import { type ComponentProps, forwardRef, useState } from "react"
 import { cn } from "@/utils/helpers/styles.helpers"
 import { toggleTheme, type ThemeMode } from "@/utils/helpers/theme.helpers"
 
@@ -26,12 +31,25 @@ export const ThemeSwitcher = forwardRef<HTMLInputElement, ThemeSwitcherProps>(
       }
     }
 
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (
+        event.key === "Enter" ||
+        event.key === "ArrowLeft" ||
+        event.key === "ArrowRight"
+      ) {
+        handleInputChange()
+        event.preventDefault()
+      }
+    }
+
     return (
       <div
         className={cn([
           "w-[15.69rem] h-12 bg-custom-light-grey inline-flex items-center justify-around rounded-md",
           className,
         ])}
+        tabIndex={0}
+        onKeyDown={handleKeyDown}
       >
         <label
           data-testid={testId}
@@ -48,6 +66,7 @@ export const ThemeSwitcher = forwardRef<HTMLInputElement, ThemeSwitcherProps>(
             onChange={handleInputChange}
             checked={themeMode === "dark"}
             className="sr-only peer"
+            tabIndex={-1}
           />
           <div
             className={cn(

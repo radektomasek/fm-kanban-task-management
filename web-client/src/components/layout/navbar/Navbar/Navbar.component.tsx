@@ -1,4 +1,3 @@
-import { useState } from "react"
 import { Logo } from "@/components/layout/logo"
 import { Button } from "@/components/forms"
 import { ContextMenu } from "@/components/menus"
@@ -8,12 +7,6 @@ type Props = {
 }
 
 export const Navbar = ({ boardName }: Props) => {
-  const [showContextMenu, setShowContextMenu] = useState<boolean>(false)
-
-  const toggleShowContextMenu = () => {
-    setShowContextMenu(!showContextMenu)
-  }
-
   return (
     <div className="flex h-24">
       <Logo />
@@ -22,12 +15,7 @@ export const Navbar = ({ boardName }: Props) => {
 
         <div className="mr-8 flex w-48 justify-between items-center relative">
           <Button className="w-40">+ Add New Task</Button>
-          <Button
-            intent={"svgOnly"}
-            iconName="dots"
-            onClick={toggleShowContextMenu}
-          />
-          {showContextMenu && <ContextMenu />}
+          <ContextMenu />
         </div>
       </nav>
     </div>
