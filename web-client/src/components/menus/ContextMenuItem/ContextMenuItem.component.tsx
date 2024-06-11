@@ -2,22 +2,14 @@ import { ComponentProps, forwardRef } from "react"
 import type { BoardContextMenu } from "@/utils/mocks/menus.mocks"
 import { cn } from "@/utils/helpers/styles.helpers"
 
-type Props = BoardContextMenu &
-  ComponentProps<"li"> & {
-    onMouseOver: () => void
-  }
+type Props = BoardContextMenu & ComponentProps<"li">
 
 export const ContextMenuItem = forwardRef<HTMLLIElement, Props>(
-  ({ title, type, className, onMouseOver }: Props, ref) => {
+  ({ title, type, className, ...props }: Props, ref) => {
     return (
       <li
         ref={ref}
         tabIndex={-1}
-        onMouseOver={() => {
-          if (onMouseOver) {
-            onMouseOver()
-          }
-        }}
         className={cn(
           [
             "cursor-pointer",
@@ -27,10 +19,10 @@ export const ContextMenuItem = forwardRef<HTMLLIElement, Props>(
             "rounded-md",
             className,
           ],
-
           type === "standard" && "text-custom-medium-grey",
           type === "destructive" && "text-custom-red"
         )}
+        {...props}
       >
         {title}
       </li>

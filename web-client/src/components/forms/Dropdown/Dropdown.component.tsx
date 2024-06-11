@@ -148,7 +148,7 @@ export const Dropdown = (props: DropdownProps) => {
               className={cn(
                 "px-3 py-2 cursor-pointer text-xs text-custom-medium-grey",
                 interactionType === "mouse" &&
-                  "hover:border hover:border-custom-dark-purple",
+                  "hover:border-custom-dark-purple",
                 interactionType === "keyboard" &&
                   focusedOptionIndex === index &&
                   "border border-custom-dark-purple",

@@ -148,7 +148,7 @@ export const ContextMenu = ({ testId, onItemSelect }: Props) => {
                   "hover:bg-custom-light-purple-25",
                 interactionType === "keyboard" &&
                   focusedOptionIndex === index &&
-                  "bg-custom-light-purple-25",
+                  "border bg-custom-light-purple-25",
                 "focus:outline-none focus:ring-1 focus:ring-custom-dark-purple focus:border-transparent"
               )}
               {...element}
