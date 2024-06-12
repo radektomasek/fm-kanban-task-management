@@ -1,13 +1,16 @@
 import { BoardPage } from "@/views/Board"
-import { Logo } from "@/components/layout/logo"
+import { Navbar } from "@/components/layout/navigation"
+import { Sidebar } from "@/components/layout/menu"
+import { boards } from "@/utils/mocks/boards.mocks"
 
 function App() {
   return (
     <>
       <header>
-        <Logo />
+        <Navbar boardName="Platform Launch" />
       </header>
-      <main>
+      <main className="flex w-screen">
+        <Sidebar boards={boards} />
         <BoardPage />
       </main>
     </>

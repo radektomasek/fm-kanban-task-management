@@ -4,6 +4,7 @@ import { cn } from "@/utils/helpers/styles.helpers"
 import FluentBoard from "@/assets/fluent-board.svg"
 import EyeOpen from "@/assets/eye-open.svg"
 import EyeSlash from "@/assets/eye-slash.svg"
+import DotGroup from "@/assets/dot-group.svg"
 
 const buttonStyles = cva(
   [
@@ -31,6 +32,7 @@ const buttonStyles = cva(
         destructive:
           "bg-custom-red text-custom-white hover:bg-custom-light-red justify-center",
         sidebar: "gap-4 text-base h-12 justify-start",
+        svgOnly: "h-10 inline-flex items-center justify-center cursor-pointer",
       },
       size: {
         large: "text-base h-12",
@@ -83,7 +85,7 @@ const buttonStyles = cva(
         intent: "sidebar",
         size: "wrapped",
         className:
-          "w-14 rounded-r-3xl bg-custom-dark-purple text-custom-white fixed bottom-2 left-0",
+          "w-14 rounded-r-3xl bg-custom-dark-purple text-custom-white fixed bottom-6 left-0",
       },
     ],
     defaultVariants: {
@@ -93,7 +95,7 @@ const buttonStyles = cva(
   }
 )
 
-type IconName = "board" | "eye"
+type IconName = "board" | "eye" | "dots"
 
 type ButtonProps = ComponentProps<"button"> &
   VariantProps<typeof buttonStyles> & {
@@ -105,6 +107,8 @@ const getButtonSvgIcon = (name?: IconName, wrapped: boolean = false) => {
   switch (name) {
     case "eye":
       return wrapped ? <EyeOpen /> : <EyeSlash />
+    case "dots":
+      return <DotGroup />
     case "board":
     default:
       return <FluentBoard />
@@ -114,6 +118,24 @@ const getButtonSvgIcon = (name?: IconName, wrapped: boolean = false) => {
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   ({ intent, size, active, className, iconName, wrapped, ...props }, ref) => {
     const isWrapped = wrapped === true
+    if (intent === "svgOnly") {
+      return (
+        <button
+          ref={ref}
+          className={cn(
+            buttonStyles({
+              intent,
+              className,
+            })
+          )}
+          {...props}
+        >
+          {getButtonSvgIcon(iconName)}
+          <span className="sr-only">{props.children}</span>
+        </button>
+      )
+    }
+
     if (intent === "sidebar") {
       return (
         <button

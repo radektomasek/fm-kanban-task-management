@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 - [web-client](./web-client) CHANGE: extended the folder structure to accommodate new elements (layout components) 
 - [web-client](./web-client) CHANGE: incorporate new options for the form element to serve the Sidebar features
 - [web-client](./web-client) CHANGE: simplify the changelog
+- [web-client](./web-client) CHANGE: improved the keyboard controls of custom elements (ThemeSwitcher, SvgButton)
 
 ## [0.3.0]
 

@@ -1,10 +1,11 @@
 import { useState } from "react"
 import { SidebarHeader, ThemeSwitcher } from "@/components/layout/menu"
 import { Button } from "@/components/forms"
-import { type Board } from "@/utils/mocks/boards.mocks"
 import { cn } from "@/utils/helpers/styles.helpers"
+import { type Board } from "@/utils/mocks/boards.mocks"
 
 type Props = {
+  readonly testId?: string
   boards: Board[]
 }
 
@@ -19,37 +20,38 @@ const getBoardButtonLinks = (boards: Board[], activeBoard: Board) =>
     </Button>
   ))
 
-export const Sidebar = ({ boards }: Props) => {
+export const Sidebar = ({ testId, boards }: Props) => {
   const [showSidebar, toggleShowSidebar] = useState(true)
 
   const toggleShowSidebarHandler = () =>
     toggleShowSidebar((showSidebar) => !showSidebar)
 
   return (
-    <div className="w-[18.75rem] border-r-2">
-      <div
-        className={cn(
-          "flex flex-col bg-custom-white justify-between min-h-[calc(100vh-10rem)] relative pr-4",
-          !showSidebar && "hidden"
-        )}
-      >
-        <div>
-          <SidebarHeader
-            className="ml-8 mb-3"
-            title={"All Boards"}
-            numberOfBoards={boards.length}
-          />
-          {getBoardButtonLinks(boards, boards[0])}
-          <Button
-            active={false}
-            intent={"sidebar"}
-            className="text-custom-dark-purple"
-          >
-            + Create New Board
-          </Button>
+    <aside data-testid={testId} className="border-r-2">
+      {showSidebar && (
+        <div
+          className={cn(
+            "flex flex-col w-[18.65rem] bg-custom-white justify-between h-[calc(100%-5rem)] relative pr-4"
+          )}
+        >
+          <div>
+            <SidebarHeader
+              className="ml-8 mb-3"
+              title={"All Boards"}
+              numberOfBoards={boards.length}
+            />
+            {getBoardButtonLinks(boards, boards[0])}
+            <Button
+              active={false}
+              intent={"sidebar"}
+              className="text-custom-dark-purple"
+            >
+              + Create New Board
+            </Button>
+          </div>
+          <ThemeSwitcher className={"ml-8"} />
         </div>
-        <ThemeSwitcher className={"ml-8"} onCha />
-      </div>
+      )}
 
       <Button
         active={false}
@@ -61,6 +63,6 @@ export const Sidebar = ({ boards }: Props) => {
       >
         Hide Sidebar
       </Button>
-    </div>
+    </aside>
   )
 }

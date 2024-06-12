@@ -78,6 +78,14 @@ export const SidebarToggleWrapped: Story = {
   },
 }
 
+export const SvgOnly: Story = {
+  args: {
+    intent: "svgOnly",
+    iconName: "dots",
+    children: "Hidden Title",
+  },
+}
+
 export const Large: Story = {
   args: {
     size: "large",
