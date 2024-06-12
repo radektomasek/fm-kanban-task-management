@@ -5,6 +5,7 @@ import { cn } from "@/utils/helpers/styles.helpers"
 import { type Board } from "@/utils/mocks/boards.mocks"
 
 type Props = {
+  readonly testId?: string
   boards: Board[]
 }
 
@@ -19,14 +20,14 @@ const getBoardButtonLinks = (boards: Board[], activeBoard: Board) =>
     </Button>
   ))
 
-export const Sidebar = ({ boards }: Props) => {
+export const Sidebar = ({ testId, boards }: Props) => {
   const [showSidebar, toggleShowSidebar] = useState(true)
 
   const toggleShowSidebarHandler = () =>
     toggleShowSidebar((showSidebar) => !showSidebar)
 
   return (
-    <aside className="border-r-2">
+    <aside data-testid={testId} className="border-r-2">
       {showSidebar && (
         <div
           className={cn(

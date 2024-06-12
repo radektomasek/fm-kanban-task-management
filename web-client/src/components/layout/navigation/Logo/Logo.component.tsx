@@ -6,7 +6,7 @@ import LogoWide from "@/assets/logo-wide.svg"
 export const Logo = () => {
   return (
     <div className="flex flex-col justify-center w-75 bg-custom-white pl-8 border-r-2">
-      <a href="/">
+      <a href="/web-client/public">
         <LogoWide />
       </a>
     </div>

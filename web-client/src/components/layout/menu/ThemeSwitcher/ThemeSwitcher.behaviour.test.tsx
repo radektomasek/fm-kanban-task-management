@@ -1,7 +1,6 @@
 import { nanoid } from "nanoid"
 import { render, screen, fireEvent } from "@testing-library/react"
 import { ThemeSwitcher } from "@/components/layout/menu"
-import { Dropdown } from "@/components/forms"
 
 describe("ThemeSwitcher.component: behavior", () => {
   describe("when 'onThemeUpdate' callback is passed", () => {

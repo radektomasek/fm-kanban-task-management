@@ -1,18 +1,19 @@
-import { boardContextMenuItems } from "@/utils/mocks/menus.mocks"
 import { ContextMenuItem } from "@/components/menus"
 import { useEffect, useRef, useState, type KeyboardEvent } from "react"
 import { Button } from "@/components/forms"
 import { assertIsNode } from "@/utils/helpers/types.helpers"
 import { cn } from "@/utils/helpers/styles.helpers"
+import { type BoardContextMenu } from "@/utils/mocks/menus.mocks"
 
 type InteractionType = "mouse" | "keyboard"
 
 type Props = {
   readonly testId?: string
+  readonly items: BoardContextMenu[]
   onItemSelect?: (id: string) => void
 }
 
-export const ContextMenu = ({ testId, onItemSelect }: Props) => {
+export const ContextMenu = ({ items, testId, onItemSelect }: Props) => {
   const [isOpen, setIsOpen] = useState<boolean>(false)
   const [focusedOptionIndex, setFocusedOptionIndex] = useState<number | null>(
     null
@@ -83,9 +84,7 @@ export const ContextMenu = ({ testId, onItemSelect }: Props) => {
       case "Tab":
       case "ArrowDown":
         setFocusedOptionIndex((prevIndex) => {
-          return prevIndex === null
-            ? 0
-            : (prevIndex + 1) % boardContextMenuItems.length
+          return prevIndex === null ? 0 : (prevIndex + 1) % items.length
         })
         event.preventDefault()
         break
@@ -93,14 +92,13 @@ export const ContextMenu = ({ testId, onItemSelect }: Props) => {
         setFocusedOptionIndex((prevIndex) => {
           return prevIndex === null
             ? 0
-            : (prevIndex - 1 + boardContextMenuItems.length) %
-                boardContextMenuItems.length
+            : (prevIndex - 1 + items.length) % items.length
         })
         event.preventDefault()
         break
       case "Enter":
         if (focusedOptionIndex !== null) {
-          handleOptionClick(boardContextMenuItems[focusedOptionIndex].id)
+          handleOptionClick(items[focusedOptionIndex].id)
         }
         event.preventDefault()
         break
@@ -137,12 +135,12 @@ export const ContextMenu = ({ testId, onItemSelect }: Props) => {
           className="absolute flex flex-col justify-evenly px-2 w-48 min-h-24 top-14 right-4 bg-custom-white z-1 rounded-lg"
           onKeyDown={handleKeyDown}
         >
-          {boardContextMenuItems.map((element, index) => (
+          {items.map((element, index) => (
             <ContextMenuItem
               key={element.id}
               ref={(element) => (menuItemsRefs.current[index] = element)}
-              onClick={() => handleOptionClick(element.id)}
               onMouseOver={handleMouseOver(index)}
+              onOptionClick={handleOptionClick}
               className={cn(
                 interactionType === "mouse" &&
                   "hover:bg-custom-light-purple-25",
