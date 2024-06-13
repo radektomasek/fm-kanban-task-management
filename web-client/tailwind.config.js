@@ -66,6 +66,8 @@ module.exports = {
           white: "hsl(0, 0%, 100%)",
           red: "hsl(0, 78%, 63%)",
           "light-red": "hsl(0, 100%, 80%)",
+          "gradient-grey-start": "hsla(219, 63%, 95%, 1)",
+          "gradient-grey-end": "hsla(218, 66%, 95%, 0.5)",
         },
       },
       fontFamily: {

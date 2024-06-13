@@ -33,6 +33,7 @@ const buttonStyles = cva(
           "bg-custom-red text-custom-white hover:bg-custom-light-red justify-center",
         sidebar: "gap-4 text-base h-12 justify-start",
         svgOnly: "h-10 inline-flex items-center justify-center cursor-pointer",
+        gridItem: "bg-custom-grey",
       },
       size: {
         large: "text-base h-12",
@@ -86,6 +87,11 @@ const buttonStyles = cva(
         size: "wrapped",
         className:
           "w-14 rounded-r-3xl bg-custom-dark-purple text-custom-white fixed bottom-6 left-0",
+      },
+      {
+        intent: "gridItem",
+        className:
+          "text-xl text-custom-medium-grey w-32 bg-[linear-gradient(180deg,hsla(219,63%,95%,1)_0%,hsla(218,66%,95%,0.5)_100%)] w-[17.5rem] h-[50.875rem] rounded-lg hover:text-custom-dark-purple",
       },
     ],
     defaultVariants: {
