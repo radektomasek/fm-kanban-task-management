@@ -1,5 +1,3 @@
-import { nanoid } from "nanoid"
-
 export type Board = {
   id: string
   name: string
@@ -7,15 +5,15 @@ export type Board = {
 
 export const boards: Board[] = [
   {
-    id: nanoid(),
+    id: "cQnkAE_KFa",
     name: "Platform Launch",
   },
   {
-    id: nanoid(),
+    id: "ee5LiDM4HY",
     name: "Marketing Plan",
   },
   {
-    id: nanoid(),
+    id: "88AmzVZ3oT",
     name: "Roadmap",
   },
 ]

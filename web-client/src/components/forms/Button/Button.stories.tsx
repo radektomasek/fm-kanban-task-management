@@ -86,6 +86,13 @@ export const SvgOnly: Story = {
   },
 }
 
+export const GridItem: Story = {
+  args: {
+    intent: "gridItem",
+    children: "+ New Column",
+  },
+}
+
 export const Large: Story = {
   args: {
     size: "large",
