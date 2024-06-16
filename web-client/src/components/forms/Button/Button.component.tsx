@@ -91,7 +91,7 @@ const buttonStyles = cva(
       {
         intent: "gridItem",
         className:
-          "text-xl text-custom-medium-grey w-32 bg-[linear-gradient(180deg,hsla(219,63%,95%,1)_0%,hsla(218,66%,95%,0.5)_100%)] w-[17.5rem] h-[50.875rem] rounded-lg hover:text-custom-dark-purple",
+          "text-xl text-custom-medium-grey w-32 bg-[linear-gradient(180deg,hsla(219,63%,95%,1)_0%,hsla(218,66%,95%,0.5)_100%)] w-[17.5rem] min-h-[200px] h-full rounded-lg hover:text-custom-dark-purple",
       },
     ],
     defaultVariants: {

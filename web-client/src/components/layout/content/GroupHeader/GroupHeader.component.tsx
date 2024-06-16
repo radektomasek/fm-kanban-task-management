@@ -20,6 +20,7 @@ export const GroupHeader = ({
       )}
     >
       <div
+        data-testid={`${testId}-circleBox`}
         className={"w-3.5 h-3.5 rounded-lg"}
         style={{ backgroundColor: circleColor }}
       />
