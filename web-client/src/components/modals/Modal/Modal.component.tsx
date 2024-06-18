@@ -7,7 +7,7 @@ type Props = {
   onClose: () => void
 }
 
-const Modal = ({ isOpen, onClose, children }: Props) => {
+export const Modal = ({ isOpen, onClose, children }: Props) => {
   const modalRootId = document.getElementById("modal")
 
   if (!modalRootId || !isOpen) {
@@ -20,7 +20,7 @@ const Modal = ({ isOpen, onClose, children }: Props) => {
         className="fixed right-0 left-0 top-0 bottom-0 bg-custom-black-50 z-10"
         onClick={onClose}
       >
-        <div className="fixed top-1/2 left-1/2 bg-custom-white p-2 rounded-md flex flex-col">
+        <div className="w-[30rem] px-8 pt-8 pb-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-custom-white rounded-md">
           {children}
         </div>
       </div>
@@ -28,5 +28,3 @@ const Modal = ({ isOpen, onClose, children }: Props) => {
     modalRootId
   )
 }
-
-export default Modal

@@ -1,9 +1,9 @@
 import { Logo } from "@/components/layout/navigation"
 import { Button } from "@/components/forms"
 import { ContextMenu } from "@/components/menus"
-import { boardContextMenuItems } from "@/utils/mocks/menus.mocks"
 import { useState } from "react"
-import Modal from "@/components/modals/Modal/Modal.component"
+import { ConfirmationDialog, Modal } from "@/components/modals"
+import { boardContextMenuItems } from "@/utils/mocks/menus.mocks"
 
 type Props = {
   readonly testId?: string
@@ -29,7 +29,12 @@ export const Navbar = ({ testId, boardName }: Props) => {
         </nav>
       </div>
       <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
-        <h1>Initial componnet</h1>
+        <ConfirmationDialog
+          title="Delete this board?"
+          description="Are you sure you want to delete the 'Platform Launch' board? This action will remove all columns and tasks and cannot be reversed."
+          onDelete={() => {}}
+          onCancel={() => setShowModal(false)}
+        />
       </Modal>
     </>
   )
