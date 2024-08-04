@@ -1,0 +1,26 @@
+[
+  {
+    "id": "3c7d1cf2-2300-4d31-ada1-ed2a06096f80",
+    "name": "Platform Launch",
+    "columns": [
+      {
+        "id": "203e97e6-df76-499e-baea-e60ce7a90de5",
+        "name": "Todo"
+      },
+      {
+        "id": "30d608f5-339d-491a-9739-4327b3ce8ba3",
+        "name": "In progress"
+      }
+    ]
+  },
+  {
+    "id": "743b2d07-5a4c-454a-9489-9f0562fa46d2",
+    "name": "Roadmap",
+    "columns": [
+      {
+        "id": "d43cba82-a324-4922-9577-d61068152971",
+        "name": "Todo"
+      }
+    ]
+  }
+]

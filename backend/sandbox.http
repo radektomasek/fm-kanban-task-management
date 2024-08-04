@@ -1,0 +1,9 @@
+### Health check
+GET http://localhost:4000/v1/healthcheck
+
+### Create a new board
+POST http://localhost:4000/v1/boards
+Content-Type: application/json
+
+{"name": "Roadmap", "columns":  [{ "name": "Todo" }]}
+###
