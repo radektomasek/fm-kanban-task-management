@@ -32,17 +32,10 @@ type Board struct {
 type BoardModel struct{}
 
 func (b BoardModel) Insert(board *Board) error {
-	// we need to read the boards from the disk - not a problem if it doesn't exist
-	file, err := os.Open("boards.json")
-	if err != nil && !errors.Is(err, os.ErrNotExist) {
-		fmt.Println("Error opening file: ", err)
-		return err
-	}
-	defer file.Close()
-
-	jsonData, err := io.ReadAll(file)
+	jsonData, err := readJSONFile("boards.json")
 	if err != nil {
 		fmt.Println("Error reading file: ", err)
+		return err
 	}
 
 	var boards []Board
@@ -59,35 +52,45 @@ func (b BoardModel) Insert(board *Board) error {
 
 	boards = append(boards, *board)
 
-	jsonData, err = json.MarshalIndent(boards, "", "  ")
+	err = writeJSONFile("boards.json", boards)
 	if err != nil {
-		fmt.Println("Error marshalling JSON:", err)
-		return err
-	}
-
-	// We can write it to filesystem - this will be removed at some point
-	file, err = os.Create("boards.json")
-	if err != nil {
-		fmt.Println("Error creating file: ", err)
-		return err
-	}
-	defer file.Close()
-
-	_, err = file.Write(jsonData)
-	if err != nil {
-		fmt.Println("Error writing to file: ", err)
+		fmt.Println("Error writing file: ", err)
 		return err
 	}
 
 	return nil
 }
 
-func (b BoardModel) GetAll() (*Board, error) {
-	return nil, nil
+func (b BoardModel) GetAll() ([]Board, error) {
+	jsonData, err := readJSONFile("boards.json")
+	if err != nil {
+		fmt.Println("Error reading file: ", err)
+		return nil, err
+	}
+
+	var boards []Board
+	err = json.Unmarshal(jsonData, &boards)
+
+	return boards, nil
 }
 
 func (b BoardModel) GetByID(id string) (*Board, error) {
-	return nil, nil
+	jsonData, err := readJSONFile("boards.json")
+	if err != nil {
+		fmt.Println("Error reading file: ", err)
+		return nil, err
+	}
+
+	var boards []Board
+	err = json.Unmarshal(jsonData, &boards)
+
+	for _, board := range boards {
+		if board.ID == id {
+			return &board, nil
+		}
+	}
+
+	return &Board{}, nil
 }
 
 func (b BoardModel) Update(board *Board) error {
@@ -95,5 +98,45 @@ func (b BoardModel) Update(board *Board) error {
 }
 
 func (b BoardModel) Delete(board *Board) error {
+	return nil
+}
+
+/**
+* This functionality is here temporary, will be removed once the DB is initialized
+ */
+
+func readJSONFile(fileName string) ([]byte, error) {
+	file, err := os.Open(fileName)
+	if err != nil && !errors.Is(err, os.ErrNotExist) {
+		return nil, fmt.Errorf("error opening file: %s", err.Error())
+	}
+	defer file.Close()
+
+	jsonData, err := io.ReadAll(file)
+	if err != nil {
+		return nil, fmt.Errorf("error reading file: %s", err.Error())
+	}
+
+	return jsonData, nil
+}
+
+func writeJSONFile(fileName string, payload interface{}) error {
+	jsonData, err := json.MarshalIndent(payload, "", "  ")
+	if err != nil {
+		return fmt.Errorf("error marshalling json %s", err.Error())
+	}
+
+	file, err := os.Create(fileName)
+	if err != nil {
+		return fmt.Errorf("error creating file %s", err.Error())
+	}
+
+	defer file.Close()
+
+	_, err = file.Write(jsonData)
+	if err != nil {
+		return fmt.Errorf("error writing to file %s", err.Error())
+	}
+
 	return nil
 }

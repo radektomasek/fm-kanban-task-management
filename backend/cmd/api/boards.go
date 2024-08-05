@@ -7,11 +7,44 @@ import (
 )
 
 func (app *application) getAllBoards(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Endpoint placeholder for getting all of the boards")
+	boards, err := app.models.Boards.GetAll()
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
+		return
+	}
+
+	headers := make(http.Header)
+	headers.Set("Location", fmt.Sprint("/v1/boards"))
+
+	err = app.writeJSON(w, http.StatusOK, envelope{"boards": boards}, headers)
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
+		return
+	}
 }
 
 func (app *application) getBoardById(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Endpoint placeholder for getting board data (by id)")
+	id, err := app.readUrlParamField(r, "boardId")
+	if err != nil {
+		app.badRequestResponse(w, r, err)
+		return
+	}
+
+	board, err := app.models.Boards.GetByID(id)
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
+		return
+	}
+
+	headers := make(http.Header)
+	headers.Set("Location", fmt.Sprintf("/v1/boards/%s", board.ID))
+
+	err = app.writeJSON(w, http.StatusOK, envelope{"board": board}, headers)
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
+		return
+	}
+
 }
 
 func (app *application) createBoard(w http.ResponseWriter, r *http.Request) {
@@ -58,5 +91,26 @@ func (app *application) updateBoard(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *application) deleteBoard(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Endpoint placeholder for deleting an existing board (by id)")
+	id, err := app.readUrlParamField(r, "boardId")
+	if err != nil {
+		app.badRequestResponse(w, r, err)
+		return
+	}
+
+	board, err := app.models.Boards.GetByID(id)
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
+		return
+	}
+
+	err = app.models.Boards.Delete(board)
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
+		return
+	}
+
+	headers := make(http.Header)
+	headers.Set("Location", fmt.Sprintf("/v1/boards/%s", board.ID))
+
+	err = app.writeJSON(w, http.StatusOK, envelope{"message": "board deleted successfully"}, headers)
 }
