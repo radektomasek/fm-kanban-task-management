@@ -93,11 +93,57 @@ func (b BoardModel) GetByID(id string) (*Board, error) {
 	return &Board{}, nil
 }
 
-func (b BoardModel) Update(board *Board) error {
-	return nil
+func (b BoardModel) Update(payload *Board) (*Board, error) {
+	jsonData, err := readJSONFile("boards.json")
+	if err != nil {
+		fmt.Println("Error reading file: ", err)
+		return nil, err
+	}
+
+	var boards []Board
+	err = json.Unmarshal(jsonData, &boards)
+
+	// We can update the payload and add missing fields which would help us later
+	for index := range payload.Columns {
+		if payload.Columns[index].ID == "" {
+			payload.Columns[index].ID = uuid.NewString()
+			payload.Columns[index].CreatedAt = time.Now()
+		}
+	}
+
+	for index := range boards {
+		if boards[index].ID == payload.ID {
+			boards[index] = *payload
+		}
+	}
+
+	err = writeJSONFile("boards.json", boards)
+	if err != nil {
+		fmt.Println("Error writing file: ", err)
+		return nil, err
+	}
+
+	return payload, nil
 }
 
 func (b BoardModel) Delete(board *Board) error {
+	jsonData, err := readJSONFile("boards.json")
+	if err != nil {
+		fmt.Println("Error reading file: ", err)
+		return err
+	}
+
+	var boards []Board
+	err = json.Unmarshal(jsonData, &boards)
+
+	index := indexOf(board.ID, boards)
+
+	err = writeJSONFile("boards.json", append(boards[:index], boards[index+1]))
+	if err != nil {
+		fmt.Println("Error writing file: ", err)
+		return err
+	}
+
 	return nil
 }
 
@@ -139,4 +185,12 @@ func writeJSONFile(fileName string, payload interface{}) error {
 	}
 
 	return nil
+}
+func indexOf(id string, boards []Board) int {
+	for index, board := range boards {
+		if board.ID == id {
+			return index
+		}
+	}
+	return -1
 }

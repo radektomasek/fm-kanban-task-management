@@ -14,7 +14,6 @@ func (app *application) routes() http.Handler {
 	router.HandlerFunc(http.MethodGet, "/v1/boards/:boardId", app.getBoardById)
 	router.HandlerFunc(http.MethodPut, "/v1/boards/:boardId", app.updateBoard)
 	router.HandlerFunc(http.MethodDelete, "/v1/boards/:boardId", app.deleteBoard)
-	//router.HandlerFunc(http.MethodGet, "/v1/boards/:boardId/tasks/:taskId", nil)
 
 	return app.recoverPanic(router)
 }

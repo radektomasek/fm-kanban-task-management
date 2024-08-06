@@ -2,10 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.0]
+
+- [backend](./backend) FEATURE: added an initial implementation of the golang service, using mock data working with the boards + having a basic CRUD
+
 ## [0.5.0]
 
 - [web-client](./web-client) FEATURE: added the initial implementation of the components on the board
-- [web-client](./web-client) FEATURE: added mocks for the board and cards elements, matching the Frontend Mentor Figma desing
+- [web-client](./web-client) FEATURE: added mocks for the board and cards elements, matching the Frontend Mentor Figma design
 
 ## [0.4.0]
 
