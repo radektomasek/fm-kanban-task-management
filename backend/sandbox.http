@@ -1,0 +1,33 @@
+### Health check
+GET http://localhost:4000/v1/healthcheck
+###
+
+### Get all of the boards
+GET http://localhost:4000/v1/boards
+Content-Type: application/json
+###
+
+### Get specific board by an ID
+GET http://localhost:4000/v1/boards/743b2d07-5a4c-454a-9489-9f0562fa46d2
+Content-Type: application/json
+###
+
+### Create a new board
+POST http://localhost:4000/v1/boards
+Content-Type: application/json
+
+{"name": "Roadmap", "columns":  [{ "name": "Todo" }]}
+###
+
+
+### Update a board
+PUT http://localhost:4000/v1/boards/3c7d1cf2-2300-4d31-ada1-ed2a06096f80
+Content-Type: application/json
+
+{"id":  "3c7d1cf2-2300-4d31-ada1-ed2a06096f80", "name": "Updated Platform launch", "columns":  [{ "id": "203e97e6-df76-499e-baea-e60ce7a90de5", "name": "(Updated) Todo" }, { "id": "30d608f5-339d-491a-9739-4327b3ce8ba3", "name": "(Updated) In progress" }, { "name": "Done" }]}
+###
+
+### Delete specific board by an ID
+DELETE http://localhost:4000/v1/boards/3c7d1cf2-2300-4d31-ada1-ed2a06096f80
+Content-Type: application/json
+###
