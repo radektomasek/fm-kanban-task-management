@@ -4,6 +4,7 @@ All notable changes to this project will be documented in this file.
 
 ## [0.6.0]
 
+- [backend](./web-client) FEATURE: added a basic implementation of the modal wrapper, including of the basic keyboard control 
 - [backend](./backend) FEATURE: added an initial implementation of the golang service, using mock data working with the boards + having a basic CRUD
 
 ## [0.5.0]
