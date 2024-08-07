@@ -55,6 +55,7 @@ module.exports = {
           "light-purple-10": "hsla(242, 48%, 58%, 0.1)",
           "light-purple-25": "hsla(242, 48%, 58%, 0.25)",
           black: "hsl(237, 100%, 4%)",
+          "black-50": "hsla(0, 100%, 0%, 0.50)",
           "very-dark-grey": "hsl(235, 16%, 15%)",
           "dark-grey": "hsl(235, 12%, 19%)",
           "dark-lines": "hsl(236, 11%, 27%)",
