@@ -8,7 +8,7 @@ Content-Type: application/json
 ###
 
 ### Get specific board by an ID
-GET http://localhost:4000/v1/boards/743b2d07-5a4c-454a-9489-9f0562fa46d2
+GET http://localhost:4000/v1/boards/3fca43e5-7aac-4ae8-97f8-f028246dbe92
 Content-Type: application/json
 ###
 
@@ -16,18 +16,23 @@ Content-Type: application/json
 POST http://localhost:4000/v1/boards
 Content-Type: application/json
 
-{"name": "Roadmap", "columns":  [{ "name": "Todo" }]}
+{"name": "Platform Launch", "columns":  [{ "name": "Todo" }, { "name": "Doing" }]}
 ###
 
 
 ### Update a board
-PUT http://localhost:4000/v1/boards/3c7d1cf2-2300-4d31-ada1-ed2a06096f80
+PUT http://localhost:4000/v1/boards/3fca43e5-7aac-4ae8-97f8-f028246dbe92
 Content-Type: application/json
 
-{"id":  "3c7d1cf2-2300-4d31-ada1-ed2a06096f80", "name": "Updated Platform launch", "columns":  [{ "id": "203e97e6-df76-499e-baea-e60ce7a90de5", "name": "(Updated) Todo" }, { "id": "30d608f5-339d-491a-9739-4327b3ce8ba3", "name": "(Updated) In progress" }, { "name": "Done" }]}
+{"id":  "3fca43e5-7aac-4ae8-97f8-f028246dbe92", "name": "Updated Platform launch", "columns":  [{ "id": "6e092df7-42c7-4fff-8988-9033fc661a57", "name": "(Updated) Todo" }, { "name": "In progress" }, { "name": "Done" }]}
 ###
 
 ### Delete specific board by an ID
-DELETE http://localhost:4000/v1/boards/3c7d1cf2-2300-4d31-ada1-ed2a06096f80
+DELETE http://localhost:4000/v1/boards/a231b3fd-72e7-4f2b-a79d-6f3b226bf43f
+Content-Type: application/json
+###
+
+### Get all columns by an ID
+GET http://localhost:4000/v1/boards/55494f14-8bb8-4db9-940d-223b4a4e4067/columns
 Content-Type: application/json
 ###
