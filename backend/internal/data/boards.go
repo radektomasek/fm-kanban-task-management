@@ -10,16 +10,9 @@ import (
 	"time"
 )
 
-type Column struct {
-	ID        string    `json:"id"`
-	Name      string    `json:"name"`
-	CreatedAt time.Time `json:"-"`
-}
-
 type Board struct {
 	ID        string    `json:"id"`
 	Name      string    `json:"name"`
-	Columns   []Column  `json:"columns"`
 	CreatedAt time.Time `json:"-"`
 }
 
@@ -45,11 +38,6 @@ func (b BoardModel) Insert(board *Board) error {
 	board.ID = uuid.NewString()
 	board.CreatedAt = time.Now()
 
-	for index := range board.Columns {
-		board.Columns[index].ID = uuid.NewString()
-		board.Columns[index].CreatedAt = time.Now()
-	}
-
 	boards = append(boards, *board)
 
 	err = writeJSONFile("boards.json", boards)
@@ -70,6 +58,10 @@ func (b BoardModel) GetAll() ([]Board, error) {
 
 	var boards []Board
 	err = json.Unmarshal(jsonData, &boards)
+
+	if boards == nil {
+		boards = []Board{}
+	}
 
 	return boards, nil
 }
@@ -102,14 +94,6 @@ func (b BoardModel) Update(payload *Board) (*Board, error) {
 
 	var boards []Board
 	err = json.Unmarshal(jsonData, &boards)
-
-	// We can update the payload and add missing fields which would help us later
-	for index := range payload.Columns {
-		if payload.Columns[index].ID == "" {
-			payload.Columns[index].ID = uuid.NewString()
-			payload.Columns[index].CreatedAt = time.Now()
-		}
-	}
 
 	for index := range boards {
 		if boards[index].ID == payload.ID {
@@ -153,7 +137,11 @@ func (b BoardModel) Delete(board *Board) error {
 
 func readJSONFile(fileName string) ([]byte, error) {
 	file, err := os.Open(fileName)
-	if err != nil && !errors.Is(err, os.ErrNotExist) {
+	if err != nil {
+		if errors.Is(err, os.ErrNotExist) {
+			return nil, nil
+		}
+
 		return nil, fmt.Errorf("error opening file: %s", err.Error())
 	}
 	defer file.Close()

@@ -1,12 +1,14 @@
 [
   {
-    "id": "743b2d07-5a4c-454a-9489-9f0562fa46d2",
-    "name": "Roadmap",
-    "columns": [
-      {
-        "id": "d43cba82-a324-4922-9577-d61068152971",
-        "name": "Todo"
-      }
-    ]
+    "id": "3fca43e5-7aac-4ae8-97f8-f028246dbe92",
+    "name": "Updated Platform launch"
+  },
+  {
+    "id": "17b5123b-1992-4dac-b859-5fdef1950b1a",
+    "name": "Roadmap"
+  },
+  {
+    "id": "55494f14-8bb8-4db9-940d-223b4a4e4066",
+    "name": "Platform Launch"
   }
 ]

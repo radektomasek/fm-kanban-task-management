@@ -61,17 +61,22 @@ func (app *application) createBoard(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	var columns []data.Column
-	for _, column := range input.Columns {
-		columns = append(columns, data.Column{Name: column.Name})
-	}
-
 	board := &data.Board{
-		Name:    input.Name,
-		Columns: columns,
+		Name: input.Name,
 	}
 
 	err = app.models.Boards.Insert(board)
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
+		return
+	}
+
+	var columns []data.Column
+	for _, column := range input.Columns {
+		columns = append(columns, data.Column{BoardID: board.ID, Name: column.Name})
+	}
+
+	err = app.models.Columns.Insert(columns)
 	if err != nil {
 		app.serverErrorResponse(w, r, err)
 		return
@@ -103,8 +108,9 @@ func (app *application) updateBoard(w http.ResponseWriter, r *http.Request) {
 		ID      string `json:"id"`
 		Name    string `json:"name"`
 		Columns []struct {
-			ID   string `json:"id,omitempty"`
-			Name string `json:"name"`
+			ID      string `json:"id,omitempty"`
+			BoardID string `json:"boardId,omitempty"`
+			Name    string `json:"name"`
 		} `json:"columns"`
 	}
 
@@ -113,15 +119,9 @@ func (app *application) updateBoard(w http.ResponseWriter, r *http.Request) {
 		app.serverErrorResponse(w, r, err)
 	}
 
-	var columns []data.Column
-	for _, column := range input.Columns {
-		columns = append(columns, data.Column{ID: column.ID, Name: column.Name})
-	}
-
 	updatedBoard := &data.Board{
-		ID:      input.ID,
-		Name:    input.Name,
-		Columns: columns,
+		ID:   input.ID,
+		Name: input.Name,
 	}
 
 	result, err := app.models.Boards.Update(updatedBoard)
@@ -129,6 +129,13 @@ func (app *application) updateBoard(w http.ResponseWriter, r *http.Request) {
 		app.serverErrorResponse(w, r, err)
 		return
 	}
+
+	var columns []data.Column
+	for _, column := range input.Columns {
+		columns = append(columns, data.Column{ID: column.ID, BoardID: result.ID, Name: column.Name})
+	}
+
+	err = app.models.Columns.Update(columns)
 
 	headers := make(http.Header)
 	headers.Set("Location", fmt.Sprintf("/v1/boards/%s", result.ID))
@@ -150,6 +157,12 @@ func (app *application) deleteBoard(w http.ResponseWriter, r *http.Request) {
 	}
 
 	err = app.models.Boards.Delete(board)
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
+		return
+	}
+
+	err = app.models.Columns.Delete(id)
 	if err != nil {
 		app.serverErrorResponse(w, r, err)
 		return

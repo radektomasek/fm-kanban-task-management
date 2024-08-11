@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.1]
+
+- [backend](./backend) CHANGE: adjust the endpoints for better represent the UI requirements. The boards and columns are separated to be utilized more appropriately.
+
 ## [0.6.0]
 
 - [backend](./web-client) FEATURE: added a basic implementation of the modal wrapper, including of the basic keyboard control 
