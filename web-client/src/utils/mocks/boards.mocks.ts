@@ -1,7 +1,4 @@
-export type Board = {
-  id: string
-  name: string
-}
+import type { Board } from "@/types/boards"
 
 export const boards: Board[] = [
   {

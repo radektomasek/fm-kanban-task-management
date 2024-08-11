@@ -12,12 +12,12 @@ export type BoardContextMenu = {
 export const boardContextMenuItems: BoardContextMenu[] = [
   {
     id: nanoid(),
-    title: "Edit Board",
+    title: "Edit Boards",
     type: "standard",
   },
   {
     id: nanoid(),
-    title: "Delete Board",
+    title: "Delete Boards",
     type: "destructive",
   },
 ]

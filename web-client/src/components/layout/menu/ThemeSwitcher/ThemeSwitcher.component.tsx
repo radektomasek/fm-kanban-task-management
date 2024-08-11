@@ -7,10 +7,11 @@ import {
 import Sun from "@/assets/sun.svg"
 import Moon from "@/assets/moon.svg"
 import { cn } from "@/utils/helpers/styles.helpers"
-import { toggleTheme, type ThemeMode } from "@/utils/helpers/theme.helpers"
+import { ThemeMode } from "@/types/theme"
+import { toggleTheme } from "@/utils/helpers/theme.helpers"
 
 type ThemeSwitcherProps = Omit<ComponentProps<"input">, "type"> & {
-  onThemeUpdate?: (newTheme: ThemeMode) => void
+  onThemeUpdate: (newTheme: ThemeMode) => void
   readonly testId?: string
   readonly default?: ThemeMode
 }
@@ -23,12 +24,8 @@ export const ThemeSwitcher = forwardRef<HTMLInputElement, ThemeSwitcherProps>(
 
     const handleInputChange = () => {
       const updatedValue = toggleTheme(themeMode)
-
       updateThemeMode(updatedValue)
-
-      if (onThemeUpdate) {
-        onThemeUpdate(updatedValue)
-      }
+      onThemeUpdate(updatedValue)
     }
 
     const handleKeyDown = (event: KeyboardEvent) => {

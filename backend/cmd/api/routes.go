@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/julienschmidt/httprouter"
+	"github.com/rs/cors"
 	"net/http"
 )
 
@@ -16,5 +17,5 @@ func (app *application) routes() http.Handler {
 	router.HandlerFunc(http.MethodDelete, "/v1/boards/:boardId", app.deleteBoard)
 	router.HandlerFunc(http.MethodGet, "/v1/boards/:boardId/columns", app.getColumnsByBoardID)
 
-	return app.recoverPanic(router)
+	return app.recoverPanic(cors.Default().Handler(router))
 }

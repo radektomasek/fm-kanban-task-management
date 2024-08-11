@@ -4,7 +4,7 @@ import { Button } from "@/components/forms"
 
 export const BoardPage = () => {
   return (
-    <div className="bg-custom-light-grey flex-grow h-[calc(100vh-6rem)] border-t-2 flex-col w-28">
+    <div className="bg-custom-light-grey flex-grow border-t-2 flex-col w-28">
       <div className="grid grid-flow-col auto-cols-min gap-x-6 pl-6 pt-6">
         {groupedCards.map((group) => (
           <CardStack
