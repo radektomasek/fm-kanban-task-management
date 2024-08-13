@@ -1,13 +1,23 @@
-import { type ReactNode, useEffect, useRef } from "react"
+import { useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
+import { useStore } from "@/store/store"
+import { useShallow } from "zustand/react/shallow"
+import { ConfirmationDialog } from "@/views/Modals"
 
-type Props = {
-  isOpen: boolean
-  children: ReactNode
-  onClose: () => void
-}
+// type Props = {
+//   isOpen: boolean
+//   children: ReactNode
+//   onClose: () => void
+// }
 
-export const Modal = ({ isOpen, onClose, children }: Props) => {
+export const ModalContainer = () => {
+  const { activeModal, handleCloseModal } = useStore(
+    useShallow((state) => ({
+      activeModal: state.activeModal,
+      handleCloseModal: state.handleCloseModal,
+    }))
+  )
+
   const modalRootId = document.getElementById("modal")
   const overlayRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
@@ -15,13 +25,13 @@ export const Modal = ({ isOpen, onClose, children }: Props) => {
 
   const handleClickOutside = (event: MouseEvent) => {
     if (overlayRef.current && overlayRef.current === event.target) {
-      onClose()
+      handleCloseModal()
     }
   }
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === "Escape") {
-      onClose()
+      handleCloseModal()
     }
 
     if (event.key === "Tab" && contentRef.current) {
@@ -44,7 +54,7 @@ export const Modal = ({ isOpen, onClose, children }: Props) => {
   }
 
   useEffect(() => {
-    if (isOpen) {
+    if (activeModal) {
       previouslyFocusedElement.current = document.activeElement as HTMLElement
       document.addEventListener("mousedown", handleClickOutside)
       document.addEventListener("keydown", handleKeyDown)
@@ -72,9 +82,9 @@ export const Modal = ({ isOpen, onClose, children }: Props) => {
       document.removeEventListener("mousedown", handleClickOutside)
       document.removeEventListener("keydown", handleKeyDown)
     }
-  }, [isOpen])
+  }, [activeModal])
 
-  if (!modalRootId || !isOpen) {
+  if (!modalRootId || activeModal === "None") {
     return null
   }
 
@@ -88,7 +98,12 @@ export const Modal = ({ isOpen, onClose, children }: Props) => {
           ref={contentRef}
           className="w-[30rem] px-8 pt-8 pb-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-custom-white rounded-md"
         >
-          {children}
+          <ConfirmationDialog
+            title="Delete this board?"
+            description="Are you sure you want to delete the 'Platform Launch' board? This action will remove all columns and tasks and cannot be reversed."
+            onCancel={handleCloseModal}
+            onDelete={handleCloseModal}
+          />
         </div>
       </div>
     </>,

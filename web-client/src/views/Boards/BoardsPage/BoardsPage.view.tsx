@@ -1,3 +1,4 @@
+import { useEffect } from "react"
 import { useShallow } from "zustand/react/shallow"
 import { Navbar } from "@/components/layout/navigation"
 import { Sidebar } from "@/components/layout/menu"
@@ -5,7 +6,6 @@ import { Outlet, useNavigate } from "react-router"
 import { OnboardingPage } from "@/views/Onboarding"
 import { useBoards } from "@/services/queries"
 import { useStore } from "@/store/store"
-import { useEffect } from "react"
 import { useParams } from "react-router-dom"
 
 export const BoardsPage = () => {
