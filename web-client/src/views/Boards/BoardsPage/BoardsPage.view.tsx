@@ -12,13 +12,15 @@ export const BoardsPage = () => {
   const { boardId } = useParams()
   const navigate = useNavigate()
   const { isPending, isError, error, data: boards } = useBoards()
-  const { selectedTheme, selectedBoardId, setTheme } = useStore(
-    useShallow((state) => ({
-      setTheme: state.setTheme,
-      selectedBoardId: state.selectedBoardId,
-      selectedTheme: state.selectedTheme,
-    }))
-  )
+  const { selectedTheme, selectedBoardId, setTheme, handleOpenModal } =
+    useStore(
+      useShallow((state) => ({
+        setTheme: state.setTheme,
+        selectedBoardId: state.selectedBoardId,
+        selectedTheme: state.selectedTheme,
+        handleOpenModal: state.handleOpenModal,
+      }))
+    )
 
   useEffect(() => {
     if (!boardId && selectedBoardId) {
@@ -47,6 +49,7 @@ export const BoardsPage = () => {
           selectedTheme={selectedTheme}
           selectedBoard={selectedBoard}
           onThemeUpdate={setTheme}
+          onBoardCreateClick={() => handleOpenModal("AddBoardScreen")}
         />
         {selectedBoardId ? <Outlet /> : <OnboardingPage />}
       </main>

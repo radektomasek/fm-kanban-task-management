@@ -15,6 +15,7 @@ type Props = {
   selectedTheme: ThemeMode
   selectedBoard?: Board
   onThemeUpdate: (theme: ThemeMode) => void
+  onBoardCreateClick: () => void
 }
 
 const getBoardButtonLinks = (boards: Board[], selectedBoard?: Board) =>
@@ -34,6 +35,7 @@ export const Sidebar = ({
   selectedTheme,
   selectedBoard,
   onThemeUpdate,
+  onBoardCreateClick,
 }: Props) => {
   const [showSidebar, toggleShowSidebar] = useState(true)
 
@@ -60,6 +62,7 @@ export const Sidebar = ({
                 active={false}
                 intent={"sidebar"}
                 className="text-custom-dark-purple"
+                onClick={onBoardCreateClick}
               >
                 + Create New Board
               </Button>

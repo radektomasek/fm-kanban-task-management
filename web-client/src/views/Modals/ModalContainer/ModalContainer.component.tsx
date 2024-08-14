@@ -2,13 +2,20 @@ import { useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
 import { useStore } from "@/store/store"
 import { useShallow } from "zustand/react/shallow"
-import { ConfirmationDialog } from "@/views/Modals"
+import * as modalChildren from "@/views/Modals/ModalChildren"
+import type { ModalScreenKey } from "@/types/modals"
 
-// type Props = {
-//   isOpen: boolean
-//   children: ReactNode
-//   onClose: () => void
-// }
+const ModalChild = (modalScreenKey: ModalScreenKey) => {
+  switch (modalScreenKey) {
+    case "AddBoardScreen":
+      return modalChildren["AddBoard"]
+    case "DeleteBoardScreen":
+      return modalChildren["DeleteBoard"]
+    case "None":
+    default:
+      return null
+  }
+}
 
 export const ModalContainer = () => {
   const { activeModal, handleCloseModal } = useStore(
@@ -88,25 +95,25 @@ export const ModalContainer = () => {
     return null
   }
 
-  return createPortal(
-    <>
-      <div
-        ref={overlayRef}
-        className="fixed right-0 left-0 top-0 bottom-0 bg-custom-black-50 z-10"
-      >
+  const modalChild = ModalChild(activeModal)
+
+  return (
+    modalChild &&
+    createPortal(
+      <>
         <div
-          ref={contentRef}
-          className="w-[30rem] px-8 pt-8 pb-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-custom-white rounded-md"
+          ref={overlayRef}
+          className="fixed right-0 left-0 top-0 bottom-0 bg-custom-black-50 z-10"
         >
-          <ConfirmationDialog
-            title="Delete this board?"
-            description="Are you sure you want to delete the 'Platform Launch' board? This action will remove all columns and tasks and cannot be reversed."
-            onCancel={handleCloseModal}
-            onDelete={handleCloseModal}
-          />
+          <div
+            ref={contentRef}
+            className="w-[30rem] px-8 pt-8 pb-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-custom-white rounded-md"
+          >
+            {modalChild()}
+          </div>
         </div>
-      </div>
-    </>,
-    modalRootId
+      </>,
+      modalRootId
+    )
   )
 }

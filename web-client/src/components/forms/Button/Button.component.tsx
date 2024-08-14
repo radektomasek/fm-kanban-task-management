@@ -5,6 +5,7 @@ import FluentBoard from "@/assets/fluent-board.svg"
 import EyeOpen from "@/assets/eye-open.svg"
 import EyeSlash from "@/assets/eye-slash.svg"
 import DotGroup from "@/assets/dot-group.svg"
+import Cross from "@/assets/cross.svg"
 
 const buttonStyles = cva(
   [
@@ -101,7 +102,7 @@ const buttonStyles = cva(
   }
 )
 
-type IconName = "board" | "eye" | "dots"
+type IconName = "board" | "eye" | "dots" | "cross"
 
 type ButtonProps = ComponentProps<"button"> &
   VariantProps<typeof buttonStyles> & {
@@ -115,6 +116,8 @@ const getButtonSvgIcon = (name?: IconName, wrapped: boolean = false) => {
       return wrapped ? <EyeOpen /> : <EyeSlash />
     case "dots":
       return <DotGroup />
+    case "cross":
+      return <Cross />
     case "board":
     default:
       return <FluentBoard />
