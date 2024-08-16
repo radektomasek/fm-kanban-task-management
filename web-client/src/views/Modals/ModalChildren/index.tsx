@@ -1,2 +1,2 @@
-export { AddBoard } from "@/views/Modals/ModalChildren/AddBoard/AddBoard.component"
+export { AddBoard } from "./AddBoard/AddBoard.component"
 export { DeleteBoard } from "./DeleteBoard/DeleteBoard.component"

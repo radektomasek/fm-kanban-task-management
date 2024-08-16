@@ -4,6 +4,14 @@ import { useStore } from "@/store/store"
 import { useShallow } from "zustand/react/shallow"
 import * as modalChildren from "@/views/Modals/ModalChildren"
 import type { ModalScreenKey } from "@/types/modals"
+import { FormProvider, useForm } from "react-hook-form"
+import {
+  BoardForm,
+  boardFormSchema,
+  defaultBoardFormValues,
+} from "@/types/boards"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { AddBoard } from "@/views/Modals/ModalChildren"
 
 const ModalChild = (modalScreenKey: ModalScreenKey) => {
   switch (modalScreenKey) {
@@ -18,6 +26,12 @@ const ModalChild = (modalScreenKey: ModalScreenKey) => {
 }
 
 export const ModalContainer = () => {
+  const methods = useForm<BoardForm>({
+    mode: "all",
+    resolver: zodResolver(boardFormSchema),
+    defaultValues: defaultBoardFormValues,
+  })
+
   const { activeModal, handleCloseModal } = useStore(
     useShallow((state) => ({
       activeModal: state.activeModal,
@@ -109,7 +123,10 @@ export const ModalContainer = () => {
             ref={contentRef}
             className="w-[30rem] px-8 pt-8 pb-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-custom-white rounded-md"
           >
-            {modalChild()}
+            <FormProvider {...methods}>
+              <AddBoard />
+            </FormProvider>
+            {/*{modalChild()}*/}
           </div>
         </div>
       </>,
