@@ -5,5 +5,5 @@ type Props = {
 }
 
 export const RowBlock = (props: Props) => {
-  return <div className={"flex"}>{props.children}</div>
+  return <div className={"flex mb-3 gap-x-4"}>{props.children}</div>
 }

@@ -122,7 +122,7 @@ func (b BoardModel) Delete(board *Board) error {
 
 	index := indexOf(board.ID, boards)
 
-	err = writeJSONFile("boards.json", append(boards[:index], boards[index+1]))
+	err = writeJSONFile("boards.json", append(boards[:index], boards[index]))
 	if err != nil {
 		fmt.Println("Error writing file: ", err)
 		return err

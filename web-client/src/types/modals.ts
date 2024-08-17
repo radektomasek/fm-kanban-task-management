@@ -7,13 +7,3 @@ export type ModalScreenKey =
   | "AddBoardScreen"
   | "EditBoardScreen"
   | "DeleteBoardScreen"
-
-// type Modal = {
-//   id: ModalScreenKey;
-//   onClose: () => void;
-// }
-
-// type Modal<G> = {
-//   id: ModalScreenKey
-//   props: G
-// }

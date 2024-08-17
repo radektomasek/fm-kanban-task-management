@@ -4,14 +4,22 @@ import { ContextMenu } from "@/components/menus"
 import { Board } from "@/types/boards"
 import { useStore } from "@/store/store"
 import { useShallow } from "zustand/react/shallow"
-import { boardContextMenuItems } from "@/utils/mocks/menus.mocks"
+import { BoardContextMenu } from "@/types/contextMenus"
+import type { ModalScreenKey } from "@/types/modals"
 
 type Props = {
   readonly testId?: string
   selectedBoard?: Board
+  contextMenuItems: BoardContextMenu[]
+  onContextMenuClick?: (id: ModalScreenKey) => void
 }
 
-export const Navbar = ({ testId, selectedBoard }: Props) => {
+export const Navbar = ({
+  testId,
+  selectedBoard,
+  contextMenuItems,
+  onContextMenuClick,
+}: Props) => {
   const { handleOpenModal } = useStore(
     useShallow((state) => ({
       handleOpenModal: state.handleOpenModal,
@@ -20,7 +28,7 @@ export const Navbar = ({ testId, selectedBoard }: Props) => {
 
   const headerForEmptyProject = () => (
     <nav className="flex items-center justify-end bg-custom-white pr-8 flex-grow">
-      <ContextMenu items={boardContextMenuItems} />
+      <ContextMenu items={contextMenuItems} onItemSelect={onContextMenuClick} />
     </nav>
   )
 
@@ -35,7 +43,10 @@ export const Navbar = ({ testId, selectedBoard }: Props) => {
         >
           + Add New Task
         </Button>
-        <ContextMenu items={boardContextMenuItems} />
+        <ContextMenu
+          items={contextMenuItems}
+          onItemSelect={onContextMenuClick}
+        />
       </div>
     </nav>
   )

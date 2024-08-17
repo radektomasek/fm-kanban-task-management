@@ -40,5 +40,17 @@
     "boardId": "55494f14-8bb8-4db9-940d-223b4a4e4066",
     "name": "Doing",
     "color": "hsl(217,64%,68%)"
+  },
+  {
+    "id": "3772c3d1-86f5-43db-b0c9-cf582a720c66",
+    "boardId": "f086f733-7370-448e-bdc8-f10c21c50726",
+    "name": "Todo",
+    "color": "hsl(117,66%,45%)"
+  },
+  {
+    "id": "da31b993-62a4-43c8-b667-83af8082bdaa",
+    "boardId": "f086f733-7370-448e-bdc8-f10c21c50726",
+    "name": "Doing",
+    "color": "hsl(168,65%,47%)"
   }
 ]

@@ -17,5 +17,8 @@ func (app *application) routes() http.Handler {
 	router.HandlerFunc(http.MethodDelete, "/v1/boards/:boardId", app.deleteBoard)
 	router.HandlerFunc(http.MethodGet, "/v1/boards/:boardId/columns", app.getColumnsByBoardID)
 
-	return app.recoverPanic(cors.Default().Handler(router))
+	return app.recoverPanic(cors.New(cors.Options{
+		AllowedOrigins: []string{"http://localhost:5173"},
+		AllowedMethods: []string{http.MethodGet, http.MethodPost, http.MethodPut, http.MethodDelete},
+	}).Handler(router))
 }

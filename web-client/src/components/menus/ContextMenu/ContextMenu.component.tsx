@@ -3,14 +3,15 @@ import { useEffect, useRef, useState, type KeyboardEvent } from "react"
 import { Button } from "@/components/forms"
 import { assertIsNode } from "@/utils/helpers/types.helpers"
 import { cn } from "@/utils/helpers/styles.helpers"
-import { type BoardContextMenu } from "@/utils/mocks/menus.mocks"
+import { BoardContextMenu } from "@/types/contextMenus"
+import type { ModalScreenKey } from "@/types/modals"
 
 type InteractionType = "mouse" | "keyboard"
 
 type Props = {
   readonly testId?: string
   readonly items: BoardContextMenu[]
-  onItemSelect?: (id: string) => void
+  onItemSelect?: (screenKey: ModalScreenKey) => void
 }
 
 export const ContextMenu = ({ items, testId, onItemSelect }: Props) => {
@@ -50,7 +51,7 @@ export const ContextMenu = ({ items, testId, onItemSelect }: Props) => {
     }
   }
 
-  const handleOptionClick = (id: string): void => {
+  const handleOptionClick = (id: ModalScreenKey): void => {
     setIsOpen(false)
     setFocusedOptionIndex(null)
 

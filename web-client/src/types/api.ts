@@ -15,3 +15,7 @@ export type BoardEdit = {
     name: string
   }[]
 }
+
+export type BoardDelete = {
+  message: string
+}

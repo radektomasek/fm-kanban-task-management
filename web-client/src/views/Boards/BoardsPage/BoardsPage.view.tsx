@@ -7,6 +7,8 @@ import { OnboardingPage } from "@/views/Onboarding"
 import { useBoards } from "@/services/queries"
 import { useStore } from "@/store/store"
 import { useParams } from "react-router-dom"
+import { BoardContextMenu } from "@/types/contextMenus"
+import { ModalScreenKey } from "@/types/modals"
 
 export const BoardsPage = () => {
   const { boardId } = useParams()
@@ -36,12 +38,29 @@ export const BoardsPage = () => {
     return <h2>Error: {error.message}</h2>
   }
 
+  const boardContextMenuItems: BoardContextMenu[] = [
+    {
+      id: "EditBoardScreen",
+      title: "Edit Board",
+      type: "standard",
+    },
+    {
+      id: "DeleteBoardScreen",
+      title: "Delete Board",
+      type: "destructive",
+    },
+  ]
+
   const selectedBoard = boards?.find((board) => board.id === selectedBoardId)
 
   return (
     <>
       <header>
-        <Navbar selectedBoard={selectedBoard} />
+        <Navbar
+          selectedBoard={selectedBoard}
+          contextMenuItems={boardContextMenuItems}
+          onContextMenuClick={(id: ModalScreenKey) => handleOpenModal(id)}
+        />
       </header>
       <main className="flex w-screen h-[calc(100vh-6rem)]">
         <Sidebar
@@ -51,7 +70,7 @@ export const BoardsPage = () => {
           onThemeUpdate={setTheme}
           onBoardCreateClick={() => handleOpenModal("AddBoardScreen")}
         />
-        {selectedBoardId ? <Outlet /> : <OnboardingPage />}
+        {boardId ? <Outlet /> : <OnboardingPage />}
       </main>
     </>
   )

@@ -1,17 +1,11 @@
-import { useEffect, useRef } from "react"
+import React, { useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
+import { FormProvider } from "react-hook-form"
 import { useStore } from "@/store/store"
 import { useShallow } from "zustand/react/shallow"
 import * as modalChildren from "@/views/Modals/ModalChildren"
 import type { ModalScreenKey } from "@/types/modals"
-import { FormProvider, useForm } from "react-hook-form"
-import {
-  BoardForm,
-  boardFormSchema,
-  defaultBoardFormValues,
-} from "@/types/boards"
-import { zodResolver } from "@hookform/resolvers/zod"
-import { AddBoard } from "@/views/Modals/ModalChildren"
+import { useFormProvider } from "@/hooks/useFormProvider"
 
 const ModalChild = (modalScreenKey: ModalScreenKey) => {
   switch (modalScreenKey) {
@@ -26,18 +20,14 @@ const ModalChild = (modalScreenKey: ModalScreenKey) => {
 }
 
 export const ModalContainer = () => {
-  const methods = useForm<BoardForm>({
-    mode: "all",
-    resolver: zodResolver(boardFormSchema),
-    defaultValues: defaultBoardFormValues,
-  })
-
   const { activeModal, handleCloseModal } = useStore(
     useShallow((state) => ({
       activeModal: state.activeModal,
       handleCloseModal: state.handleCloseModal,
     }))
   )
+
+  const methods = useFormProvider(activeModal)
 
   const modalRootId = document.getElementById("modal")
   const overlayRef = useRef<HTMLDivElement>(null)
@@ -124,9 +114,8 @@ export const ModalContainer = () => {
             className="w-[30rem] px-8 pt-8 pb-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-custom-white rounded-md"
           >
             <FormProvider {...methods}>
-              <AddBoard />
+              {React.createElement(modalChild)}
             </FormProvider>
-            {/*{modalChild()}*/}
           </div>
         </div>
       </>,

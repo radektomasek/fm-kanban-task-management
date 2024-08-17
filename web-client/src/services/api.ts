@@ -1,6 +1,7 @@
 import axios from "axios"
 import { boardSchema, type Board, type BoardForm } from "@/types/boards"
 import { mapBoardData } from "@/utils/helpers/mapData.helpers"
+import { BoardDelete } from "@/types/api"
 
 const BASE_URL = "http://localhost:4000/v1/"
 const axiosInstance = axios.create({ baseURL: BASE_URL })
@@ -32,4 +33,14 @@ export const createBoard = async (data: BoardForm): Promise<Board> => {
   }
 
   return result.data
+}
+
+export const deleteBoard = async (id: string): Promise<boolean> => {
+  const response = await axiosInstance.delete<BoardDelete>(`/boards/${id}`)
+
+  if (response.status !== 200) {
+    throw new Error("[DELETE /boards]: failed to delete the board")
+  }
+
+  return true
 }
