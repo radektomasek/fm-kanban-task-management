@@ -3,8 +3,8 @@ import { useShallow } from "zustand/react/shallow"
 import { Navbar } from "@/components/layout/navigation"
 import { Sidebar } from "@/components/layout/menu"
 import { Outlet, useNavigate } from "react-router"
-import { OnboardingPage } from "@/views/Onboarding"
-import { useBoards } from "@/services/queries"
+import { EmptyProject, NoActiveBoard } from "@/views/Placeholders"
+import { useBoardColumns, useBoards } from "@/services/queries"
 import { useStore } from "@/store/store"
 import { useParams } from "react-router-dom"
 import { BoardContextMenu } from "@/types/contextMenus"
@@ -14,21 +14,25 @@ export const BoardsPage = () => {
   const { boardId } = useParams()
   const navigate = useNavigate()
   const { isPending, isError, error, data: boards } = useBoards()
-  const { selectedTheme, selectedBoardId, setTheme, handleOpenModal } =
-    useStore(
-      useShallow((state) => ({
-        setTheme: state.setTheme,
-        selectedBoardId: state.selectedBoardId,
-        selectedTheme: state.selectedTheme,
-        handleOpenModal: state.handleOpenModal,
-      }))
-    )
+  const { selectedTheme, setTheme, handleOpenModal, selectedBoard } = useStore(
+    useShallow((state) => ({
+      setTheme: state.setTheme,
+      selectedBoard: state.selectedBoard,
+      selectedTheme: state.selectedTheme,
+      handleOpenModal: state.handleOpenModal,
+    }))
+  )
 
+  useBoardColumns(boards)
   useEffect(() => {
-    if (!boardId && selectedBoardId) {
-      navigate(`/boards/${selectedBoardId}`)
+    if (!boardId && selectedBoard) {
+      navigate(`/boards/${selectedBoard.id}`)
     }
-  }, [boardId, navigate, selectedBoardId])
+
+    if (boardId && !selectedBoard) {
+      navigate(`/boards`)
+    }
+  }, [boardId, navigate, selectedBoard])
 
   if (isPending) {
     return <h2>Loading...</h2>
@@ -51,7 +55,15 @@ export const BoardsPage = () => {
     },
   ]
 
-  const selectedBoard = boards?.find((board) => board.id === selectedBoardId)
+  const renderChildComponent = () => {
+    if (boards?.length === 0) {
+      return <EmptyProject />
+    } else if (!boardId) {
+      return <NoActiveBoard />
+    } else {
+      return <Outlet />
+    }
+  }
 
   return (
     <>
@@ -70,7 +82,7 @@ export const BoardsPage = () => {
           onThemeUpdate={setTheme}
           onBoardCreateClick={() => handleOpenModal("AddBoardScreen")}
         />
-        {boardId ? <Outlet /> : <OnboardingPage />}
+        {renderChildComponent()}
       </main>
     </>
   )

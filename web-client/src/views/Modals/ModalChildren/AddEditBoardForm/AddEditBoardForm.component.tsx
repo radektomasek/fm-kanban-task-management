@@ -1,22 +1,26 @@
+import { Fragment, useEffect } from "react"
 import { Button } from "@/components/forms"
 import { RowBlock } from "@/components/grid"
-import { SubmitHandler, useFieldArray, useFormContext } from "react-hook-form"
-import { BoardForm } from "@/types/boards"
-import { CustomTextField } from "@/views/Modals/HookFormPrimitives"
-import { Fragment } from "react"
-import { useCreateBoard } from "@/services/mutations"
 import { useStore } from "@/store/store"
 import { useShallow } from "zustand/react/shallow"
+import { useCreateBoard, useEditBoard } from "@/services/mutations"
+import { CustomTextField } from "@/views/Modals/HookFormPrimitives"
+import { SubmitHandler, useFieldArray, useFormContext } from "react-hook-form"
+import type { BoardForm } from "@/types/boards"
+import { useBoardColumn } from "@/services/queries"
 
-export const AddBoard = () => {
+export const AddEditBoardForm = () => {
   const {
+    reset,
     control,
     handleSubmit,
-    formState: { errors, isValid, isDirty },
+    formState: { errors },
   } = useFormContext<BoardForm>()
 
-  const { handleCloseModal } = useStore(
+  const { activeModal, selectedBoard, handleCloseModal } = useStore(
     useShallow((state) => ({
+      activeModal: state.activeModal,
+      selectedBoard: state.selectedBoard,
       handleCloseModal: state.handleCloseModal,
     }))
   )
@@ -26,17 +30,37 @@ export const AddBoard = () => {
     name: "columns",
   })
 
+  const isEditMode = activeModal === "EditBoardScreen"
   const createBoardMutation = useCreateBoard()
+  const editBoardMutation = useEditBoard()
+  const { data: boardColumns, isLoading } = useBoardColumn(selectedBoard?.id)
+
+  useEffect(() => {
+    if (isEditMode && boardColumns && !isLoading) {
+      reset({
+        variant: "edit",
+        id: selectedBoard?.id,
+        name: selectedBoard?.name,
+        columns: boardColumns?.map((element) => ({
+          id: element.id,
+          name: element.name,
+        })),
+      })
+    }
+  }, [boardColumns, isLoading, isEditMode, reset])
 
   const handleAddColumn = () => {
     append({ name: "" })
   }
 
-  const isSubmittable = isDirty && isValid
+  // const isSubmittable = !isDirty && isValid
+  const handleRemoveColumn = (index: number) => remove(index)
 
   const onSubmit: SubmitHandler<BoardForm> = (data: BoardForm) => {
     if (data.variant === "create") {
       createBoardMutation.mutate(data)
+    } else {
+      editBoardMutation.mutate(data)
     }
 
     handleCloseModal()
@@ -44,7 +68,7 @@ export const AddBoard = () => {
 
   return (
     <form className="flex flex-col " onSubmit={handleSubmit(onSubmit)}>
-      <h3 className="text-lg">Add New Board</h3>
+      <h3 className="text-lg">{isEditMode ? "Edit Board" : "Add New Board"}</h3>
 
       <label
         className={"text-2xs text-custom-medium-grey my-2"}
@@ -75,7 +99,7 @@ export const AddBoard = () => {
               wrapped={true}
               iconName={"cross"}
               onClick={() => {
-                remove(index)
+                handleRemoveColumn(index)
               }}
               intent={"svgOnly"}
             />
@@ -93,12 +117,12 @@ export const AddBoard = () => {
       </Button>
 
       <Button
-        disabled={!isSubmittable}
+        // disabled={!isSubmittable}
         type={"submit"}
         intent={"primary"}
         className="w-full"
       >
-        Create New Board
+        {isEditMode ? "Save Changes" : "Create New Board"}
       </Button>
     </form>
   )

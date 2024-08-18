@@ -53,3 +53,15 @@ func filterColumnsByBoardID(id string, data []Column) []Column {
 
 	return result
 }
+
+func filterBoardByID(id string, data []Board) []Board {
+	var result []Board
+
+	for _, board := range data {
+		if board.ID != id {
+			result = append(result, board)
+		}
+	}
+
+	return result
+}

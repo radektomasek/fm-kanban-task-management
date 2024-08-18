@@ -10,7 +10,8 @@ import { useFormProvider } from "@/hooks/useFormProvider"
 const ModalChild = (modalScreenKey: ModalScreenKey) => {
   switch (modalScreenKey) {
     case "AddBoardScreen":
-      return modalChildren["AddBoard"]
+    case "EditBoardScreen":
+      return modalChildren["AddEditBoardForm"]
     case "DeleteBoardScreen":
       return modalChildren["DeleteBoard"]
     case "None":

@@ -1,2 +1,2 @@
-export { AddBoard } from "./AddBoard/AddBoard.component"
+export { AddEditBoardForm } from "./AddEditBoardForm/AddEditBoardForm.component"
 export { DeleteBoard } from "./DeleteBoard/DeleteBoard.component"

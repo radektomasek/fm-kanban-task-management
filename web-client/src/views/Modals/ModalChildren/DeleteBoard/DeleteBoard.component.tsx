@@ -4,10 +4,10 @@ import { useShallow } from "zustand/react/shallow"
 import { useDeleteBoard } from "@/services/mutations"
 
 export const DeleteBoard = () => {
-  const { selectedBoardId, setSelectedBoardId, handleCloseModal } = useStore(
+  const { selectedBoard, clearSelectedBoard, handleCloseModal } = useStore(
     useShallow((state) => ({
-      selectedBoardId: state.selectedBoardId,
-      setSelectedBoardId: state.setSelectedBoardId,
+      selectedBoard: state.selectedBoard,
+      clearSelectedBoard: state.clearSelectedBoard,
       handleCloseModal: state.handleCloseModal,
     }))
   )
@@ -15,12 +15,13 @@ export const DeleteBoard = () => {
   const deleteBoardMutation = useDeleteBoard()
 
   const handleDeleteBoard = () => {
-    if (!selectedBoardId) {
+    if (!selectedBoard) {
       return
     }
 
-    deleteBoardMutation.mutate(selectedBoardId)
-    setSelectedBoardId(undefined)
+    deleteBoardMutation.mutate(selectedBoard.id)
+    clearSelectedBoard()
+    handleCloseModal()
   }
 
   return (

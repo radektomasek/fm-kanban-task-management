@@ -1,11 +1,13 @@
 import { StateCreator } from "zustand"
+import { Board } from "@/types/boards"
 
 type BoardState = {
-  selectedBoardId?: string
+  selectedBoard?: Board
 }
 
 type BoardActions = {
-  setSelectedBoardId: (boardId?: string) => void
+  setSelectedBoard: (selectedBoard?: Board) => void
+  clearSelectedBoard: () => void
 }
 
 export type BoardSlice = BoardState & BoardActions
@@ -16,8 +18,12 @@ export const createBoardSlice: StateCreator<
   [],
   BoardSlice
 > = (set) => ({
-  setSelectedBoardId: (boardId?: string) =>
+  setSelectedBoard: (selectedBoard?: Board) =>
     set((state) => {
-      state.selectedBoardId = boardId
+      state.selectedBoard = selectedBoard
+    }),
+  clearSelectedBoard: () =>
+    set((state) => {
+      state.selectedBoard = undefined
     }),
 })

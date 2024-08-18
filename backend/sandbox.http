@@ -28,7 +28,7 @@ Content-Type: application/json
 ###
 
 ### Delete specific board by an ID
-DELETE http://localhost:4000/v1/boards/a231b3fd-72e7-4f2b-a79d-6f3b226bf43f
+DELETE http://localhost:4000/v1/boards/81ee65e6-823a-4f08-ad37-3c4433b4aa4d
 Content-Type: application/json
 ###
 

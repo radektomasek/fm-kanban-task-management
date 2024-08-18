@@ -26,10 +26,11 @@ export const Navbar = ({
     }))
   )
 
+  /**
+   * @TODO: Once we add auth mechanism, there should be a context menu with the Logout/Account option
+   */
   const headerForEmptyProject = () => (
-    <nav className="flex items-center justify-end bg-custom-white pr-8 flex-grow">
-      <ContextMenu items={contextMenuItems} onItemSelect={onContextMenuClick} />
-    </nav>
+    <nav className="flex items-center justify-end bg-custom-white pr-8 flex-grow"></nav>
   )
 
   const headerForProjectWithBoards = (selectedBoard: Board) => (
@@ -43,6 +44,7 @@ export const Navbar = ({
         >
           + Add New Task
         </Button>
+
         <ContextMenu
           items={contextMenuItems}
           onItemSelect={onContextMenuClick}

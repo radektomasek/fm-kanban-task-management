@@ -6,6 +6,11 @@ export const boardSchema = z.object({
   name: z.string(),
 })
 
+export const boardDeleteSchema = z.object({
+  id: z.string(),
+  message: z.string(),
+})
+
 export const boardFormSchema = z.discriminatedUnion("variant", [
   z.object({
     variant: z.literal("create"),
@@ -42,7 +47,20 @@ export const boardFormSchema = z.discriminatedUnion("variant", [
 ])
 
 export type Board = z.infer<typeof boardSchema>
+export type BoardDelete = z.infer<typeof boardDeleteSchema>
 export type BoardForm = z.infer<typeof boardFormSchema>
+
+export const isCreateBoardForm = (
+  data: BoardForm
+): data is Extract<BoardForm, { variant: "create" }> => {
+  return data.variant === "create"
+}
+
+export const isEditBoardForm = (
+  data: BoardForm
+): data is Extract<BoardForm, { variant: "edit" }> => {
+  return data.variant === "edit"
+}
 
 export const defaultBoardFormValues: BoardForm = {
   variant: "create",

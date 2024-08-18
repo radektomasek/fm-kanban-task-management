@@ -5,18 +5,22 @@ import { Button } from "@/components/forms"
 import { useShallow } from "zustand/react/shallow"
 import { useStore } from "@/store/store"
 import { groupedCards } from "@/utils/mocks/cardGroups.mocks"
+import { useBoards } from "@/services/queries"
 
 export const BoardPage = () => {
   const { boardId } = useParams()
-  const { setSelectedBoardId } = useStore(
+  const { setSelectedBoard } = useStore(
     useShallow((state) => ({
-      setSelectedBoardId: state.setSelectedBoardId,
+      setSelectedBoard: state.setSelectedBoard,
     }))
   )
 
+  const { data } = useBoards()
+
   useEffect(() => {
-    setSelectedBoardId(boardId)
-  }, [setSelectedBoardId, boardId])
+    const board = data?.find((element) => element.id === boardId)
+    setSelectedBoard(board)
+  }, [setSelectedBoard, boardId])
 
   return (
     <div className="bg-custom-light-grey flex-grow border-t-2 flex-col w-28">

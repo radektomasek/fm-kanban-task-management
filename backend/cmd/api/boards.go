@@ -171,5 +171,5 @@ func (app *application) deleteBoard(w http.ResponseWriter, r *http.Request) {
 	headers := make(http.Header)
 	headers.Set("Location", fmt.Sprintf("/v1/boards/%s", board.ID))
 
-	err = app.writeJSON(w, http.StatusOK, envelope{"message": "board deleted successfully"}, headers)
+	err = app.writeJSON(w, http.StatusOK, envelope{"id": id, "message": "board deleted successfully"}, headers)
 }
