@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid"
 import { render, screen } from "@testing-library/react"
 import { ContextMenu } from "@/components/menus"
-import { boardContextMenuItems } from "@/utils/mocks/menus.mocks"
+import { boardContextMenuItems } from "@/types/contextMenus"
 
 describe("ContextMenu.component: rendering", () => {
   it("renders the SVG button with the context menu closed", () => {

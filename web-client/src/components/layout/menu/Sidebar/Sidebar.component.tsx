@@ -1,26 +1,42 @@
 import { useState } from "react"
-import { SidebarHeader, ThemeSwitcher } from "@/components/layout/menu"
+import {
+  MenuLink,
+  SidebarHeader,
+  ThemeSwitcher,
+} from "@/components/layout/menu"
 import { Button } from "@/components/forms"
 import { cn } from "@/utils/helpers/styles.helpers"
-import { type Board } from "@/utils/mocks/boards.mocks"
+import { Board } from "@/types/boards"
+import type { ThemeMode } from "@/types/theme"
 
 type Props = {
   readonly testId?: string
   boards: Board[]
+  selectedTheme: ThemeMode
+  selectedBoard?: Board
+  onThemeUpdate: (theme: ThemeMode) => void
+  onBoardCreateClick: () => void
 }
 
-const getBoardButtonLinks = (boards: Board[], activeBoard: Board) =>
+const getBoardButtonLinks = (boards: Board[], selectedBoard?: Board) =>
   boards.map((board) => (
-    <Button
-      key={board.id}
-      intent={"sidebar"}
-      active={board.id === activeBoard.id}
-    >
-      {board.name}
-    </Button>
+    <li key={board.id} className="list-none">
+      <MenuLink
+        label={board.name}
+        link={board.id}
+        active={board.id === selectedBoard?.id}
+      />
+    </li>
   ))
 
-export const Sidebar = ({ testId, boards }: Props) => {
+export const Sidebar = ({
+  testId,
+  boards,
+  selectedTheme,
+  selectedBoard,
+  onThemeUpdate,
+  onBoardCreateClick,
+}: Props) => {
   const [showSidebar, toggleShowSidebar] = useState(true)
 
   const toggleShowSidebarHandler = () =>
@@ -40,16 +56,23 @@ export const Sidebar = ({ testId, boards }: Props) => {
               title={"All Boards"}
               numberOfBoards={boards.length}
             />
-            {getBoardButtonLinks(boards, boards[0])}
-            <Button
-              active={false}
-              intent={"sidebar"}
-              className="text-custom-dark-purple"
-            >
-              + Create New Board
-            </Button>
+            {getBoardButtonLinks(boards, selectedBoard)}
+            <li className="list-none">
+              <Button
+                active={false}
+                intent={"sidebar"}
+                className="text-custom-dark-purple"
+                onClick={onBoardCreateClick}
+              >
+                + Create New Board
+              </Button>
+            </li>
           </div>
-          <ThemeSwitcher className={"ml-8"} />
+          <ThemeSwitcher
+            className={"ml-8"}
+            default={selectedTheme}
+            onThemeUpdate={onThemeUpdate}
+          />
         </div>
       )}
 

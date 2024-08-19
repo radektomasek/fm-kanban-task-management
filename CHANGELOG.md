@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.6.2]
+
+- [web-client](./web-client) FEATURE: implemented the initial flow of the board management. We are able to make basic CRUD operations when it comes to boards/columns
+- [backend](./backend) FIX: fixed the issue in data deletion when DELETE /boards/:id/columns was called.
+
 ## [0.6.1]
 
 - [backend](./backend) CHANGE: adjust the endpoints for better represent the UI requirements. The boards and columns are separated to be utilized more appropriately.

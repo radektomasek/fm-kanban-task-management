@@ -1,11 +1,12 @@
 import { ComponentProps, forwardRef } from "react"
-import type { BoardContextMenu } from "@/utils/mocks/menus.mocks"
 import { cn } from "@/utils/helpers/styles.helpers"
+import type { BoardContextMenu } from "@/types/contextMenus"
+import type { ModalScreenKey } from "@/types/modals"
 
 type Props = BoardContextMenu &
   ComponentProps<"li"> & {
     readonly id: string
-    onOptionClick?: (id: string) => void
+    onOptionClick?: (id: ModalScreenKey) => void
   }
 
 export const ContextMenuItem = forwardRef<HTMLLIElement, Props>(

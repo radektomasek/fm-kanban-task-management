@@ -1,12 +1,12 @@
 import LogoWide from "@/assets/logo-wide.svg"
 
 /**
- * @TODO: Replace the link with a React Router Link
+ * @TODO: Replace the link with a React Router MenuLink
  */
 export const Logo = () => {
   return (
     <div className="flex flex-col justify-center w-75 bg-custom-white pl-8 border-r-2">
-      <a href="/web-client/public">
+      <a href="/">
         <LogoWide />
       </a>
     </div>

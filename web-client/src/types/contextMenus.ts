@@ -1,22 +1,21 @@
-import { nanoid } from "nanoid"
+import type { ModalScreenKey } from "@/types/modals"
 
 type ItemType = "standard" | "destructive"
 
 export type BoardContextMenu = {
-  id: string
+  id: ModalScreenKey
   title: string
   type: ItemType
-  onClickHandler?: (type: ItemType) => void
 }
 
 export const boardContextMenuItems: BoardContextMenu[] = [
   {
-    id: nanoid(),
+    id: "EditBoardScreen",
     title: "Edit Board",
     type: "standard",
   },
   {
-    id: nanoid(),
+    id: "DeleteBoardScreen",
     title: "Delete Board",
     type: "destructive",
   },

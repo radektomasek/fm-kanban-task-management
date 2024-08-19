@@ -120,9 +120,9 @@ func (b BoardModel) Delete(board *Board) error {
 	var boards []Board
 	err = json.Unmarshal(jsonData, &boards)
 
-	index := indexOf(board.ID, boards)
+	result := filterBoardByID(board.ID, boards)
 
-	err = writeJSONFile("boards.json", append(boards[:index], boards[index+1]))
+	err = writeJSONFile("boards.json", result)
 	if err != nil {
 		fmt.Println("Error writing file: ", err)
 		return err

@@ -1,44 +1,20 @@
 [
   {
-    "id": "6e092df7-42c7-4fff-8988-9033fc661a57",
-    "boardId": "3fca43e5-7aac-4ae8-97f8-f028246dbe92",
-    "name": "(Updated) Todo",
-    "color": "hsl(0,42%,41%)"
+    "id": "ff6865c5-c176-4790-b3b8-3a0a8a3fe62e",
+    "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
+    "name": "Todo",
+    "color": "hsl(273,83%,84%)"
   },
   {
-    "id": "5094d8b2-e8e9-4248-9309-6067ad18d436",
-    "boardId": "3fca43e5-7aac-4ae8-97f8-f028246dbe92",
-    "name": "In progress",
-    "color": "hsl(43,93%,81%)"
+    "id": "448526a9-1231-484a-aac0-e4e0d25aebdc",
+    "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
+    "name": "Doing",
+    "color": "hsl(343,61%,65%)"
   },
   {
-    "id": "f6e9bd76-2257-4258-8bf5-150e637e0c4b",
-    "boardId": "3fca43e5-7aac-4ae8-97f8-f028246dbe92",
+    "id": "b7dbeee6-f5da-4609-aea1-2dfd1f10000c",
+    "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
     "name": "Done",
-    "color": "hsl(83,52%,75%)"
-  },
-  {
-    "id": "aefa13de-20c3-4157-bd57-f06c289d40ee",
-    "boardId": "17b5123b-1992-4dac-b859-5fdef1950b1a",
-    "name": "Todo",
-    "color": "hsl(69,70%,78%)"
-  },
-  {
-    "id": "1d7b0a93-2812-43eb-9210-f77d6ce8b117",
-    "boardId": "17b5123b-1992-4dac-b859-5fdef1950b1a",
-    "name": "Doing",
-    "color": "hsl(158,52%,75%)"
-  },
-  {
-    "id": "80c473f9-7dae-40af-9ea4-8164ec778e87",
-    "boardId": "55494f14-8bb8-4db9-940d-223b4a4e4066",
-    "name": "Todo",
-    "color": "hsl(164,72%,83%)"
-  },
-  {
-    "id": "bd42318a-ac40-477d-813a-30e7be680c68",
-    "boardId": "55494f14-8bb8-4db9-940d-223b4a4e4066",
-    "name": "Doing",
-    "color": "hsl(217,64%,68%)"
+    "color": "hsl(13,98%,42%)"
   }
 ]

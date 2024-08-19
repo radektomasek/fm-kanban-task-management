@@ -1,13 +1,35 @@
-import { type ReactNode, useEffect, useRef } from "react"
+import React, { useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
+import { FormProvider } from "react-hook-form"
+import { useStore } from "@/store/store"
+import { useShallow } from "zustand/react/shallow"
+import * as modalChildren from "@/views/Modals/ModalChildren"
+import type { ModalScreenKey } from "@/types/modals"
+import { useFormProvider } from "@/hooks/useFormProvider"
 
-type Props = {
-  isOpen: boolean
-  children: ReactNode
-  onClose: () => void
+const ModalChild = (modalScreenKey: ModalScreenKey) => {
+  switch (modalScreenKey) {
+    case "AddBoardScreen":
+    case "EditBoardScreen":
+      return modalChildren["AddEditBoardForm"]
+    case "DeleteBoardScreen":
+      return modalChildren["DeleteBoard"]
+    case "None":
+    default:
+      return null
+  }
 }
 
-export const Modal = ({ isOpen, onClose, children }: Props) => {
+export const ModalContainer = () => {
+  const { activeModal, handleCloseModal } = useStore(
+    useShallow((state) => ({
+      activeModal: state.activeModal,
+      handleCloseModal: state.handleCloseModal,
+    }))
+  )
+
+  const methods = useFormProvider(activeModal)
+
   const modalRootId = document.getElementById("modal")
   const overlayRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
@@ -15,13 +37,13 @@ export const Modal = ({ isOpen, onClose, children }: Props) => {
 
   const handleClickOutside = (event: MouseEvent) => {
     if (overlayRef.current && overlayRef.current === event.target) {
-      onClose()
+      handleCloseModal()
     }
   }
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === "Escape") {
-      onClose()
+      handleCloseModal()
     }
 
     if (event.key === "Tab" && contentRef.current) {
@@ -44,7 +66,7 @@ export const Modal = ({ isOpen, onClose, children }: Props) => {
   }
 
   useEffect(() => {
-    if (isOpen) {
+    if (activeModal) {
       previouslyFocusedElement.current = document.activeElement as HTMLElement
       document.addEventListener("mousedown", handleClickOutside)
       document.addEventListener("keydown", handleKeyDown)
@@ -72,26 +94,33 @@ export const Modal = ({ isOpen, onClose, children }: Props) => {
       document.removeEventListener("mousedown", handleClickOutside)
       document.removeEventListener("keydown", handleKeyDown)
     }
-  }, [isOpen])
+  }, [activeModal])
 
-  if (!modalRootId || !isOpen) {
+  if (!modalRootId || activeModal === "None") {
     return null
   }
 
-  return createPortal(
-    <>
-      <div
-        ref={overlayRef}
-        className="fixed right-0 left-0 top-0 bottom-0 bg-custom-black-50 z-10"
-      >
+  const modalChild = ModalChild(activeModal)
+
+  return (
+    modalChild &&
+    createPortal(
+      <>
         <div
-          ref={contentRef}
-          className="w-[30rem] px-8 pt-8 pb-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-custom-white rounded-md"
+          ref={overlayRef}
+          className="fixed right-0 left-0 top-0 bottom-0 bg-custom-black-50 z-10"
         >
-          {children}
+          <div
+            ref={contentRef}
+            className="w-[30rem] px-8 pt-8 pb-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-custom-white rounded-md"
+          >
+            <FormProvider {...methods}>
+              {React.createElement(modalChild)}
+            </FormProvider>
+          </div>
         </div>
-      </div>
-    </>,
-    modalRootId
+      </>,
+      modalRootId
+    )
   )
 }

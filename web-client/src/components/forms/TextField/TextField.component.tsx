@@ -8,10 +8,6 @@ type TextFieldProps = Omit<ComponentProps<"input">, "type"> & {
   readonly default?: string
 }
 
-/**
- * @TODO: The way how to pass data to the higher level components still TBC as still deciding about the final structure.
- */
-
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   ({ testId, errorText, ...props }, ref) => {
     const [value, setValue] = useState<string>(props.default ?? "")
@@ -29,14 +25,14 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
     }
 
     return (
-      <div className="relative">
+      <div className="relative w-full">
         <input
           data-testid={testId}
           ref={ref}
           value={value}
           onChange={handleInputChange}
           className={cn(
-            "min-w-96 text-xs border-custom-medium-grey-25 placeholder-custom-medium-grey-25 text-black rounded",
+            "w-full text-xs border-custom-medium-grey-25 placeholder-custom-medium-grey-25 text-black rounded",
             canDisplayError() && "border-custom-red"
           )}
           {...props}

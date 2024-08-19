@@ -1,41 +1,66 @@
 import { Logo } from "@/components/layout/navigation"
 import { Button } from "@/components/forms"
 import { ContextMenu } from "@/components/menus"
-import { useState } from "react"
-import { ConfirmationDialog, Modal } from "@/components/modals"
-import { boardContextMenuItems } from "@/utils/mocks/menus.mocks"
+import { Board } from "@/types/boards"
+import { useStore } from "@/store/store"
+import { useShallow } from "zustand/react/shallow"
+import { BoardContextMenu } from "@/types/contextMenus"
+import type { ModalScreenKey } from "@/types/modals"
 
 type Props = {
   readonly testId?: string
-  boardName: string
+  selectedBoard?: Board
+  contextMenuItems: BoardContextMenu[]
+  onContextMenuClick?: (id: ModalScreenKey) => void
 }
 
-export const Navbar = ({ testId, boardName }: Props) => {
-  const [showModal, setShowModal] = useState<boolean>(false)
+export const Navbar = ({
+  testId,
+  selectedBoard,
+  contextMenuItems,
+  onContextMenuClick,
+}: Props) => {
+  const { handleOpenModal } = useStore(
+    useShallow((state) => ({
+      handleOpenModal: state.handleOpenModal,
+    }))
+  )
+
+  /**
+   * @TODO: Once we add auth mechanism, there should be a context menu with the Logout/Account option
+   */
+  const headerForEmptyProject = () => (
+    <nav className="flex items-center justify-end bg-custom-white pr-8 flex-grow"></nav>
+  )
+
+  const headerForProjectWithBoards = (selectedBoard: Board) => (
+    <nav className="flex items-center justify-between bg-custom-white pl-8 flex-grow">
+      <h1 className="text-xl ">{selectedBoard.name}</h1>
+
+      <div className="mr-8 flex w-48 justify-between items-center relative">
+        <Button
+          className="w-40"
+          onClick={() => handleOpenModal("AddTaskScreen")}
+        >
+          + Add New Task
+        </Button>
+
+        <ContextMenu
+          items={contextMenuItems}
+          onItemSelect={onContextMenuClick}
+        />
+      </div>
+    </nav>
+  )
 
   return (
     <>
       <div data-testid={testId} className="flex h-24">
         <Logo />
-        <nav className="flex items-center justify-between bg-custom-white pl-8 flex-grow">
-          <h1 className="text-xl ">{boardName}</h1>
-
-          <div className="mr-8 flex w-48 justify-between items-center relative">
-            <Button className="w-40" onClick={() => setShowModal(true)}>
-              + Add New Task
-            </Button>
-            <ContextMenu items={boardContextMenuItems} />
-          </div>
-        </nav>
+        {selectedBoard
+          ? headerForProjectWithBoards(selectedBoard)
+          : headerForEmptyProject()}
       </div>
-      <Modal isOpen={showModal} onClose={() => setShowModal(false)}>
-        <ConfirmationDialog
-          title="Delete this board?"
-          description="Are you sure you want to delete the 'Platform Launch' board? This action will remove all columns and tasks and cannot be reversed."
-          onDelete={() => setShowModal(false)}
-          onCancel={() => setShowModal(false)}
-        />
-      </Modal>
     </>
   )
 }
