@@ -7,8 +7,8 @@ import { EmptyProject, NoActiveBoard } from "@/views/Placeholders"
 import { useBoardColumns, useBoards } from "@/services/queries"
 import { useStore } from "@/store/store"
 import { useParams } from "react-router-dom"
-import { BoardContextMenu } from "@/types/contextMenus"
-import { ModalScreenKey } from "@/types/modals"
+import { boardContextMenuItems } from "@/types/contextMenus"
+import type { ModalScreenKey } from "@/types/modals"
 
 export const BoardsPage = () => {
   const { boardId } = useParams()
@@ -41,19 +41,6 @@ export const BoardsPage = () => {
   if (isError) {
     return <h2>Error: {error.message}</h2>
   }
-
-  const boardContextMenuItems: BoardContextMenu[] = [
-    {
-      id: "EditBoardScreen",
-      title: "Edit Board",
-      type: "standard",
-    },
-    {
-      id: "DeleteBoardScreen",
-      title: "Delete Board",
-      type: "destructive",
-    },
-  ]
 
   const renderChildComponent = () => {
     if (boards?.length === 0) {

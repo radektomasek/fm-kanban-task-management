@@ -36,7 +36,7 @@ export const boardFormSchema = z.discriminatedUnion("variant", [
       .max(20, { message: fieldErrorTooLong }),
     columns: z.array(
       z.object({
-        id: z.string(),
+        id: z.optional(z.string()),
         name: z
           .string()
           .min(1, { message: fieldErrorTooShort })

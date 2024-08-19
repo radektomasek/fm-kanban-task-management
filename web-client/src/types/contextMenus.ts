@@ -7,3 +7,16 @@ export type BoardContextMenu = {
   title: string
   type: ItemType
 }
+
+export const boardContextMenuItems: BoardContextMenu[] = [
+  {
+    id: "EditBoardScreen",
+    title: "Edit Board",
+    type: "standard",
+  },
+  {
+    id: "DeleteBoardScreen",
+    title: "Delete Board",
+    type: "destructive",
+  },
+]

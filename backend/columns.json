@@ -1,8 +1,20 @@
 [
   {
-    "id": "cbb99fa8-6c6d-4a97-9a0a-bce564b621ea",
-    "boardId": "a0b26d4a-d72e-421d-b39a-6630ae29c8de",
+    "id": "ff6865c5-c176-4790-b3b8-3a0a8a3fe62e",
+    "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
     "name": "Todo",
-    "color": "hsl(350,83%,79%)"
+    "color": "hsl(273,83%,84%)"
+  },
+  {
+    "id": "448526a9-1231-484a-aac0-e4e0d25aebdc",
+    "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
+    "name": "Doing",
+    "color": "hsl(343,61%,65%)"
+  },
+  {
+    "id": "b7dbeee6-f5da-4609-aea1-2dfd1f10000c",
+    "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
+    "name": "Done",
+    "color": "hsl(13,98%,42%)"
   }
 ]

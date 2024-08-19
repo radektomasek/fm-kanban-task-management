@@ -5,9 +5,9 @@ import { useStore } from "@/store/store"
 import { useShallow } from "zustand/react/shallow"
 import { useCreateBoard, useEditBoard } from "@/services/mutations"
 import { CustomTextField } from "@/views/Modals/HookFormPrimitives"
-import { SubmitHandler, useFieldArray, useFormContext } from "react-hook-form"
 import type { BoardForm } from "@/types/boards"
 import { useBoardColumn } from "@/services/queries"
+import { SubmitHandler, useFieldArray, useFormContext } from "react-hook-form"
 
 export const AddEditBoardForm = () => {
   const {
@@ -33,27 +33,33 @@ export const AddEditBoardForm = () => {
   const isEditMode = activeModal === "EditBoardScreen"
   const createBoardMutation = useCreateBoard()
   const editBoardMutation = useEditBoard()
-  const { data: boardColumns, isLoading } = useBoardColumn(selectedBoard?.id)
+  const boardColumnData = useBoardColumn(selectedBoard?.id)
 
   useEffect(() => {
-    if (isEditMode && boardColumns && !isLoading) {
+    if (isEditMode) {
+      console.log("Is edit mode")
       reset({
         variant: "edit",
         id: selectedBoard?.id,
         name: selectedBoard?.name,
-        columns: boardColumns?.map((element) => ({
+        columns: boardColumnData.data?.map((element) => ({
           id: element.id,
           name: element.name,
         })),
       })
     }
-  }, [boardColumns, isLoading, isEditMode, reset])
+  }, [
+    boardColumnData.data,
+    selectedBoard?.id,
+    selectedBoard?.name,
+    isEditMode,
+    reset,
+  ])
 
   const handleAddColumn = () => {
     append({ name: "" })
   }
 
-  // const isSubmittable = !isDirty && isValid
   const handleRemoveColumn = (index: number) => remove(index)
 
   const onSubmit: SubmitHandler<BoardForm> = (data: BoardForm) => {
@@ -116,12 +122,7 @@ export const AddEditBoardForm = () => {
         + Add New Column
       </Button>
 
-      <Button
-        // disabled={!isSubmittable}
-        type={"submit"}
-        intent={"primary"}
-        className="w-full"
-      >
+      <Button type={"submit"} intent={"primary"} className="w-full">
         {isEditMode ? "Save Changes" : "Create New Board"}
       </Button>
     </form>

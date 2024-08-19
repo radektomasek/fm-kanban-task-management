@@ -1,7 +1,7 @@
 import { nanoid } from "nanoid"
 import { fireEvent, render, screen } from "@testing-library/react"
 import { ContextMenu } from "@/components/menus"
-import { boardContextMenuItems } from "@/utils/mocks/menus.mocks"
+import { boardContextMenuItems } from "@/types/contextMenus"
 
 describe("ContextMenu.component: behavior", () => {
   describe("when user clicks on the button with the mouse", () => {
