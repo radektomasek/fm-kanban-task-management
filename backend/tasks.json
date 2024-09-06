@@ -3,170 +3,102 @@
     "id": "N8-XrVCpnQ",
     "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
     "columnId": "ff6865c5-c176-4790-b3b8-3a0a8a3fe62e",
-    "title": "Build UI for onboarding flow",
-    "subtasks": {
-      "total": 3,
-      "completed": 0
-    }
+    "title": "Build UI for onboarding flow"
   },
   {
     "id": "vbFaTQ7QIx",
     "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
     "columnId": "ff6865c5-c176-4790-b3b8-3a0a8a3fe62e",
-    "title": "Build UI for search",
-    "subtasks": {
-      "total": 1,
-      "completed": 0
-    }
+    "title": "Build UI for search"
   },
   {
     "id": "WkdHjPfTSp",
     "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
     "columnId": "ff6865c5-c176-4790-b3b8-3a0a8a3fe62e",
-    "title": "Build settings UI",
-    "subtasks": {
-      "total": 2,
-      "completed": 0
-    }
+    "title": "Build settings UI"
   },
   {
     "id": "gJ9FbOoFpo",
     "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
     "columnId": "ff6865c5-c176-4790-b3b8-3a0a8a3fe62e",
-    "title": "QA and test all major user journeys",
-    "subtasks": {
-      "total": 2,
-      "completed": 0
-    }
+    "title": "QA and test all major user journeys"
   },
   {
     "id": "V2RutyHIVb",
     "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
     "columnId": "448526a9-1231-484a-aac0-e4e0d25aebdc",
-    "title": "Design settings and search pages",
-    "subtasks": {
-      "total": 3,
-      "completed": 1
-    }
+    "title": "Design settings and search pages"
   },
   {
     "id": "c1HB6nBcQo",
     "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
     "columnId": "448526a9-1231-484a-aac0-e4e0d25aebdc",
-    "title": "Add account management endpoints",
-    "subtasks": {
-      "total": 3,
-      "completed": 2
-    }
+    "title": "Add account management endpoints"
   },
   {
     "id": "lDnfW_rhW4",
     "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
     "columnId": "448526a9-1231-484a-aac0-e4e0d25aebdc",
-    "title": "Design onboarding flow",
-    "subtasks": {
-      "total": 3,
-      "completed": 1
-    }
+    "title": "Design onboarding flow"
   },
   {
     "id": "1fA-X67Fje",
     "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
     "columnId": "448526a9-1231-484a-aac0-e4e0d25aebdc",
-    "title": "Add search endpoints",
-    "subtasks": {
-      "total": 2,
-      "completed": 1
-    }
+    "title": "Add search endpoints"
   },
   {
     "id": "j8xelUqoph",
     "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
     "columnId": "448526a9-1231-484a-aac0-e4e0d25aebdc",
-    "title": "Add authentication endpoints",
-    "subtasks": {
-      "total": 2,
-      "completed": 1
-    }
+    "title": "Add authentication endpoints"
   },
   {
     "id": "71GGdfqOEf",
     "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
     "columnId": "448526a9-1231-484a-aac0-e4e0d25aebdc",
-    "title": "Research pricing points of various competitors and trial different business models",
-    "subtasks": {
-      "total": 3,
-      "completed": 1
-    }
+    "title": "Research pricing points of various competitors and trial different business models"
   },
   {
     "id": "5RHfvEr3Dq",
     "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
     "columnId": "b7dbeee6-f5da-4609-aea1-2dfd1f10000c",
-    "title": "Conduct 5 wireframe tests",
-    "subtasks": {
-      "total": 1,
-      "completed": 1
-    }
+    "title": "Conduct 5 wireframe tests"
   },
   {
     "id": "nyosLF2vw6",
     "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
     "columnId": "b7dbeee6-f5da-4609-aea1-2dfd1f10000c",
-    "title": "Create wireframe prototype",
-    "subtasks": {
-      "total": 1,
-      "completed": 1
-    }
+    "title": "Create wireframe prototype"
   },
   {
     "id": "JCNrTtzuEc",
     "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
     "columnId": "b7dbeee6-f5da-4609-aea1-2dfd1f10000c",
-    "title": "Review results of usability tests and iterate",
-    "subtasks": {
-      "total": 3,
-      "completed": 3
-    }
+    "title": "Review results of usability tests and iterate"
   },
   {
     "id": "gGbQ-MHEXD",
     "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
     "columnId": "b7dbeee6-f5da-4609-aea1-2dfd1f10000c",
-    "title": "Create paper prototype and conduct 10 usability tests with potential customers",
-    "subtasks": {
-      "total": 2,
-      "completed": 2
-    }
+    "title": "Create paper prototype and conduct 10 usability tests with potential customers"
   },
   {
     "id": "I5xWHNYCuR",
     "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
     "columnId": "b7dbeee6-f5da-4609-aea1-2dfd1f10000c",
-    "title": "Market discovery",
-    "subtasks": {
-      "total": 1,
-      "completed": 1
-    }
+    "title": "Market discovery"
   },
   {
     "id": "LG-cjbh-Cl",
     "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
     "columnId": "b7dbeee6-f5da-4609-aea1-2dfd1f10000c",
-    "title": "Competitor Analysis",
-    "subtasks": {
-      "total": 2,
-      "completed": 2
-    }
+    "title": "Competitor Analysis"
   },
   {
     "id": "BW7KvUIWYl",
     "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
     "columnId": "b7dbeee6-f5da-4609-aea1-2dfd1f10000c",
-    "title": "Research the market",
-    "subtasks": {
-      "total": 2,
-      "completed": 2
-    }
+    "title": "Research the market"
   }
 ]

@@ -7,13 +7,17 @@ var (
 )
 
 type Models struct {
-	Boards  BoardModel
-	Columns ColumnModel
+	Boards   BoardModel
+	Columns  ColumnModel
+	Tasks    TaskModel
+	Subtasks SubtaskModel
 }
 
 func NewModels() Models {
 	return Models{
-		Boards:  BoardModel{},
-		Columns: ColumnModel{},
+		Boards:   BoardModel{},
+		Columns:  ColumnModel{},
+		Tasks:    TaskModel{},
+		Subtasks: SubtaskModel{},
 	}
 }
