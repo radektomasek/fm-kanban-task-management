@@ -17,11 +17,11 @@ func (app *application) routes() http.Handler {
 	router.HandlerFunc(http.MethodDelete, "/v1/boards/:boardId", app.deleteBoard)
 	router.HandlerFunc(http.MethodGet, "/v1/boards/:boardId/columns", app.getColumnsByBoardID)
 
-	router.HandlerFunc(http.MethodGet, "/v1/boards/:boardId/tasks", nil)
-	router.HandlerFunc(http.MethodPost, "/v1/boards/:boardId/tasks", nil)
-	router.HandlerFunc(http.MethodGet, "/v1/boards/:boardId/tasks/:taskId", nil)
-	router.HandlerFunc(http.MethodPut, "/v1/boards/:boardId/tasks/:taskId", nil)
-	router.HandlerFunc(http.MethodDelete, "/v1/boards/:boardId/tasks/:taskId", nil)
+	// router.HandlerFunc(http.MethodGet, "/v1/boards/:boardId/tasks", nil)
+	// router.HandlerFunc(http.MethodPost, "/v1/boards/:boardId/tasks", nil)
+	// router.HandlerFunc(http.MethodGet, "/v1/boards/:boardId/tasks/:taskId", nil)
+	// router.HandlerFunc(http.MethodPut, "/v1/boards/:boardId/tasks/:taskId", nil)
+	// router.HandlerFunc(http.MethodDelete, "/v1/boards/:boardId/tasks/:taskId", nil)
 
 	return app.recoverPanic(cors.New(cors.Options{
 		AllowedOrigins: []string{"http://localhost:5173"},
