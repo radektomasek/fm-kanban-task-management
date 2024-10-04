@@ -16,10 +16,9 @@ func (app *application) routes() http.Handler {
 	router.HandlerFunc(http.MethodPut, "/v1/boards/:boardId", app.updateBoardByID)
 	router.HandlerFunc(http.MethodDelete, "/v1/boards/:boardId", app.deleteBoardByID)
 	router.HandlerFunc(http.MethodGet, "/v1/boards/:boardId/columns", app.getColumnsByBoardID)
-
-	router.HandlerFunc(http.MethodGet, "/v1/boards/:boardId/tasks", app.getAllTasks)
-	router.HandlerFunc(http.MethodPost, "/v1/boards/:boardId/tasks", app.createTask)
+	router.HandlerFunc(http.MethodGet, "/v1/boards/:boardId/tasks", app.getTasksByBoardID)
 	router.HandlerFunc(http.MethodGet, "/v1/boards/:boardId/tasks/:taskId", app.getTaskByID)
+	router.HandlerFunc(http.MethodPost, "/v1/boards/:boardId/tasks", app.createTask)
 	router.HandlerFunc(http.MethodPut, "/v1/boards/:boardId/tasks/:taskId", app.updateTaskByID)
 	router.HandlerFunc(http.MethodDelete, "/v1/boards/:boardId/tasks/:taskId", app.deleteTaskByID)
 

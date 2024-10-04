@@ -36,3 +36,13 @@ Content-Type: application/json
 GET http://localhost:4000/v1/boards/55494f14-8bb8-4db9-940d-223b4a4e4067/columns
 Content-Type: application/json
 ###
+
+### Get all tasks by a board ID
+GET http://localhost:4000/v1/boards/328ba7fa-0508-4c04-865b-d4630d6255aa/tasks
+Content-Type: application/json
+###
+
+### Get a task by a board ID and task ID
+GET http://localhost:4000/v1/boards/328ba7fa-0508-4c04-865b-d4630d6255aa/tasks/N8-XrVCpnQ
+Content-Type: application/json
+###

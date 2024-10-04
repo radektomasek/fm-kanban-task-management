@@ -44,7 +44,6 @@ func (app *application) getBoardByID(w http.ResponseWriter, r *http.Request) {
 		app.serverErrorResponse(w, r, err)
 		return
 	}
-
 }
 
 func (app *application) createBoard(w http.ResponseWriter, r *http.Request) {
