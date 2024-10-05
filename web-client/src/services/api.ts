@@ -9,6 +9,12 @@ import {
   isCreateBoardForm,
 } from "@/types/boards"
 import { mapBoardData } from "@/utils/helpers/mapData.helpers"
+import {
+  isAggregatedSubtask,
+  Task,
+  taskSchema,
+  TaskWithAggregatedSubtasks,
+} from "@/types/tasks"
 
 const BASE_URL = "http://localhost:4000/v1/"
 const axiosInstance = axios.create({ baseURL: BASE_URL })
@@ -89,4 +95,21 @@ export const deleteBoard = async (id: string): Promise<BoardDelete> => {
   }
 
   return result.data
+}
+
+export const getTasksByBoardId = async (
+  boardId: string
+): Promise<TaskWithAggregatedSubtasks[]> => {
+  const response = await axiosInstance.get<Task[]>(`/boards/${boardId}/tasks`)
+
+  const result = taskSchema.array().safeParse(response.data)
+  if (!result.success) {
+    throw new Error(
+      `[GET /boards/${boardId}/tasks]: failed to parse the response]`
+    )
+  }
+
+  return result.data.filter((task): task is TaskWithAggregatedSubtasks => {
+    return isAggregatedSubtask(task.subtasks)
+  })
 }
