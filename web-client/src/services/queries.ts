@@ -1,5 +1,9 @@
 import { useQueries, useQuery } from "@tanstack/react-query"
-import { getBoards, getColumnsByBoardId } from "@/services/api"
+import {
+  getBoards,
+  getColumnsByBoardId,
+  getTasksByBoardId,
+} from "@/services/api"
 import { Board } from "@/types/boards"
 
 export function useBoards() {
@@ -9,19 +13,27 @@ export function useBoards() {
   })
 }
 
-export function useBoardColumn(id?: string) {
+export function useBoardColumns(boardId?: string) {
   return useQuery({
-    queryKey: ["boards/columns", { boardId: id }],
-    queryFn: () => getColumnsByBoardId(id),
-    enabled: !!id,
+    queryKey: ["boards/columns", { boardId: boardId }],
+    queryFn: () => getColumnsByBoardId(boardId),
+    enabled: !!boardId,
   })
 }
 
-export function useBoardColumns(data?: Board[]) {
+export function useBoardColumnsParallel(data?: Board[]) {
   return useQueries({
     queries: (data ?? []).map((element) => ({
       queryKey: ["boards/columns", { boardId: element.id }],
       queryFn: () => getColumnsByBoardId(element.id),
     })),
+  })
+}
+
+export function useBoardTasks(boardId?: string) {
+  return useQuery({
+    queryKey: ["boards/tasks", { boardId: boardId }],
+    queryFn: () => getTasksByBoardId(boardId),
+    enabled: !!boardId,
   })
 }

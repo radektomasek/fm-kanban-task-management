@@ -98,11 +98,18 @@ export const deleteBoard = async (id: string): Promise<BoardDelete> => {
 }
 
 export const getTasksByBoardId = async (
-  boardId: string
+  boardId?: string
 ): Promise<TaskWithAggregatedSubtasks[]> => {
-  const response = await axiosInstance.get<Task[]>(`/boards/${boardId}/tasks`)
+  if (!boardId) {
+    throw new ReferenceError("(boardId): the parameter is not provided")
+  }
 
-  const result = taskSchema.array().safeParse(response.data)
+  const response = await axiosInstance.get<{ tasks: Task[] }>(
+    `/boards/${boardId}/tasks`
+  )
+
+  const result = taskSchema.array().safeParse(response.data.tasks)
+
   if (!result.success) {
     throw new Error(
       `[GET /boards/${boardId}/tasks]: failed to parse the response]`

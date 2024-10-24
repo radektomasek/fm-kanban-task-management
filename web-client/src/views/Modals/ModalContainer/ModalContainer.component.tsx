@@ -14,6 +14,8 @@ const ModalChild = (modalScreenKey: ModalScreenKey) => {
       return modalChildren["AddEditBoardForm"]
     case "DeleteBoardScreen":
       return modalChildren["DeleteBoard"]
+    case "ViewTaskDetailScreen":
+      return modalChildren["ViewTaskDetail"]
     case "None":
     default:
       return null

@@ -98,12 +98,36 @@ func filterTasksByBoardID(boardID string, tasks []Task) []Task {
 	return result
 }
 
-func filterTasksByBoardIDAndTaskID(boardID string, taskID string, tasks []Task) []Task {
+func getTasksByBoardIDAndTaskID(boardID string, taskID string, tasks []Task) []Task {
 	var result []Task
 
 	for _, task := range tasks {
 		if task.BoardID == boardID && task.ID == taskID {
 			result = append(result, task)
+		}
+	}
+
+	return result
+}
+
+func filterTasksByTaskID(taskID string, tasks []Task) []Task {
+	var result []Task
+
+	for _, task := range tasks {
+		if task.ID != taskID {
+			result = append(result, task)
+		}
+	}
+
+	return result
+}
+
+func filterSubtasksByTaskID(taskID string, subtasks []Subtask) []Subtask {
+	var result []Subtask
+
+	for _, subtask := range subtasks {
+		if subtask.TaskID != taskID {
+			result = append(result, subtask)
 		}
 	}
 

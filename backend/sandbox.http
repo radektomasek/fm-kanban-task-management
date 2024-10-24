@@ -46,3 +46,14 @@ Content-Type: application/json
 GET http://localhost:4000/v1/boards/328ba7fa-0508-4c04-865b-d4630d6255aa/tasks/N8-XrVCpnQ
 Content-Type: application/json
 ###
+
+### Create task for a board ID
+POST http://localhost:4000/v1/boards/328ba7fa-0508-4c04-865b-d4630d6255aa/tasks
+Content-Type: application/json
+
+{ "columnId": "b7dbeee6-f5da-4609-aea1-2dfd1f10000c", "title": "Updated Platform launch", "description": "A description", "subtasks":  [{ "title": "Custom subtask1" }, { "title": "Custom subtask2" }, { "title": "Custom subtask3" }]}
+###
+
+### Delete a specific task from a board (boardId), including the subtasks
+DELETE http://localhost:4000/v1/boards/328ba7fa-0508-4c04-865b-d4630d6255aa/tasks/407745a8-9987-445e-88d3-64690f354227
+Content-Type: application/json

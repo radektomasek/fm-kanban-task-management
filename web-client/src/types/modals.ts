@@ -2,7 +2,7 @@ export type ModalScreenKey =
   | "None"
   | "AddTaskScreen"
   | "EditTaskScreen"
-  | "ViewTaskScreen"
+  | "ViewTaskDetailScreen"
   | "DeleteTaskScreen"
   | "AddBoardScreen"
   | "EditBoardScreen"

@@ -3,15 +3,17 @@ package data
 import (
 	"encoding/json"
 	"fmt"
+	"github.com/google/uuid"
 	"time"
 )
 
 type Task struct {
-	ID        string    `json:"id"`
-	BoardID   string    `json:"boardId"`
-	ColumnID  string    `json:"columnId"`
-	Title     string    `json:"title"`
-	CreatedAt time.Time `json:"-"`
+	ID          string    `json:"id"`
+	BoardID     string    `json:"boardId"`
+	ColumnID    string    `json:"columnId"`
+	Title       string    `json:"title"`
+	Description string    `json:"description"`
+	CreatedAt   time.Time `json:"-"`
 }
 
 type Subtask struct {
@@ -104,7 +106,7 @@ func (t TaskModel) GetTaskByID(boardID string, taskID string) (*TaskWithSubtasks
 		tasks = []Task{}
 	}
 
-	tasks = filterTasksByBoardIDAndTaskID(boardID, taskID, tasks)
+	tasks = getTasksByBoardIDAndTaskID(boardID, taskID, tasks)
 
 	jsonData, err = readJSONFile("subtasks.json")
 	if err != nil {
@@ -127,21 +129,105 @@ func (t TaskModel) GetTaskByID(boardID string, taskID string) (*TaskWithSubtasks
 	mergedData := mergeTasksAndSubtasks(tasks, subtasks)
 
 	result := getTasksWithSubtasks(mergedData)
-	if len(result) == 0 {
+	if result == nil {
 		return nil, fmt.Errorf("no element with ID %s found", taskID)
 	}
 
 	return &result[0], nil
 }
 
-func (t TaskModel) Insert(task *Task) error {
-	return nil
+func (t TaskModel) Insert(task *Task, subtasks []Subtask) (*TaskWithSubtasks, error) {
+	jsonTaskData, err := readJSONFile("tasks.json")
+	if err != nil {
+		fmt.Println("Error reading file: ", err)
+		return nil, err
+	}
+
+	var taskData []Task
+	err = json.Unmarshal(jsonTaskData, &taskData)
+
+	if err != nil {
+		fmt.Println("Error unmarshalling json: ", err)
+		return nil, err
+	}
+
+	jsonSubtaskData, err := readJSONFile("subtasks.json")
+	if err != nil {
+		fmt.Println("Error reading file: ", err)
+		return nil, err
+	}
+
+	var subtaskData []Subtask
+	err = json.Unmarshal(jsonSubtaskData, &subtaskData)
+
+	if err != nil {
+		fmt.Println("Error unmarshalling json: ", err)
+		return nil, err
+	}
+
+	task.ID = uuid.NewString()
+	task.CreatedAt = time.Now()
+
+	for index := range subtasks {
+		subtasks[index].ID = uuid.NewString()
+		subtasks[index].TaskID = task.ID
+		subtasks[index].Completed = false
+		subtasks[index].CreatedAt = time.Now()
+	}
+
+	taskData = append(taskData, *task)
+	err = writeJSONFile("tasks.json", taskData)
+	if err != nil {
+		fmt.Println("Error writing file: ", err)
+		return nil, err
+	}
+
+	subtaskData = append(subtaskData, subtasks...)
+	err = writeJSONFile("subtasks.json", subtaskData)
+	if err != nil {
+		fmt.Println("Error writing file: ", err)
+		return nil, err
+	}
+
+	return &TaskWithSubtasks{Task: *task, Subtasks: subtasks}, nil
 }
 
 func (t TaskModel) Update(payload *Task) (*Task, error) {
 	return nil, nil
 }
 
-func (t TaskModel) Delete(task *Task) error {
+func (t TaskModel) Delete(taskId string) error {
+	jsonTaskData, err := readJSONFile("tasks.json")
+	if err != nil {
+		fmt.Println("Error reading file: ", err)
+		return err
+	}
+
+	var taskData []Task
+	err = json.Unmarshal(jsonTaskData, &taskData)
+
+	updatedTasks := filterTasksByTaskID(taskId, taskData)
+	err = writeJSONFile("tasks.json", updatedTasks)
+	if err != nil {
+		fmt.Println("Error writing file: ", err)
+		return err
+	}
+
+	jsonSubtaskData, err := readJSONFile("subtasks.json")
+	if err != nil {
+		fmt.Println("Error reading file: ", err)
+		return err
+	}
+
+	var subtaskData []Subtask
+	err = json.Unmarshal(jsonSubtaskData, &subtaskData)
+
+	updatedSubtasks := filterSubtasksByTaskID(taskId, subtaskData)
+	err = writeJSONFile("subtasks.json", updatedSubtasks)
+	if err != nil {
+		fmt.Println("Error writing file: ", err)
+		return err
+	}
+
 	return nil
 }
