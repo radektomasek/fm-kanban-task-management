@@ -109,7 +109,75 @@ func (app *application) createTask(w http.ResponseWriter, r *http.Request) {
 }
 
 func (app *application) updateTaskByID(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Placeholder response")
+	boardId, err := app.readUrlParamField(r, "boardId")
+	if err != nil {
+		app.badRequestResponse(w, r, err)
+		return
+	}
+
+	taskId, err := app.readUrlParamField(r, "taskId")
+	if err != nil {
+		app.badRequestResponse(w, r, err)
+		return
+	}
+
+	task, err := app.models.Tasks.GetTaskByID(boardId, taskId)
+
+	if task == nil {
+		app.notFoundResponse(w, r)
+		return
+	}
+
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
+		return
+	}
+
+	var input struct {
+		ID          string `json:"id"`
+		ColumnID    string `json:"columnId"`
+		BoardID     string `json:"boardId"`
+		Title       string `json:"title"`
+		Description string `json:"description"`
+		Subtasks    []struct {
+			ID        string `json:"id,omitempty"`
+			TaskID    string `json:"taskId,omitempty"`
+			Title     string `json:"title"`
+			Completed bool   `json:"completed,omitempty"`
+		} `json:"subtasks"`
+	}
+
+	err = app.readJSON(w, r, &input)
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
+	}
+
+	updatedTask := &data.Task{
+		ID:          taskId,
+		BoardID:     boardId,
+		ColumnID:    input.ColumnID,
+		Title:       input.Title,
+		Description: input.Description,
+	}
+
+	var updatedSubtasks []data.Subtask
+	for _, subtask := range input.Subtasks {
+		updatedSubtasks = append(updatedSubtasks, data.Subtask{ID: subtask.ID, TaskID: taskId, Title: subtask.Title, Completed: subtask.Completed})
+	}
+
+	result, err := app.models.Tasks.Update(updatedTask, updatedSubtasks)
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
+		return
+	}
+
+	headers := make(http.Header)
+	headers.Set("Location", fmt.Sprintf("/v1/boards/%s/tasks/%s", boardId, taskId))
+
+	err = app.writeJSON(w, http.StatusOK, envelope{"task": result}, headers)
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
+	}
 }
 
 func (app *application) deleteTaskByID(w http.ResponseWriter, r *http.Request) {
@@ -143,4 +211,8 @@ func (app *application) deleteTaskByID(w http.ResponseWriter, r *http.Request) {
 	headers.Set("Location", fmt.Sprintf("/v1/boards/%s/tasks/%s", boardId, taskId))
 
 	err = app.writeJSON(w, http.StatusOK, envelope{"id": taskId, "message": "task deleted successfully"}, headers)
+	if err != nil {
+
+		app.serverErrorResponse(w, r, err)
+	}
 }

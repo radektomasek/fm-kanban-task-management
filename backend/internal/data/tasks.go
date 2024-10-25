@@ -192,8 +192,89 @@ func (t TaskModel) Insert(task *Task, subtasks []Subtask) (*TaskWithSubtasks, er
 	return &TaskWithSubtasks{Task: *task, Subtasks: subtasks}, nil
 }
 
-func (t TaskModel) Update(payload *Task) (*Task, error) {
-	return nil, nil
+func (t TaskModel) Update(task *Task, subtasks []Subtask) (*TaskWithSubtasks, error) {
+	// Read and parse tasks from file
+	jsonTaskData, err := readJSONFile("tasks.json")
+	if err != nil {
+		fmt.Println("Error reading file: ", err)
+		return nil, err
+	}
+
+	var taskData []Task
+	if err := json.Unmarshal(jsonTaskData, &taskData); err != nil {
+		fmt.Println("Error unmarshalling JSON: ", err)
+		return nil, err
+	}
+
+	// Read and parse subtasks from file
+	jsonSubtaskData, err := readJSONFile("subtasks.json")
+	if err != nil {
+		fmt.Println("Error reading file: ", err)
+		return nil, err
+	}
+
+	var subtaskData []Subtask
+	if err := json.Unmarshal(jsonSubtaskData, &subtaskData); err != nil {
+		fmt.Println("Error unmarshalling JSON: ", err)
+		return nil, err
+	}
+
+	// Update or create the task
+	task.CreatedAt = time.Now() // Update CreatedAt if needed
+	taskExists := false
+	for index, storedTask := range taskData {
+		if storedTask.ID == task.ID {
+			taskData[index] = *task
+			taskExists = true
+			break
+		}
+	}
+	if !taskExists {
+		task.ID = uuid.NewString()
+		taskData = append(taskData, *task)
+	}
+
+	// Create a map for existing subtasks by ID
+	existingSubtasks := make(map[string]Subtask)
+	for _, storedSubtask := range subtaskData {
+		existingSubtasks[storedSubtask.ID] = storedSubtask
+	}
+
+	// Update or add new subtasks
+	for index := range subtasks {
+		if existing, found := existingSubtasks[subtasks[index].ID]; found {
+			// Preserve existing CreatedAt
+			subtasks[index].CreatedAt = existing.CreatedAt
+		} else {
+			// Set new ID, completion status, and timestamp for new subtasks
+			subtasks[index].ID = uuid.NewString()
+			subtasks[index].Completed = false
+			subtasks[index].CreatedAt = time.Now()
+		}
+		// Update the map with new/updated subtask
+		existingSubtasks[subtasks[index].ID] = subtasks[index]
+	}
+
+	// Convert the subtask map back to a slice for saving
+	var updatedSubtasks []Subtask
+	for _, sub := range existingSubtasks {
+		updatedSubtasks = append(updatedSubtasks, sub)
+	}
+
+	// Write the updated tasks and subtasks back to their files
+	if err := writeJSONFile("tasks.json", taskData); err != nil {
+		fmt.Println("Error writing file: ", err)
+		return nil, err
+	}
+
+	if err := writeJSONFile("subtasks.json", updatedSubtasks); err != nil {
+		fmt.Println("Error writing file: ", err)
+		return nil, err
+	}
+
+	// Create and return the result with updated task and subtasks
+	result := TaskWithSubtasks{Task: *task, Subtasks: subtasks}
+	return &result, nil
 }
 
 func (t TaskModel) Delete(taskId string) error {

@@ -172,3 +172,15 @@ func getTasksAndAggregatedSubtasks(data map[string]TaskWithSubtasks) []TaskWithA
 
 	return result
 }
+
+func findSubtaskElementIfExist(id string, data []Subtask) *Subtask {
+	var result *Subtask
+
+	for _, subtask := range data {
+		if subtask.ID == id {
+			result = &subtask
+		}
+	}
+
+	return result
+}
