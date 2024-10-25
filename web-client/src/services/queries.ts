@@ -2,6 +2,7 @@ import { useQueries, useQuery } from "@tanstack/react-query"
 import {
   getBoards,
   getColumnsByBoardId,
+  getTaskDetailById,
   getTasksByBoardId,
 } from "@/services/api"
 import { Board } from "@/types/boards"
@@ -35,5 +36,13 @@ export function useBoardTasks(boardId?: string) {
     queryKey: ["boards/tasks", { boardId: boardId }],
     queryFn: () => getTasksByBoardId(boardId),
     enabled: !!boardId,
+  })
+}
+
+export function useBoardTaskDetail(boardId?: string, taskId?: string) {
+  return useQuery({
+    queryKey: ["boards/task", { boardId: boardId, taskId: taskId }],
+    queryFn: () => getTaskDetailById(boardId, taskId),
+    enabled: !!boardId && !!taskId,
   })
 }

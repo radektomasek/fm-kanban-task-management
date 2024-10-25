@@ -14,6 +14,7 @@ import {
   Task,
   taskSchema,
   TaskWithAggregatedSubtasks,
+  TaskWithSubtasks,
 } from "@/types/tasks"
 
 const BASE_URL = "http://localhost:4000/v1/"
@@ -112,11 +113,45 @@ export const getTasksByBoardId = async (
 
   if (!result.success) {
     throw new Error(
-      `[GET /boards/${boardId}/tasks]: failed to parse the response]`
+      `[GET /boards/${boardId}/tasks]: failed to parse the response as Task[]`
     )
   }
 
-  return result.data.filter((task): task is TaskWithAggregatedSubtasks => {
-    return isAggregatedSubtask(task.subtasks)
-  })
+  return result.data.filter((task): task is TaskWithAggregatedSubtasks =>
+    isAggregatedSubtask(task.subtasks)
+  )
+}
+
+export const getTaskDetailById = async (
+  boardId?: string,
+  taskId?: string
+): Promise<TaskWithSubtasks> => {
+  if (!boardId) {
+    throw new ReferenceError("(boardId): the parameter is not provided")
+  }
+
+  if (!taskId) {
+    throw new ReferenceError("(taskId): the parameter is not provided")
+  }
+
+  const response = await axiosInstance.get<{ task: TaskWithSubtasks }>(
+    `/boards/${boardId}/tasks/${taskId}`
+  )
+
+  const result = taskSchema.safeParse(response.data.task)
+  if (!result.success) {
+    throw new Error(
+      `[GET /boards/${boardId}/tasks/${taskId}]: failed to parse the response`
+    )
+  }
+
+  const task = result.data
+
+  if (isAggregatedSubtask(task.subtasks)) {
+    throw new Error(
+      `[GET /boards/${boardId}/tasks/${taskId}]: expected subtasks array but received aggregated subtasks`
+    )
+  }
+
+  return { ...task, subtasks: task.subtasks }
 }

@@ -1,11 +1,25 @@
+import { useShallow } from "zustand/react/shallow"
+import { useStore } from "@/store/store"
 import type {
   AggregatedSubtask,
   TaskWithAggregatedSubtasks,
 } from "@/types/tasks"
 
-export const CardItem = ({ title, subtasks }: TaskWithAggregatedSubtasks) => {
+export const CardItem = ({
+  id,
+  title,
+  subtasks,
+}: TaskWithAggregatedSubtasks) => {
+  const { handleOpenModal, setSelectedTaskId } = useStore(
+    useShallow((state) => ({
+      setSelectedTaskId: state.setSelectedTaskId,
+      handleOpenModal: state.handleOpenModal,
+    }))
+  )
+
   const handleOnClick = () => {
-    console.log("clicked")
+    setSelectedTaskId(id)
+    handleOpenModal("ViewTaskDetailScreen")
   }
 
   const handleOnKeyDown = (event: React.KeyboardEvent) => {

@@ -17,6 +17,7 @@ export const taskSchema = z.object({
   boardId: z.string(),
   columnId: z.string(),
   title: z.string(),
+  description: z.string(),
   subtasks: z.union([z.array(subtaskSchema), aggregatedSubtaskSchema]),
 })
 

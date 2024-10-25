@@ -23,10 +23,11 @@ const ModalChild = (modalScreenKey: ModalScreenKey) => {
 }
 
 export const ModalContainer = () => {
-  const { activeModal, handleCloseModal } = useStore(
+  const { activeModal, handleCloseModal, clearSelectedTaskId } = useStore(
     useShallow((state) => ({
       activeModal: state.activeModal,
       handleCloseModal: state.handleCloseModal,
+      clearSelectedTaskId: state.clearSelectedTaskId,
     }))
   )
 
@@ -40,12 +41,14 @@ export const ModalContainer = () => {
   const handleClickOutside = (event: MouseEvent) => {
     if (overlayRef.current && overlayRef.current === event.target) {
       handleCloseModal()
+      clearSelectedTaskId()
     }
   }
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === "Escape") {
       handleCloseModal()
+      clearSelectedTaskId()
     }
 
     if (event.key === "Tab" && contentRef.current) {
