@@ -25,14 +25,15 @@ type Subtask struct {
 }
 
 type AggregatedSubtasks struct {
-	Total     int `json:"total"`
-	Completed int `json:"completed"`
+	Total     int       `json:"total"`
+	Completed int       `json:"completed"`
+	Data      []Subtask `json:"data,omitempty"`
 }
 
-type TaskWithSubtasks struct {
-	Task
-	Subtasks []Subtask `json:"subtasks"`
-}
+//type TaskWithSubtasks struct {
+//	Task
+//	Subtasks AggregatedSubtasks `json:"subtasks"`
+//}
 
 type TaskWithAggregatedSubtasks struct {
 	Task
@@ -81,13 +82,12 @@ func (t TaskModel) GetTasksByBoardID(boardId string) ([]TaskWithAggregatedSubtas
 	}
 
 	mergedData := mergeTasksAndSubtasks(tasks, subtasks)
-
 	result := getTasksAndAggregatedSubtasks(mergedData)
 
 	return result, nil
 }
 
-func (t TaskModel) GetTaskByID(boardID string, taskID string) (*TaskWithSubtasks, error) {
+func (t TaskModel) GetTaskByID(boardID string, taskID string) (*TaskWithAggregatedSubtasks, error) {
 	jsonData, err := readJSONFile("tasks.json")
 	if err != nil {
 		fmt.Println("Error reading file: ", err)
@@ -108,6 +108,10 @@ func (t TaskModel) GetTaskByID(boardID string, taskID string) (*TaskWithSubtasks
 
 	tasks = getTasksByBoardIDAndTaskID(boardID, taskID, tasks)
 
+	if len(tasks) == 0 {
+		return nil, fmt.Errorf("no element with ID %s found", taskID)
+	}
+
 	jsonData, err = readJSONFile("subtasks.json")
 	if err != nil {
 		fmt.Println("Error reading file: ", err)
@@ -126,17 +130,12 @@ func (t TaskModel) GetTaskByID(boardID string, taskID string) (*TaskWithSubtasks
 		subtasks = []Subtask{}
 	}
 
-	mergedData := mergeTasksAndSubtasks(tasks, subtasks)
+	result := getTaskAndAggregatedSubtasks(&tasks[0], subtasks)
 
-	result := getTasksWithSubtasks(mergedData)
-	if result == nil {
-		return nil, fmt.Errorf("no element with ID %s found", taskID)
-	}
-
-	return &result[0], nil
+	return &result, nil
 }
 
-func (t TaskModel) Insert(task *Task, subtasks []Subtask) (*TaskWithSubtasks, error) {
+func (t TaskModel) Insert(task *Task, subtasks []Subtask) (*TaskWithAggregatedSubtasks, error) {
 	jsonTaskData, err := readJSONFile("tasks.json")
 	if err != nil {
 		fmt.Println("Error reading file: ", err)
@@ -189,10 +188,12 @@ func (t TaskModel) Insert(task *Task, subtasks []Subtask) (*TaskWithSubtasks, er
 		return nil, err
 	}
 
-	return &TaskWithSubtasks{Task: *task, Subtasks: subtasks}, nil
+	result := getTaskAndAggregatedSubtasks(task, subtasks)
+
+	return &result, nil
 }
 
-func (t TaskModel) Update(task *Task, subtasks []Subtask) (*TaskWithSubtasks, error) {
+func (t TaskModel) Update(task *Task, subtasks []Subtask) (*TaskWithAggregatedSubtasks, error) {
 	// Read and parse tasks from file
 	jsonTaskData, err := readJSONFile("tasks.json")
 	if err != nil {
@@ -273,7 +274,7 @@ func (t TaskModel) Update(task *Task, subtasks []Subtask) (*TaskWithSubtasks, er
 	}
 
 	// Create and return the result with updated task and subtasks
-	result := TaskWithSubtasks{Task: *task, Subtasks: subtasks}
+	result := getTaskAndAggregatedSubtasks(task, subtasks)
 	return &result, nil
 }
 

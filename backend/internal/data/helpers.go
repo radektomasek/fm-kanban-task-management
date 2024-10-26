@@ -66,17 +66,17 @@ func filterBoardByID(id string, data []Board) []Board {
 	return result
 }
 
-func mergeTasksAndSubtasks(tasks []Task, subtasks []Subtask) map[string]TaskWithSubtasks {
-	var result map[string]TaskWithSubtasks
-	result = make(map[string]TaskWithSubtasks)
+func mergeTasksAndSubtasks(tasks []Task, subtasks []Subtask) map[string]TaskWithAggregatedSubtasks {
+	var result map[string]TaskWithAggregatedSubtasks
+	result = make(map[string]TaskWithAggregatedSubtasks)
 
 	for _, task := range tasks {
-		var tasksWithSubtasks TaskWithSubtasks
+		var tasksWithSubtasks TaskWithAggregatedSubtasks
 		tasksWithSubtasks.Task = task
 
 		for _, subtask := range subtasks {
 			if subtask.TaskID == task.ID {
-				tasksWithSubtasks.Subtasks = append(tasksWithSubtasks.Subtasks, subtask)
+				tasksWithSubtasks.Subtasks.Data = append(tasksWithSubtasks.Subtasks.Data, subtask)
 			}
 		}
 
@@ -122,6 +122,18 @@ func filterTasksByTaskID(taskID string, tasks []Task) []Task {
 	return result
 }
 
+func getSubtasksByTaskID(taskID string, subtasks []Subtask) []Subtask {
+	var result []Subtask
+
+	for _, subtask := range subtasks {
+		if subtask.TaskID == taskID {
+			result = append(result, subtask)
+		}
+	}
+
+	return result
+}
+
 func filterSubtasksByTaskID(taskID string, subtasks []Subtask) []Subtask {
 	var result []Subtask
 
@@ -134,8 +146,8 @@ func filterSubtasksByTaskID(taskID string, subtasks []Subtask) []Subtask {
 	return result
 }
 
-func getTasksWithSubtasks(data map[string]TaskWithSubtasks) []TaskWithSubtasks {
-	var result []TaskWithSubtasks
+func getTasksWithSubtasks(data map[string]TaskWithAggregatedSubtasks) []TaskWithAggregatedSubtasks {
+	var result []TaskWithAggregatedSubtasks
 
 	for _, taskWithSubtasks := range data {
 		result = append(result, taskWithSubtasks)
@@ -144,14 +156,40 @@ func getTasksWithSubtasks(data map[string]TaskWithSubtasks) []TaskWithSubtasks {
 	return result
 }
 
-func getTasksAndAggregatedSubtasks(data map[string]TaskWithSubtasks) []TaskWithAggregatedSubtasks {
+func getTaskAndAggregatedSubtasks(task *Task, subtasks []Subtask) TaskWithAggregatedSubtasks {
+	var result TaskWithAggregatedSubtasks
+	result.Task = *task
+
+	selectedSubtasks := getSubtasksByTaskID(task.ID, subtasks)
+
+	totalSubtasks := len(selectedSubtasks)
+	completedSubtasks := 0
+
+	for _, subtask := range selectedSubtasks {
+		if subtask.Completed {
+			completedSubtasks++
+		}
+	}
+
+	aggregatedSubtasks := AggregatedSubtasks{
+		Total:     totalSubtasks,
+		Completed: completedSubtasks,
+		Data:      selectedSubtasks,
+	}
+
+	result.Subtasks = aggregatedSubtasks
+
+	return result
+}
+
+func getTasksAndAggregatedSubtasks(data map[string]TaskWithAggregatedSubtasks) []TaskWithAggregatedSubtasks {
 	var result []TaskWithAggregatedSubtasks
 
 	for _, taskWithSubtasks := range data {
-		totalSubtasks := len(taskWithSubtasks.Subtasks)
+		totalSubtasks := len(taskWithSubtasks.Subtasks.Data)
 		completedSubtasks := 0
 
-		for _, subtask := range taskWithSubtasks.Subtasks {
+		for _, subtask := range taskWithSubtasks.Subtasks.Data {
 			if subtask.Completed {
 				completedSubtasks++
 			}

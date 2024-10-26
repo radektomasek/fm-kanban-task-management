@@ -124,5 +124,12 @@
     "columnId": "b7dbeee6-f5da-4609-aea1-2dfd1f10000c",
     "title": "Will this task be replaced?",
     "description": "Updated description"
+  },
+  {
+    "id": "b34535f3-413c-4a7c-8256-864cc60ff4ba",
+    "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
+    "columnId": "b7dbeee6-f5da-4609-aea1-2dfd1f10000c",
+    "title": "Will this task be replaced?",
+    "description": "Updated description"
   }
 ]

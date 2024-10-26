@@ -61,8 +61,8 @@ Content-Type: application/json
 ###
 
 ### Update a specific task based on the boardId and taskId
-PUT http://localhost:4000/v1/boards/328ba7fa-0508-4c04-865b-d4630d6255aa/tasks/da3f645e-857c-4b57-b472-14ee05516de7
+PUT http://localhost:4000/v1/boards/328ba7fa-0508-4c04-865b-d4630d6255aa/tasks/b34535f3-413c-4a7c-8256-864cc60ff4ba
 Content-Type: application/json
 
-{ "id": "da3f645e-857c-4b57-b472-14ee05516de7", "columnId": "b7dbeee6-f5da-4609-aea1-2dfd1f10000c", "title": "Will this task be replaced?", "description": "Updated description", "subtasks":  [{ "id": "206d70cd-767c-4fef-8ba0-99d343f30a34", "title": "subtask1" }, { "id": "302ed42a-b05a-483b-92bf-a298355dbe6a", "title": "subtask2" }]}
+{ "id": "b34535f3-413c-4a7c-8256-864cc60ff4ba", "columnId": "b7dbeee6-f5da-4609-aea1-2dfd1f10000c", "title": "Will this task be replaced?", "description": "Updated description", "subtasks":  [{ "id": "0903d25b-7a91-4905-86cc-fb820e1dd44e", "title": "subtask1", "completed": true }]}
 ###
