@@ -9,13 +9,7 @@ import {
   isCreateBoardForm,
 } from "@/types/boards"
 import { mapBoardData } from "@/utils/helpers/mapData.helpers"
-import {
-  isAggregatedSubtask,
-  Task,
-  taskSchema,
-  TaskWithAggregatedSubtasks,
-  TaskWithSubtasks,
-} from "@/types/tasks"
+import { Task, taskSchema } from "@/types/tasks"
 
 const BASE_URL = "http://localhost:4000/v1/"
 const axiosInstance = axios.create({ baseURL: BASE_URL })
@@ -98,9 +92,7 @@ export const deleteBoard = async (id: string): Promise<BoardDelete> => {
   return result.data
 }
 
-export const getTasksByBoardId = async (
-  boardId?: string
-): Promise<TaskWithAggregatedSubtasks[]> => {
+export const getTasksByBoardId = async (boardId?: string): Promise<Task[]> => {
   if (!boardId) {
     throw new ReferenceError("(boardId): the parameter is not provided")
   }
@@ -117,15 +109,13 @@ export const getTasksByBoardId = async (
     )
   }
 
-  return result.data.filter((task): task is TaskWithAggregatedSubtasks =>
-    isAggregatedSubtask(task.subtasks)
-  )
+  return result.data
 }
 
 export const getTaskDetailById = async (
   boardId?: string,
   taskId?: string
-): Promise<TaskWithSubtasks> => {
+): Promise<Task> => {
   if (!boardId) {
     throw new ReferenceError("(boardId): the parameter is not provided")
   }
@@ -134,7 +124,7 @@ export const getTaskDetailById = async (
     throw new ReferenceError("(taskId): the parameter is not provided")
   }
 
-  const response = await axiosInstance.get<{ task: TaskWithSubtasks }>(
+  const response = await axiosInstance.get<{ task: Task }>(
     `/boards/${boardId}/tasks/${taskId}`
   )
 
@@ -145,13 +135,5 @@ export const getTaskDetailById = async (
     )
   }
 
-  const task = result.data
-
-  if (isAggregatedSubtask(task.subtasks)) {
-    throw new Error(
-      `[GET /boards/${boardId}/tasks/${taskId}]: expected subtasks array but received aggregated subtasks`
-    )
-  }
-
-  return { ...task, subtasks: task.subtasks }
+  return result.data
 }

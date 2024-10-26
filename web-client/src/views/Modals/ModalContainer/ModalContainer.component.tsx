@@ -16,6 +16,8 @@ const ModalChild = (modalScreenKey: ModalScreenKey) => {
       return modalChildren["DeleteBoard"]
     case "ViewTaskDetailScreen":
       return modalChildren["ViewTaskDetail"]
+    case "DeleteTaskScreen":
+      return modalChildren["DeleteTask"]
     case "None":
     default:
       return null
@@ -23,11 +25,11 @@ const ModalChild = (modalScreenKey: ModalScreenKey) => {
 }
 
 export const ModalContainer = () => {
-  const { activeModal, handleCloseModal, clearSelectedTaskId } = useStore(
+  const { activeModal, handleCloseModal, clearSelectedTask } = useStore(
     useShallow((state) => ({
       activeModal: state.activeModal,
       handleCloseModal: state.handleCloseModal,
-      clearSelectedTaskId: state.clearSelectedTaskId,
+      clearSelectedTask: state.clearSelectedTask,
     }))
   )
 
@@ -41,14 +43,14 @@ export const ModalContainer = () => {
   const handleClickOutside = (event: MouseEvent) => {
     if (overlayRef.current && overlayRef.current === event.target) {
       handleCloseModal()
-      clearSelectedTaskId()
+      clearSelectedTask()
     }
   }
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === "Escape") {
       handleCloseModal()
-      clearSelectedTaskId()
+      clearSelectedTask()
     }
 
     if (event.key === "Tab" && contentRef.current) {

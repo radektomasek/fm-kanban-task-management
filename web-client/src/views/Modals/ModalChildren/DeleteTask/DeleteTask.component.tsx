@@ -3,7 +3,7 @@ import { useStore } from "@/store/store"
 import { useShallow } from "zustand/react/shallow"
 import { useDeleteBoard } from "@/services/mutations"
 
-export const DeleteBoard = () => {
+export const DeleteTask = () => {
   const { selectedBoard, clearSelectedBoard, handleCloseModal } = useStore(
     useShallow((state) => ({
       selectedBoard: state.selectedBoard,

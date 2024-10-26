@@ -10,6 +10,7 @@ export const subtaskSchema = z.object({
 export const aggregatedSubtaskSchema = z.object({
   total: z.number(),
   completed: z.number(),
+  data: z.array(subtaskSchema).optional(),
 })
 
 export const taskSchema = z.object({
@@ -18,20 +19,9 @@ export const taskSchema = z.object({
   columnId: z.string(),
   title: z.string(),
   description: z.string(),
-  subtasks: z.union([z.array(subtaskSchema), aggregatedSubtaskSchema]),
+  subtasks: aggregatedSubtaskSchema,
 })
 
 export type Task = z.infer<typeof taskSchema>
 export type Subtask = z.infer<typeof subtaskSchema>
 export type AggregatedSubtask = z.infer<typeof aggregatedSubtaskSchema>
-
-export type TaskWithSubtasks = Omit<Task, "subtasks"> & { subtasks: Subtask[] }
-export type TaskWithAggregatedSubtasks = Omit<Task, "subtasks"> & {
-  subtasks: AggregatedSubtask
-}
-
-export const isAggregatedSubtask = (
-  subtasks: AggregatedSubtask | Subtask[]
-): subtasks is AggregatedSubtask => {
-  return !Array.isArray(subtasks)
-}

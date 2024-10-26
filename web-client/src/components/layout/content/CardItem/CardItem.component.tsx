@@ -1,24 +1,21 @@
 import { useShallow } from "zustand/react/shallow"
 import { useStore } from "@/store/store"
-import type {
-  AggregatedSubtask,
-  TaskWithAggregatedSubtasks,
-} from "@/types/tasks"
+import type { Task, AggregatedSubtask } from "@/types/tasks"
+import { useBoardTaskDetail } from "@/services/queries"
 
-export const CardItem = ({
-  id,
-  title,
-  subtasks,
-}: TaskWithAggregatedSubtasks) => {
-  const { handleOpenModal, setSelectedTaskId } = useStore(
+export const CardItem = ({ id, title, subtasks }: Task) => {
+  const { handleOpenModal, setSelectedTask, selectedBoard } = useStore(
     useShallow((state) => ({
-      setSelectedTaskId: state.setSelectedTaskId,
+      setSelectedTask: state.setSelectedTask,
       handleOpenModal: state.handleOpenModal,
+      selectedBoard: state.selectedBoard,
     }))
   )
 
+  const { data: task } = useBoardTaskDetail(selectedBoard?.id, id)
+
   const handleOnClick = () => {
-    setSelectedTaskId(id)
+    setSelectedTask(task)
     handleOpenModal("ViewTaskDetailScreen")
   }
 

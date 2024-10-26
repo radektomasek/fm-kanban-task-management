@@ -1,16 +1,18 @@
 import { StateCreator } from "zustand"
-import { Board } from "@/types/boards"
+import type { Board } from "@/types/boards"
+import type { Task } from "@/types/tasks"
 
 type BoardState = {
   selectedBoard?: Board
+  selectedTask?: Task
   selectedTaskId?: string
 }
 
 type BoardActions = {
   setSelectedBoard: (selectedBoard?: Board) => void
-  setSelectedTaskId: (taskId?: string) => void
+  setSelectedTask: (selectedTask?: Task) => void
   clearSelectedBoard: () => void
-  clearSelectedTaskId: () => void
+  clearSelectedTask: () => void
 }
 
 export type BoardSlice = BoardState & BoardActions
@@ -25,16 +27,16 @@ export const createBoardSlice: StateCreator<
     set((state) => {
       state.selectedBoard = selectedBoard
     }),
-  setSelectedTaskId: (taskId?: string) =>
+  setSelectedTask: (selectedTask?: Task) =>
     set((state) => {
-      state.selectedTaskId = taskId
+      state.selectedTask = selectedTask
     }),
   clearSelectedBoard: () =>
     set((state) => {
       state.selectedBoard = undefined
     }),
-  clearSelectedTaskId: () =>
+  clearSelectedTask: () =>
     set((state) => {
-      state.selectedTaskId = undefined
+      state.selectedTask = undefined
     }),
 })
