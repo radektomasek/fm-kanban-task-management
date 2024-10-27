@@ -22,6 +22,12 @@ export const taskSchema = z.object({
   subtasks: aggregatedSubtaskSchema,
 })
 
+export const taskDeleteSchema = z.object({
+  id: z.string(),
+  message: z.string(),
+})
+
 export type Task = z.infer<typeof taskSchema>
 export type Subtask = z.infer<typeof subtaskSchema>
 export type AggregatedSubtask = z.infer<typeof aggregatedSubtaskSchema>
+export type TaskDelete = z.infer<typeof taskDeleteSchema>

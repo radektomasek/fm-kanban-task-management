@@ -21,6 +21,10 @@ type Story = StoryObj<typeof meta>
 
 export const Idle: Story = {
   args: {
-    items: ["Todo", "Doing", "Done"],
+    items: [
+      { id: "todo", name: "Todo" },
+      { id: "doing", name: "Doing" },
+      { id: "done", name: "Done" },
+    ],
   },
 }

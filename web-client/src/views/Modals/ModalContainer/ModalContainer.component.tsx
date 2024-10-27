@@ -5,7 +5,7 @@ import { useStore } from "@/store/store"
 import { useShallow } from "zustand/react/shallow"
 import * as modalChildren from "@/views/Modals/ModalChildren"
 import type { ModalScreenKey } from "@/types/modals"
-import { useFormProvider } from "@/hooks/useFormProvider"
+import { useBoardFormProvider } from "@/hooks/useBoardFormProvider"
 
 const ModalChild = (modalScreenKey: ModalScreenKey) => {
   switch (modalScreenKey) {
@@ -33,7 +33,7 @@ export const ModalContainer = () => {
     }))
   )
 
-  const methods = useFormProvider(activeModal)
+  const methods = useBoardFormProvider(activeModal)
 
   const modalRootId = document.getElementById("modal")
   const overlayRef = useRef<HTMLDivElement>(null)

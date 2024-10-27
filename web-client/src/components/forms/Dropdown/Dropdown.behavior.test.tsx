@@ -3,7 +3,11 @@ import { render, screen, fireEvent } from "@testing-library/react"
 import { Dropdown } from "@/components/forms"
 
 describe("Dropdown.component: behavior", () => {
-  const items = ["Todo", "Doing", "Done"]
+  const items = [
+    { id: "todo", name: "Todo" },
+    { id: "doing", name: "Doing" },
+    { id: "done", name: "Done" },
+  ]
 
   describe("when user decide to use a mouse to control", () => {
     it("click event list the items", () => {
@@ -32,7 +36,7 @@ describe("Dropdown.component: behavior", () => {
         const buttonElement = screen.getByRole("combobox")
         fireEvent.click(buttonElement)
 
-        const selectedItem = screen.getByText(items[1])
+        const selectedItem = screen.getByText(items[1].name)
         fireEvent.click(selectedItem)
 
         expect(onItemSelect).toHaveBeenCalledTimes(1)

@@ -5,16 +5,21 @@ import Chevron from "@/assets/chevron.svg"
 
 type InteractionType = "mouse" | "keyboard"
 
+export type DropdownItem = {
+  id: string
+  name: string
+}
+
 type DropdownProps = {
-  items: string[]
-  onItemSelect?: (item: string) => void
+  items: DropdownItem[]
+  onItemSelect?: (item: DropdownItem) => void
   readonly testId?: string
-  readonly default?: string
+  readonly default?: DropdownItem
 }
 
 export const Dropdown = (props: DropdownProps) => {
   const [isOpen, setIsOpen] = useState(false)
-  const [selectedOption, setSelectedOption] = useState<string>(
+  const [selectedOption, setSelectedOption] = useState<DropdownItem>(
     props.default ?? props.items[0] ?? ""
   )
   const [focusedOptionIndex, setFocusedOptionIndex] = useState<number | null>(
@@ -41,7 +46,7 @@ export const Dropdown = (props: DropdownProps) => {
     }
   }, [focusedOptionIndex])
 
-  const handleOptionClick = (option: string): void => {
+  const handleOptionClick = (option: DropdownItem): void => {
     setSelectedOption(option)
     setIsOpen(false)
     setFocusedOptionIndex(null)
@@ -127,7 +132,7 @@ export const Dropdown = (props: DropdownProps) => {
         className="bg-white border border-custom-medium-grey-25 rounded px-3 py-2 w-full text-left text-xs text-custom-black"
         onClick={handleToggleDropdown}
       >
-        {selectedOption}
+        {selectedOption.name}
       </button>
       <div
         className="absolute top-4 right-4 w-2.5 cursor-pointer"
@@ -143,7 +148,7 @@ export const Dropdown = (props: DropdownProps) => {
         >
           {props.items.map((option, index) => (
             <li
-              key={option}
+              key={option.id}
               role="option"
               className={cn(
                 "px-3 py-2 cursor-pointer text-xs text-custom-medium-grey",
@@ -163,7 +168,7 @@ export const Dropdown = (props: DropdownProps) => {
               ref={(element) => (optionsRefs.current[index] = element)}
               tabIndex={-1}
             >
-              {option}
+              {option.name}
             </li>
           ))}
         </ul>
