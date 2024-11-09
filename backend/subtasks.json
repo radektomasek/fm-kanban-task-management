@@ -60,12 +60,6 @@
     "completed": true
   },
   {
-    "id": "0903d25b-7a91-4905-86cc-fb820e1dd44e",
-    "taskId": "b34535f3-413c-4a7c-8256-864cc60ff4ba",
-    "title": "subtask1",
-    "completed": true
-  },
-  {
     "id": "ixyj24Y2f5",
     "taskId": "V2RutyHIVb",
     "title": "Refine search page designs",
@@ -106,24 +100,6 @@
     "taskId": "JCNrTtzuEc",
     "title": "Analyze test results",
     "completed": true
-  },
-  {
-    "id": "7bbe2265-9dfb-4c68-91e2-3309b131cb51",
-    "taskId": "b34535f3-413c-4a7c-8256-864cc60ff4ba",
-    "title": "Custom subtask2",
-    "completed": false
-  },
-  {
-    "id": "98681d3c-9ab2-4e96-b6ca-2a29da9d3ba6",
-    "taskId": "b34535f3-413c-4a7c-8256-864cc60ff4ba",
-    "title": "Custom subtask3",
-    "completed": false
-  },
-  {
-    "id": "206d70cd-767c-4fef-8ba0-99d343f30a34",
-    "taskId": "da3f645e-857c-4b57-b472-14ee05516de7",
-    "title": "subtask1",
-    "completed": false
   },
   {
     "id": "7TAPVK5_Kk",
@@ -180,12 +156,6 @@
     "completed": true
   },
   {
-    "id": "79bea1e7-bba1-4d38-8874-97792776068b",
-    "taskId": "da3f645e-857c-4b57-b472-14ee05516de7",
-    "title": "Custom subtask3",
-    "completed": false
-  },
-  {
     "id": "9IHC3o8l3j",
     "taskId": "j8xelUqoph",
     "title": "Develop authentication APIs",
@@ -228,12 +198,6 @@
     "completed": true
   },
   {
-    "id": "302ed42a-b05a-483b-92bf-a298355dbe6a",
-    "taskId": "da3f645e-857c-4b57-b472-14ee05516de7",
-    "title": "subtask2",
-    "completed": false
-  },
-  {
     "id": "bvWPbRJP6T",
     "taskId": "1fA-X67Fje",
     "title": "Research search API designs",
@@ -249,6 +213,24 @@
     "id": "xhKWfUUhk_",
     "taskId": "N8-XrVCpnQ",
     "title": "Design UI layout",
+    "completed": false
+  },
+  {
+    "id": "e5b2eead-495b-461a-b302-01b0372bf93b",
+    "taskId": "1b6edb0a-e7a1-40c9-8fb9-8e322c2c8b16",
+    "title": "Custom subtask1",
+    "completed": false
+  },
+  {
+    "id": "c314c456-30eb-4c79-962d-1382675e4233",
+    "taskId": "1b6edb0a-e7a1-40c9-8fb9-8e322c2c8b16",
+    "title": "Custom subtask2",
+    "completed": false
+  },
+  {
+    "id": "f0fabbda-eae2-42a2-8093-b6576b1ff265",
+    "taskId": "1b6edb0a-e7a1-40c9-8fb9-8e322c2c8b16",
+    "title": "Custom subtask3",
     "completed": false
   }
 ]

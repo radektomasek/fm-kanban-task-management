@@ -9,7 +9,13 @@ import {
   isCreateBoardForm,
 } from "@/types/boards"
 import { mapBoardData } from "@/utils/helpers/mapData.helpers"
-import { Task, TaskDelete, taskDeleteSchema, taskSchema } from "@/types/tasks"
+import {
+  Task,
+  TaskDelete,
+  taskDeleteSchema,
+  TaskDetailSchema,
+  taskSchema,
+} from "@/types/tasks"
 
 const BASE_URL = "http://localhost:4000/v1/"
 const axiosInstance = axios.create({ baseURL: BASE_URL })
@@ -132,6 +138,24 @@ export const getTaskDetailById = async (
   if (!result.success) {
     throw new Error(
       `[GET /boards/${boardId}/tasks/${taskId}]: failed to parse the response`
+    )
+  }
+
+  return result.data
+}
+
+export const updateTaskDetailById = async (
+  data: TaskDetailSchema
+): Promise<Task> => {
+  const response = await axiosInstance.put<{ task: Task }>(
+    `/boards/${data.boardId}/tasks/${data.id}`,
+    data
+  )
+
+  const result = taskSchema.safeParse(response.data.task)
+  if (!result.success) {
+    throw new Error(
+      `[PUT /boards/${data.boardId}/tasks/${data.id}]: failed to parse the response`
     )
   }
 

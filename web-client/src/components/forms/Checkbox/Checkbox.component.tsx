@@ -5,17 +5,41 @@ type CheckboxProps = Omit<ComponentProps<"input">, "type"> & {
   label: string
   onUpdate?: (value: boolean) => void
   readonly testId?: string
-  readonly default?: boolean
+  checked?: boolean
+  defaultChecked?: boolean
 }
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ id, label, testId, onUpdate, ...props }, ref) => {
-    const [checked, setChecked] = useState<boolean>(props.default ?? false)
+  (
+    {
+      id,
+      label,
+      testId,
+      onUpdate,
+      checked: controlledChecked,
+      defaultChecked,
+      onChange,
+      ...props
+    },
+    ref
+  ) => {
+    const [internalChecked, setInternalChecked] = useState(
+      defaultChecked ?? false
+    )
+    const isControlled = controlledChecked !== undefined
+    const checked = isControlled ? controlledChecked : internalChecked
 
     const handleStateUpdate = (newValue: boolean) => {
-      setChecked(newValue)
+      if (!isControlled) {
+        setInternalChecked(newValue)
+      }
       if (onUpdate) {
         onUpdate(newValue)
+      }
+      if (onChange) {
+        onChange({
+          target: { checked: newValue },
+        } as React.ChangeEvent<HTMLInputElement>)
       }
     }
 

@@ -3,6 +3,7 @@ import {
   createBoard,
   updateBoard,
   deleteBoardById,
+  updateTaskDetailById,
   deleteTaskById,
 } from "@/services/api"
 
@@ -14,7 +15,7 @@ export function useCreateBoard() {
     onSuccess: async ({ id: boardId }) => {
       await queryClient.invalidateQueries({ queryKey: ["boards"] })
       await queryClient.invalidateQueries({
-        queryKey: ["boards/columns", { boardId: boardId }],
+        queryKey: ["boards/columns", { boardId }],
       })
     },
   })
@@ -25,7 +26,7 @@ export function useEditBoard() {
 
   return useMutation({
     mutationFn: updateBoard,
-    onSuccess: async ({ id }, variables) => {
+    onSuccess: async ({ id: boardId }, variables) => {
       await queryClient.invalidateQueries({ queryKey: ["boards"] })
 
       if (variables.variant === "edit") {
@@ -34,7 +35,7 @@ export function useEditBoard() {
         })
 
         await queryClient.invalidateQueries({
-          queryKey: ["boards/columns", { boardId: id }],
+          queryKey: ["boards/columns", { boardId }],
         })
       }
     },
@@ -46,10 +47,27 @@ export function useDeleteBoard() {
 
   return useMutation({
     mutationFn: deleteBoardById,
-    onSuccess: async ({ id }) => {
+    onSuccess: async ({ id: boardId }) => {
       await queryClient.invalidateQueries({ queryKey: ["boards"] })
       queryClient.removeQueries({
-        queryKey: ["boards/columns", { boardId: id }],
+        queryKey: ["boards/columns", { boardId }],
+      })
+    },
+  })
+}
+
+export function useUpdateTaskDetail() {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: updateTaskDetailById,
+    onSuccess: async ({ id: taskId, boardId }) => {
+      await queryClient.invalidateQueries({
+        queryKey: ["boards/tasks", { boardId }],
+      })
+
+      await queryClient.invalidateQueries({
+        queryKey: ["boards/task", { boardId, taskId }],
       })
     },
   })
@@ -64,10 +82,10 @@ export function useDeleteTask() {
       const { boardId, taskId } = variables
 
       await queryClient.invalidateQueries({
-        queryKey: ["boards/tasks", { boardId: boardId }],
+        queryKey: ["boards/tasks", { boardId }],
       })
       queryClient.removeQueries({
-        queryKey: ["boards/task", { boardId: boardId, taskId: taskId }],
+        queryKey: ["boards/task", { boardId, taskId }],
       })
     },
   })

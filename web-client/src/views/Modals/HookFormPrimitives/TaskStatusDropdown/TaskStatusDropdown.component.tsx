@@ -12,13 +12,15 @@ type Props<T extends FieldValues> = {
   id: string
   name: Path<T>
   boardId?: string
-  itemSelectionHandler: (item: DropdownItem) => void
+  onItemSelect: (item: DropdownItem) => void
+  defaultValue?: string
 }
 
-export function StatusDropdown<T extends FieldValues>({
+export function TaskStatusDropdown<T extends FieldValues>({
   name,
   boardId,
-  itemSelectionHandler,
+  onItemSelect,
+  defaultValue,
   ...props
 }: Props<T>) {
   const { control } = useFormContext()
@@ -35,7 +37,8 @@ export function StatusDropdown<T extends FieldValues>({
             {...field}
             {...props}
             items={items.map(({ id, name }) => ({ id, name }))}
-            onItemSelect={itemSelectionHandler}
+            onItemSelect={onItemSelect}
+            default={items.find((element) => element.id === defaultValue)}
           />
         )
       }}

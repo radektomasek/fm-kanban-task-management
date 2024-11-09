@@ -1,13 +1,18 @@
-import { Checkbox, DropdownItem } from "@/components/forms"
 import { useStore } from "@/store/store"
 import { useShallow } from "zustand/react/shallow"
 import { RowBlock } from "@/components/grid"
 import { ContextMenu } from "@/components/menus"
 import { taskContextMenuItems } from "@/types/contextMenus"
-import type { ModalScreenKey } from "@/types/modals"
 import { FormProvider } from "react-hook-form"
 import { useTaskDetailProvider } from "@/hooks/useTaskDetailProvider"
-import { StatusDropdown } from "@/views/Modals/HookFormPrimitives"
+import {
+  SubtaskStatusCheckboxList,
+  TaskStatusDropdown,
+} from "@/views/Modals/HookFormPrimitives"
+import type { ModalScreenKey } from "@/types/modals"
+import type { DropdownItem } from "@/components/forms"
+import type { Task } from "@/types/tasks"
+import { useUpdateTaskDetail } from "@/services/mutations"
 
 export const ViewTaskDetail = () => {
   const { selectedTask, selectedBoard, handleOpenModal } = useStore(
@@ -20,8 +25,24 @@ export const ViewTaskDetail = () => {
 
   const methods = useTaskDetailProvider(selectedTask)
 
-  const itemSelectionHandler = (item: DropdownItem) => {
+  const updateTaskDetailMutation = useUpdateTaskDetail()
+
+  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault()
+  }
+
+  const handleItemSelection = (item: DropdownItem) => {
+    console.log(selectedTask)
+
     console.log(item)
+
+    // updateTaskDetailMutation.mutate()
+  }
+
+  const handleItemCheck = (task: Task) => {
+    console.log(task)
+
+    // updateTaskDetailMutation.mutate()
   }
 
   return (
@@ -38,22 +59,19 @@ export const ViewTaskDetail = () => {
       </p>
 
       <FormProvider {...methods}>
-        <form>
-          Subtasks ({selectedTask?.subtasks.completed} of{" "}
-          {selectedTask?.subtasks.total})
-          {selectedTask?.subtasks.data?.map((subtask) => (
-            <Checkbox
-              key={subtask.id}
-              id={subtask.id}
-              label={subtask.title}
-              checked={subtask.completed}
-            />
-          ))}
-          <StatusDropdown
+        <form onSubmit={handleSubmit}>
+          <SubtaskStatusCheckboxList
+            id="subtasks"
+            name="subtasks"
+            selectedTask={selectedTask}
+            onItemCheck={handleItemCheck}
+          />
+          <TaskStatusDropdown
             id="status"
             name="status"
             boardId={selectedBoard?.id}
-            itemSelectionHandler={itemSelectionHandler}
+            onItemSelect={handleItemSelection}
+            defaultValue={selectedTask?.columnId}
           />
         </form>
       </FormProvider>
