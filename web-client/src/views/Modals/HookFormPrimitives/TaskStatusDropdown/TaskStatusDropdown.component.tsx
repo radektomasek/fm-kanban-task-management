@@ -11,19 +11,20 @@ import { useBoardColumns } from "@/services/queries"
 type Props<T extends FieldValues> = {
   id: string
   name: Path<T>
+  title?: string
   boardId?: string
-  onItemSelect: (item: DropdownItem) => void
   defaultValue?: string
+  onItemSelect: (item: DropdownItem) => void
 }
 
 export function TaskStatusDropdown<T extends FieldValues>({
   name,
   boardId,
-  onItemSelect,
   defaultValue,
+  onItemSelect,
   ...props
 }: Props<T>) {
-  const { control } = useFormContext()
+  const { control } = useFormContext<T>()
 
   const { data: items = [] } = useBoardColumns(boardId)
 

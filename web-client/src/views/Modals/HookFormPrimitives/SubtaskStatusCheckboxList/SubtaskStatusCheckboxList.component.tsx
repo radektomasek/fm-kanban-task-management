@@ -25,8 +25,10 @@ export function SubtaskStatusCheckboxList<T extends FieldValues>({
 
   return (
     <>
-      Subtasks ({selectedTask?.subtasks.completed} of{" "}
-      {selectedTask?.subtasks.total})
+      <h4 className={"mb-4 text-custom-medium-grey text-2xs"}>
+        Subtasks ({selectedTask?.subtasks.completed} of{" "}
+        {selectedTask?.subtasks.total})
+      </h4>
       {selectedTask?.subtasks.data?.map((subtask, index) => (
         <Controller
           key={subtask.id}

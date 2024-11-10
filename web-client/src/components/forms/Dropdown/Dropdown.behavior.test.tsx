@@ -18,9 +18,10 @@ describe("Dropdown.component: behavior", () => {
       fireEvent.click(buttonElement)
 
       const dropdownListElement = screen.getByTestId(`${testId}-list`)
-      const list = Array.from(dropdownListElement.children).map(
-        (element) => element.innerHTML
-      )
+      const list = Array.from(dropdownListElement.children).map((element) => ({
+        id: element.innerHTML.toLowerCase(),
+        name: element.innerHTML,
+      }))
 
       expect(list).toEqual(items)
     })
@@ -54,9 +55,10 @@ describe("Dropdown.component: behavior", () => {
       fireEvent.keyDown(buttonElement, { key: "ArrowDown" })
 
       const dropdownListElement = screen.getByTestId(`${testId}-list`)
-      const list = Array.from(dropdownListElement.children).map(
-        (element) => element.innerHTML
-      )
+      const list = Array.from(dropdownListElement.children).map((element) => ({
+        id: element.innerHTML.toLowerCase(),
+        name: element.innerHTML,
+      }))
 
       expect(list).toEqual(items)
     })

@@ -63,7 +63,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       <div
         data-testid={testId}
         onClick={handleDivClick}
-        className="flex min-w-96 bg-custom-light-grey p-3 gap-4 rounded hover:bg-custom-light-purple-25 focus:bg-custom-light-purple-25 cursor-pointer"
+        className="flex min-w-96 bg-custom-light-grey p-3 mb-2 gap-4 rounded hover:bg-custom-light-purple-25 focus:bg-custom-light-purple-25 cursor-pointer"
       >
         <input
           id={id}

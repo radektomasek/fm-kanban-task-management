@@ -26,7 +26,12 @@ describe("Checkbox.component: rendering", () => {
       const label = "Checked component"
 
       render(
-        <Checkbox id={label} label={label} testId={testId} default={true} />
+        <Checkbox
+          id={label}
+          label={label}
+          testId={testId}
+          defaultChecked={true}
+        />
       )
 
       const checkboxContainer = screen.getByTestId(testId)

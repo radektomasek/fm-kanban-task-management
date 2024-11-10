@@ -19,6 +19,7 @@ export type DropdownItem = {
 type DropdownProps = {
   items: DropdownItem[]
   onItemSelect?: (item: DropdownItem) => void
+  readonly title?: string
   readonly testId?: string
   readonly default?: DropdownItem
 }
@@ -36,6 +37,12 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
       useState<InteractionType | null>(null)
     const dropdownRef = useRef<HTMLDivElement | null>(null)
     const optionsRefs = useRef<(HTMLLIElement | null)[]>([])
+
+    useEffect(() => {
+      if (props.default && props.default !== selectedOption) {
+        setSelectedOption(props.default)
+      }
+    }, [props.default, selectedOption])
 
     useEffect(() => {
       document.addEventListener("click", handleOutsideClick)
@@ -124,67 +131,75 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
     }
 
     return (
-      <div
-        data-testid={props.testId}
-        className={cn(
-          "relative min-w-96",
-          isOpen && "border border-custom-dark-purple overflow rounded"
+      <>
+        {props.title && (
+          <h4 className="mt-6 mb-2 text-custom-medium-grey text-2xs">
+            {props.title}
+          </h4>
         )}
-        ref={(el) => {
-          dropdownRef.current = el
-          if (typeof ref === "function") ref(el)
-          else if (ref) ref.current = el
-        }}
-        tabIndex={0}
-        onKeyDown={handleKeyDown}
-      >
-        <button
-          role="combobox"
-          className="bg-white border border-custom-medium-grey-25 rounded px-3 py-2 w-full text-left text-xs text-custom-black"
-          onClick={handleToggleDropdown}
-        >
-          {selectedOption.name}
-        </button>
+
         <div
-          className="absolute top-4 right-4 w-2.5 cursor-pointer"
-          onClick={handleToggleDropdown}
+          data-testid={props.testId}
+          className={cn(
+            "relative min-w-96 ",
+            isOpen && "border border-custom-dark-purple overflow rounded"
+          )}
+          ref={(el) => {
+            dropdownRef.current = el
+            if (typeof ref === "function") ref(el)
+            else if (ref) ref.current = el
+          }}
+          tabIndex={0}
+          onKeyDown={handleKeyDown}
         >
-          <Chevron />
-        </div>
-        {isOpen && (
-          <ul
-            role="listbox"
-            data-testid={`${props.testId}-list`}
-            className="absolute bg-white rounded mt-1 w-full z-10"
+          <button
+            role="combobox"
+            className="bg-white border border-custom-medium-grey-25 rounded px-3 py-2 w-full text-left text-xs text-custom-black"
+            onClick={handleToggleDropdown}
           >
-            {props.items.map((option, index) => (
-              <li
-                key={option.id}
-                role="option"
-                className={cn(
-                  "px-3 py-2 cursor-pointer text-xs text-custom-medium-grey",
-                  interactionType === "mouse" &&
-                    "hover:border-custom-dark-purple",
-                  interactionType === "keyboard" &&
-                    focusedOptionIndex === index &&
-                    "border border-custom-dark-purple",
-                  "focus:outline-none focus:ring-1 focus:ring-custom-dark-purple focus:border-transparent"
-                )}
-                onClick={() => handleOptionClick(option)}
-                // onMouseEnter={() => setFocusedOptionIndex(index)}
-                onMouseOver={() => {
-                  setFocusedOptionIndex(index)
-                  setInteractionType("mouse")
-                }}
-                ref={(element) => (optionsRefs.current[index] = element)}
-                tabIndex={-1}
-              >
-                {option.name}
-              </li>
-            ))}
-          </ul>
-        )}
-      </div>
+            {selectedOption.name}
+          </button>
+          <div
+            className="absolute top-4 right-4 w-2.5 cursor-pointer"
+            onClick={handleToggleDropdown}
+          >
+            <Chevron />
+          </div>
+          {isOpen && (
+            <ul
+              role="listbox"
+              data-testid={`${props.testId}-list`}
+              className="absolute bg-white rounded mt-1 w-full z-10"
+            >
+              {props.items.map((option, index) => (
+                <li
+                  key={option.id}
+                  role="option"
+                  className={cn(
+                    "px-3 py-2 cursor-pointer text-xs text-custom-medium-grey",
+                    interactionType === "mouse" &&
+                      "hover:border-custom-dark-purple",
+                    interactionType === "keyboard" &&
+                      focusedOptionIndex === index &&
+                      "border border-custom-dark-purple",
+                    "focus:outline-none focus:ring-1 focus:ring-custom-dark-purple focus:border-transparent"
+                  )}
+                  onClick={() => handleOptionClick(option)}
+                  // onMouseEnter={() => setFocusedOptionIndex(index)}
+                  onMouseOver={() => {
+                    setFocusedOptionIndex(index)
+                    setInteractionType("mouse")
+                  }}
+                  ref={(element) => (optionsRefs.current[index] = element)}
+                  tabIndex={-1}
+                >
+                  {option.name}
+                </li>
+              ))}
+            </ul>
+          )}
+        </div>
+      </>
     )
   }
 )

@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.7.0]
+
+- [web-client](./web-client) FEATURE: replaced the mock for displaying the tasks on board by an actual data from backend.
+- [web-client](./web-client) FEATURE: added the task detail modal that allows to update either task or subtasks status
+- [backend](./backend) FEATURE: added more REST endpoints for fetching, updating and removing the task.
+- [backend](./backend) FIX: adjusted the types of the tasks to better manage the aggregated/non-aggregated results.
+
 ## [0.6.2]
 
 - [web-client](./web-client) FEATURE: implemented the initial flow of the board management. We are able to make basic CRUD operations when it comes to boards/columns
