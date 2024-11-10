@@ -36,3 +36,33 @@ Content-Type: application/json
 GET http://localhost:4000/v1/boards/55494f14-8bb8-4db9-940d-223b4a4e4067/columns
 Content-Type: application/json
 ###
+
+### Get all tasks by a board ID
+GET http://localhost:4000/v1/boards/328ba7fa-0508-4c04-865b-d4630d6255aa/tasks
+Content-Type: application/json
+###
+
+### Get a task by a board ID and task ID
+GET http://localhost:4000/v1/boards/328ba7fa-0508-4c04-865b-d4630d6255aa/tasks/N8-XrVCpnQ
+Content-Type: application/json
+###
+
+### Create task for a board ID
+POST http://localhost:4000/v1/boards/328ba7fa-0508-4c04-865b-d4630d6255aa/tasks
+Content-Type: application/json
+
+{ "columnId": "b7dbeee6-f5da-4609-aea1-2dfd1f10000c", "title": "A task", "description": "A description", "subtasks":  [{ "title": "Custom subtask1" }, { "title": "Custom subtask2" }, { "title": "Custom subtask3" }]}
+###
+
+### Delete a specific task from a board (boardId), including the subtasks
+DELETE http://localhost:4000/v1/boards/328ba7fa-0508-4c04-865b-d4630d6255aa/tasks/407745a8-9987-445e-88d3-64690f354227
+Content-Type: application/json
+
+###
+
+### Update a specific task based on the boardId and taskId
+PUT http://localhost:4000/v1/boards/328ba7fa-0508-4c04-865b-d4630d6255aa/tasks/b34535f3-413c-4a7c-8256-864cc60ff4ba
+Content-Type: application/json
+
+{ "id": "b34535f3-413c-4a7c-8256-864cc60ff4ba", "columnId": "b7dbeee6-f5da-4609-aea1-2dfd1f10000c", "title": "Will this task be replaced?", "description": "Updated description", "subtasks":  [{ "id": "0903d25b-7a91-4905-86cc-fb820e1dd44e", "title": "subtask1", "completed": true }]}
+###

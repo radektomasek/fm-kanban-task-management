@@ -7,7 +7,7 @@ import {
   defaultBoardFormValues,
 } from "@/types/boards"
 
-export function useFormProvider(modalScreenKey: ModalScreenKey) {
+export function useBoardFormProvider(modalScreenKey: ModalScreenKey) {
   const methods = useForm<BoardForm>({
     mode: "all",
     resolver: zodResolver(boardFormSchema),

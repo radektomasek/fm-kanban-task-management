@@ -4,7 +4,7 @@ import { Navbar } from "@/components/layout/navigation"
 import { Sidebar } from "@/components/layout/menu"
 import { Outlet, useNavigate } from "react-router"
 import { EmptyProject, NoActiveBoard } from "@/views/Placeholders"
-import { useBoardColumns, useBoards } from "@/services/queries"
+import { useBoards, useBoardColumnsParallel } from "@/services/queries"
 import { useStore } from "@/store/store"
 import { useParams } from "react-router-dom"
 import { boardContextMenuItems } from "@/types/contextMenus"
@@ -23,7 +23,7 @@ export const BoardsPage = () => {
     }))
   )
 
-  useBoardColumns(boards)
+  useBoardColumnsParallel(boards)
   useEffect(() => {
     if (!boardId && selectedBoard) {
       navigate(`/boards/${selectedBoard.id}`)

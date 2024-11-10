@@ -4,13 +4,13 @@ import { ContextMenu } from "@/components/menus"
 import { Board } from "@/types/boards"
 import { useStore } from "@/store/store"
 import { useShallow } from "zustand/react/shallow"
-import { BoardContextMenu } from "@/types/contextMenus"
+import type { ContextMenuElement } from "@/types/contextMenus"
 import type { ModalScreenKey } from "@/types/modals"
 
 type Props = {
   readonly testId?: string
   selectedBoard?: Board
-  contextMenuItems: BoardContextMenu[]
+  contextMenuItems: ContextMenuElement[]
   onContextMenuClick?: (id: ModalScreenKey) => void
 }
 

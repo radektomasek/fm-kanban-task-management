@@ -3,14 +3,14 @@ import { useEffect, useRef, useState, type KeyboardEvent } from "react"
 import { Button } from "@/components/forms"
 import { assertIsNode } from "@/utils/helpers/types.helpers"
 import { cn } from "@/utils/helpers/styles.helpers"
-import { BoardContextMenu } from "@/types/contextMenus"
+import { ContextMenuElement } from "@/types/contextMenus"
 import type { ModalScreenKey } from "@/types/modals"
 
 type InteractionType = "mouse" | "keyboard"
 
 type Props = {
   readonly testId?: string
-  readonly items: BoardContextMenu[]
+  readonly items: ContextMenuElement[]
   onItemSelect?: (screenKey: ModalScreenKey) => void
 }
 

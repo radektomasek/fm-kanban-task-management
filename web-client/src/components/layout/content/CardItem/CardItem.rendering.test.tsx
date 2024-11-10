@@ -4,7 +4,9 @@ import { CardItem } from "@/components/layout/content"
 describe("CardItem.component: rendering", () => {
   it("renders the component with provided parameters", () => {
     const id = "some-id"
-    const status = "todo"
+    const boardId = "some-board-id"
+    const columnId = "some-column-id"
+    const description = "some description"
     const title = "Build UI for onboarding flow"
     const completedSubtasks = 0
     const allSubtasks = 3
@@ -12,10 +14,11 @@ describe("CardItem.component: rendering", () => {
     render(
       <CardItem
         id={id}
-        status={status}
         title={title}
-        allSubtasks={allSubtasks}
-        completedSubtasks={completedSubtasks}
+        boardId={boardId}
+        columnId={columnId}
+        description={description}
+        subtasks={{ total: allSubtasks, completed: completedSubtasks }}
       />
     )
 

@@ -5,7 +5,7 @@ import { useStore } from "@/store/store"
 import { useShallow } from "zustand/react/shallow"
 import * as modalChildren from "@/views/Modals/ModalChildren"
 import type { ModalScreenKey } from "@/types/modals"
-import { useFormProvider } from "@/hooks/useFormProvider"
+import { useBoardFormProvider } from "@/hooks/useBoardFormProvider"
 
 const ModalChild = (modalScreenKey: ModalScreenKey) => {
   switch (modalScreenKey) {
@@ -14,6 +14,10 @@ const ModalChild = (modalScreenKey: ModalScreenKey) => {
       return modalChildren["AddEditBoardForm"]
     case "DeleteBoardScreen":
       return modalChildren["DeleteBoard"]
+    case "ViewTaskDetailScreen":
+      return modalChildren["ViewTaskDetail"]
+    case "DeleteTaskScreen":
+      return modalChildren["DeleteTask"]
     case "None":
     default:
       return null
@@ -21,14 +25,15 @@ const ModalChild = (modalScreenKey: ModalScreenKey) => {
 }
 
 export const ModalContainer = () => {
-  const { activeModal, handleCloseModal } = useStore(
+  const { activeModal, handleCloseModal, clearSelectedTask } = useStore(
     useShallow((state) => ({
       activeModal: state.activeModal,
       handleCloseModal: state.handleCloseModal,
+      clearSelectedTask: state.clearSelectedTask,
     }))
   )
 
-  const methods = useFormProvider(activeModal)
+  const methods = useBoardFormProvider(activeModal)
 
   const modalRootId = document.getElementById("modal")
   const overlayRef = useRef<HTMLDivElement>(null)
@@ -38,12 +43,14 @@ export const ModalContainer = () => {
   const handleClickOutside = (event: MouseEvent) => {
     if (overlayRef.current && overlayRef.current === event.target) {
       handleCloseModal()
+      clearSelectedTask()
     }
   }
 
   const handleKeyDown = (event: KeyboardEvent) => {
     if (event.key === "Escape") {
       handleCloseModal()
+      clearSelectedTask()
     }
 
     if (event.key === "Tab" && contentRef.current) {

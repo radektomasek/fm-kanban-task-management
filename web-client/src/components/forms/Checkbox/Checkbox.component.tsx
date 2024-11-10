@@ -5,17 +5,41 @@ type CheckboxProps = Omit<ComponentProps<"input">, "type"> & {
   label: string
   onUpdate?: (value: boolean) => void
   readonly testId?: string
-  readonly default?: boolean
+  checked?: boolean
+  defaultChecked?: boolean
 }
 
 export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ id, label, testId, onUpdate, ...props }, ref) => {
-    const [checked, setChecked] = useState<boolean>(props.default ?? false)
+  (
+    {
+      id,
+      label,
+      testId,
+      onUpdate,
+      checked: controlledChecked,
+      defaultChecked,
+      onChange,
+      ...props
+    },
+    ref
+  ) => {
+    const [internalChecked, setInternalChecked] = useState(
+      defaultChecked ?? false
+    )
+    const isControlled = controlledChecked !== undefined
+    const checked = isControlled ? controlledChecked : internalChecked
 
     const handleStateUpdate = (newValue: boolean) => {
-      setChecked(newValue)
+      if (!isControlled) {
+        setInternalChecked(newValue)
+      }
       if (onUpdate) {
         onUpdate(newValue)
+      }
+      if (onChange) {
+        onChange({
+          target: { checked: newValue },
+        } as React.ChangeEvent<HTMLInputElement>)
       }
     }
 
@@ -39,7 +63,7 @@ export const Checkbox = forwardRef<HTMLInputElement, CheckboxProps>(
       <div
         data-testid={testId}
         onClick={handleDivClick}
-        className="flex min-w-96 bg-custom-light-grey p-3 gap-4 rounded hover:bg-custom-light-purple-25 focus:bg-custom-light-purple-25 cursor-pointer"
+        className="flex min-w-96 bg-custom-light-grey p-3 mb-2 gap-4 rounded hover:bg-custom-light-purple-25 focus:bg-custom-light-purple-25 cursor-pointer"
       >
         <input
           id={id}

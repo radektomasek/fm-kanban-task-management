@@ -6,7 +6,7 @@ import { useShallow } from "zustand/react/shallow"
 import { useCreateBoard, useEditBoard } from "@/services/mutations"
 import { CustomTextField } from "@/views/Modals/HookFormPrimitives"
 import type { BoardForm } from "@/types/boards"
-import { useBoardColumn } from "@/services/queries"
+import { useBoardColumns } from "@/services/queries"
 import { SubmitHandler, useFieldArray, useFormContext } from "react-hook-form"
 
 export const AddEditBoardForm = () => {
@@ -33,11 +33,10 @@ export const AddEditBoardForm = () => {
   const isEditMode = activeModal === "EditBoardScreen"
   const createBoardMutation = useCreateBoard()
   const editBoardMutation = useEditBoard()
-  const boardColumnData = useBoardColumn(selectedBoard?.id)
+  const boardColumnData = useBoardColumns(selectedBoard?.id)
 
   useEffect(() => {
     if (isEditMode) {
-      console.log("Is edit mode")
       reset({
         variant: "edit",
         id: selectedBoard?.id,

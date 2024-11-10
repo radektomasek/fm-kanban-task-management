@@ -3,7 +3,11 @@ import { render, screen, fireEvent } from "@testing-library/react"
 import { Dropdown } from "@/components/forms"
 
 describe("Dropdown.component: behavior", () => {
-  const items = ["Todo", "Doing", "Done"]
+  const items = [
+    { id: "todo", name: "Todo" },
+    { id: "doing", name: "Doing" },
+    { id: "done", name: "Done" },
+  ]
 
   describe("when user decide to use a mouse to control", () => {
     it("click event list the items", () => {
@@ -14,9 +18,10 @@ describe("Dropdown.component: behavior", () => {
       fireEvent.click(buttonElement)
 
       const dropdownListElement = screen.getByTestId(`${testId}-list`)
-      const list = Array.from(dropdownListElement.children).map(
-        (element) => element.innerHTML
-      )
+      const list = Array.from(dropdownListElement.children).map((element) => ({
+        id: element.innerHTML.toLowerCase(),
+        name: element.innerHTML,
+      }))
 
       expect(list).toEqual(items)
     })
@@ -32,7 +37,7 @@ describe("Dropdown.component: behavior", () => {
         const buttonElement = screen.getByRole("combobox")
         fireEvent.click(buttonElement)
 
-        const selectedItem = screen.getByText(items[1])
+        const selectedItem = screen.getByText(items[1].name)
         fireEvent.click(selectedItem)
 
         expect(onItemSelect).toHaveBeenCalledTimes(1)
@@ -50,9 +55,10 @@ describe("Dropdown.component: behavior", () => {
       fireEvent.keyDown(buttonElement, { key: "ArrowDown" })
 
       const dropdownListElement = screen.getByTestId(`${testId}-list`)
-      const list = Array.from(dropdownListElement.children).map(
-        (element) => element.innerHTML
-      )
+      const list = Array.from(dropdownListElement.children).map((element) => ({
+        id: element.innerHTML.toLowerCase(),
+        name: element.innerHTML,
+      }))
 
       expect(list).toEqual(items)
     })

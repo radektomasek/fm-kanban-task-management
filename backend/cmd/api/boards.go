@@ -23,7 +23,7 @@ func (app *application) getAllBoards(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (app *application) getBoardById(w http.ResponseWriter, r *http.Request) {
+func (app *application) getBoardByID(w http.ResponseWriter, r *http.Request) {
 	id, err := app.readUrlParamField(r, "boardId")
 	if err != nil {
 		app.badRequestResponse(w, r, err)
@@ -44,7 +44,6 @@ func (app *application) getBoardById(w http.ResponseWriter, r *http.Request) {
 		app.serverErrorResponse(w, r, err)
 		return
 	}
-
 }
 
 func (app *application) createBoard(w http.ResponseWriter, r *http.Request) {
@@ -91,7 +90,7 @@ func (app *application) createBoard(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func (app *application) updateBoard(w http.ResponseWriter, r *http.Request) {
+func (app *application) updateBoardByID(w http.ResponseWriter, r *http.Request) {
 	id, err := app.readUrlParamField(r, "boardId")
 	if err != nil {
 		app.badRequestResponse(w, r, err)
@@ -143,7 +142,7 @@ func (app *application) updateBoard(w http.ResponseWriter, r *http.Request) {
 	err = app.writeJSON(w, http.StatusOK, envelope{"board": result}, headers)
 }
 
-func (app *application) deleteBoard(w http.ResponseWriter, r *http.Request) {
+func (app *application) deleteBoardByID(w http.ResponseWriter, r *http.Request) {
 	id, err := app.readUrlParamField(r, "boardId")
 	if err != nil {
 		app.badRequestResponse(w, r, err)

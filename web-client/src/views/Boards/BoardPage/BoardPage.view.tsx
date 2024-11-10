@@ -4,8 +4,8 @@ import { CardStack } from "@/components/layout/content"
 import { Button } from "@/components/forms"
 import { useShallow } from "zustand/react/shallow"
 import { useStore } from "@/store/store"
-import { groupedCards } from "@/utils/mocks/cardGroups.mocks"
-import { useBoards } from "@/services/queries"
+import { useBoardColumns, useBoards, useBoardTasks } from "@/services/queries"
+import { EmptyBoard } from "@/views/Placeholders"
 
 export const BoardPage = () => {
   const { boardId } = useParams()
@@ -14,24 +14,31 @@ export const BoardPage = () => {
       setSelectedBoard: state.setSelectedBoard,
     }))
   )
-
-  const { data } = useBoards()
+  const { data: boards } = useBoards()
+  const { data: columns } = useBoardColumns(boardId)
+  const { data: tasks } = useBoardTasks(boardId)
 
   useEffect(() => {
-    const board = data?.find((element) => element.id === boardId)
+    const board = boards?.find((element) => element.id === boardId)
     setSelectedBoard(board)
   }, [setSelectedBoard, boardId])
+
+  if (columns?.length === 0) {
+    return <EmptyBoard />
+  }
 
   return (
     <div className="bg-custom-light-grey flex-grow border-t-2 flex-col w-28">
       <div className="grid grid-flow-col auto-cols-min gap-x-6 pl-6 pt-6">
-        {groupedCards.map((group) => (
+        {columns?.map((column) => (
           <CardStack
-            key={group.id}
-            id={group.id}
-            cards={group.cards}
-            title={group.title}
-            circleColor={group.circleColor}
+            key={column.id}
+            id={column.id}
+            title={column.name}
+            circleColor={column.color}
+            cards={(tasks ?? []).filter(
+              (element) => element.columnId === column.id
+            )}
           />
         ))}
         <Button className={"mt-8"} intent={"gridItem"}>
