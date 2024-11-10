@@ -17,15 +17,33 @@ import {
   mergeTaskWithUpdatedColumnId,
   mergeTaskWithUpdatedSubtask,
 } from "@/utils/helpers/tasks.helpers"
+import { useBoardTaskDetail } from "@/services/queries"
+import { useLayoutEffect } from "react"
 
 export const ViewTaskDetail = () => {
-  const { selectedTask, selectedBoard, handleOpenModal } = useStore(
-    useShallow((state) => ({
-      selectedTask: state.selectedTask,
-      selectedBoard: state.selectedBoard,
-      handleOpenModal: state.handleOpenModal,
-    }))
+  const { selectedTask, selectedBoard, handleOpenModal, handleCloseModal } =
+    useStore(
+      useShallow((state) => ({
+        selectedTask: state.selectedTask,
+        selectedBoard: state.selectedBoard,
+        handleOpenModal: state.handleOpenModal,
+        handleCloseModal: state.handleCloseModal,
+      }))
+    )
+
+  const { data: activeTask } = useBoardTaskDetail(
+    selectedBoard?.id,
+    selectedTask?.id
   )
+
+  useLayoutEffect(() => {
+    // This check make sure when the app is fully refreshed,
+    // it hides the modal to ensure the data consistency.
+    // @TODO: Find a better way how to handle the hard refresh for the modal screens.
+    if (!activeTask?.columnId) {
+      handleCloseModal()
+    }
+  }, [])
 
   const methods = useTaskDetailProvider(selectedTask)
 
@@ -36,36 +54,32 @@ export const ViewTaskDetail = () => {
   }
 
   const handleItemSelection = (item: DropdownItem) => {
-    if (!selectedTask) {
+    if (!activeTask) {
       return
     }
-
-    const payload = mergeTaskWithUpdatedColumnId(selectedTask, item.id)
-
+    const payload = mergeTaskWithUpdatedColumnId(activeTask, item.id)
     updateTaskDetailMutation.mutate(payload)
   }
 
   const handleItemCheck = (subtask: Subtask) => {
-    if (!selectedTask) {
+    if (!activeTask) {
       return
     }
-
-    const payload = mergeTaskWithUpdatedSubtask(selectedTask, subtask)
-
+    const payload = mergeTaskWithUpdatedSubtask(activeTask, subtask)
     updateTaskDetailMutation.mutate(payload)
   }
 
   return (
     <>
       <RowBlock>
-        <h3 className="text-lg">{selectedTask?.title}</h3>
+        <h3 className="text-lg">{activeTask?.title}</h3>
         <ContextMenu
           items={taskContextMenuItems}
           onItemSelect={(id: ModalScreenKey) => handleOpenModal(id)}
         />
       </RowBlock>
       <p className={"text-2xs text-custom-medium-grey my-2"}>
-        {selectedTask?.description}
+        {activeTask?.description}
       </p>
 
       <FormProvider {...methods}>
@@ -73,7 +87,7 @@ export const ViewTaskDetail = () => {
           <SubtaskStatusCheckboxList
             id="subtasks"
             name="subtasks"
-            selectedTask={selectedTask}
+            selectedTask={activeTask}
             onItemCheck={handleItemCheck}
           />
           <TaskStatusDropdown
@@ -81,7 +95,7 @@ export const ViewTaskDetail = () => {
             name="status"
             boardId={selectedBoard?.id}
             onItemSelect={handleItemSelection}
-            defaultValue={selectedTask?.columnId}
+            defaultValue={activeTask?.columnId}
           />
         </form>
       </FormProvider>
