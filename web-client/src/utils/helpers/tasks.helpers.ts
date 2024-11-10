@@ -13,7 +13,7 @@ export const mergeTaskWithUpdatedColumnId = (
   } = task
 
   return {
-    id: id,
+    id,
     columnId,
     title,
     boardId,
@@ -25,4 +25,26 @@ export const mergeTaskWithUpdatedColumnId = (
 export const mergeTaskWithUpdatedSubtask = (
   task: Task,
   updatedSubtask: Subtask
-): TaskDetailSchema => {}
+): TaskDetailSchema => {
+  const {
+    id,
+    columnId,
+    title,
+    boardId,
+    description,
+    subtasks: { data: subtasks },
+  } = task
+
+  const updatedSubtasks = subtasks?.map((element) => {
+    return element.id === updatedSubtask.id ? updatedSubtask : element
+  })
+
+  return {
+    id,
+    columnId,
+    title,
+    boardId,
+    description,
+    subtasks: updatedSubtasks,
+  }
+}

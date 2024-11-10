@@ -6,13 +6,13 @@ import {
 } from "react-hook-form"
 
 import { Checkbox } from "@/components/forms"
-import type { Task } from "@/types/tasks"
+import type { Subtask, Task } from "@/types/tasks"
 
 type Props<T extends FieldValues> = {
   id: string
   name: Path<T>
   selectedTask?: Task
-  onItemCheck: (task: Task) => void
+  onItemCheck: (updatedSubtask: Subtask) => void
 }
 
 export function SubtaskStatusCheckboxList<T extends FieldValues>({
@@ -42,15 +42,10 @@ export function SubtaskStatusCheckboxList<T extends FieldValues>({
               onUpdate={(newValue) => {
                 field.onChange(newValue)
                 onItemCheck({
-                  ...selectedTask,
-                  subtasks: {
-                    ...selectedTask.subtasks,
-                    data: selectedTask.subtasks.data?.map((subtask) =>
-                      subtask.id === subtask.id
-                        ? { ...subtask, completed: newValue }
-                        : subtask
-                    ),
-                  },
+                  id: subtask.id,
+                  taskId: selectedTask?.id,
+                  title: subtask.title,
+                  completed: newValue,
                 })
               }}
             />

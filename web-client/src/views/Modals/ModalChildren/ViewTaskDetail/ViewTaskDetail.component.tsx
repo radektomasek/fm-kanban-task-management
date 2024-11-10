@@ -11,8 +11,12 @@ import {
 } from "@/views/Modals/HookFormPrimitives"
 import type { ModalScreenKey } from "@/types/modals"
 import type { DropdownItem } from "@/components/forms"
-import type { Task } from "@/types/tasks"
+import type { Subtask } from "@/types/tasks"
 import { useUpdateTaskDetail } from "@/services/mutations"
+import {
+  mergeTaskWithUpdatedColumnId,
+  mergeTaskWithUpdatedSubtask,
+} from "@/utils/helpers/tasks.helpers"
 
 export const ViewTaskDetail = () => {
   const { selectedTask, selectedBoard, handleOpenModal } = useStore(
@@ -32,17 +36,23 @@ export const ViewTaskDetail = () => {
   }
 
   const handleItemSelection = (item: DropdownItem) => {
-    console.log(selectedTask)
+    if (!selectedTask) {
+      return
+    }
 
-    console.log(item)
+    const payload = mergeTaskWithUpdatedColumnId(selectedTask, item.id)
 
-    // updateTaskDetailMutation.mutate()
+    updateTaskDetailMutation.mutate(payload)
   }
 
-  const handleItemCheck = (task: Task) => {
-    console.log(task)
+  const handleItemCheck = (subtask: Subtask) => {
+    if (!selectedTask) {
+      return
+    }
 
-    // updateTaskDetailMutation.mutate()
+    const payload = mergeTaskWithUpdatedSubtask(selectedTask, subtask)
+
+    updateTaskDetailMutation.mutate(payload)
   }
 
   return (
