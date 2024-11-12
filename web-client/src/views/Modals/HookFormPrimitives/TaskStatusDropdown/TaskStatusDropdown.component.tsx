@@ -39,7 +39,9 @@ export function TaskStatusDropdown<T extends FieldValues>({
             {...props}
             items={items.map(({ id, name }) => ({ id, name }))}
             onItemSelect={onItemSelect}
-            default={items.find((element) => element.id === defaultValue)}
+            default={
+              items.find((element) => element.id === defaultValue) ?? items[0]
+            }
           />
         )
       }}

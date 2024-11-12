@@ -7,15 +7,18 @@ import { useCreateBoard, useEditBoard } from "@/services/mutations"
 import { CustomTextField } from "@/views/Modals/HookFormPrimitives"
 import type { BoardForm } from "@/types/boards"
 import { useBoardColumns } from "@/services/queries"
-import { SubmitHandler, useFieldArray, useFormContext } from "react-hook-form"
+import { FormProvider, SubmitHandler, useFieldArray } from "react-hook-form"
+import { useBoardFormProvider } from "@/hooks/useBoardFormProvider"
 
 export const AddEditBoardForm = () => {
+  const methods = useBoardFormProvider()
+
   const {
     reset,
     control,
     handleSubmit,
     formState: { errors },
-  } = useFormContext<BoardForm>()
+  } = methods
 
   const { activeModal, selectedBoard, handleCloseModal } = useStore(
     useShallow((state) => ({
@@ -72,58 +75,64 @@ export const AddEditBoardForm = () => {
   }
 
   return (
-    <form className="flex flex-col " onSubmit={handleSubmit(onSubmit)}>
-      <h3 className="text-lg">{isEditMode ? "Edit Board" : "Add New Board"}</h3>
+    <FormProvider {...methods}>
+      <form className="flex flex-col " onSubmit={handleSubmit(onSubmit)}>
+        <h3 className="text-lg">
+          {isEditMode ? "Edit Board" : "Add New Board"}
+        </h3>
 
-      <label
-        className={"text-2xs text-custom-medium-grey my-2"}
-        htmlFor={"name"}
-      >
-        Name
-      </label>
+        <label
+          className={"text-2xs text-custom-medium-grey my-2"}
+          htmlFor={"name"}
+        >
+          Name
+        </label>
 
-      <CustomTextField
-        id="name"
-        name="name"
-        placeholder="e.g. Web Design"
-        errorText={errors?.name?.message}
-      />
+        <CustomTextField
+          id="name"
+          name="name"
+          placeholder="e.g. Web Design"
+          errorText={errors?.name?.message}
+        />
 
-      <label className={"text-2xs text-custom-medium-grey my-4"}>Columns</label>
+        <label className={"text-2xs text-custom-medium-grey my-4"}>
+          Columns
+        </label>
 
-      {fields.map((field, index) => (
-        <Fragment key={field.id}>
-          <RowBlock>
-            <CustomTextField
-              id={`columns.${index}.name`}
-              name={`columns.${index}.name`}
-              placeholder="e.g. Done"
-              errorText={errors?.columns?.[index]?.name?.message}
-            />
-            <Button
-              wrapped={true}
-              iconName={"cross"}
-              onClick={() => {
-                handleRemoveColumn(index)
-              }}
-              intent={"svgOnly"}
-            />
-          </RowBlock>
-        </Fragment>
-      ))}
+        {fields.map((field, index) => (
+          <Fragment key={field.id}>
+            <RowBlock>
+              <CustomTextField
+                id={`columns.${index}.name`}
+                name={`columns.${index}.name`}
+                placeholder="e.g. Done"
+                errorText={errors?.columns?.[index]?.name?.message}
+              />
+              <Button
+                wrapped={true}
+                iconName={"cross"}
+                onClick={() => {
+                  handleRemoveColumn(index)
+                }}
+                intent={"svgOnly"}
+              />
+            </RowBlock>
+          </Fragment>
+        ))}
 
-      <Button
-        type={"submit"}
-        intent={"secondary"}
-        className="w-full my-4"
-        onClick={handleAddColumn}
-      >
-        + Add New Column
-      </Button>
+        <Button
+          type={"submit"}
+          intent={"secondary"}
+          className="w-full my-4"
+          onClick={handleAddColumn}
+        >
+          + Add New Column
+        </Button>
 
-      <Button type={"submit"} intent={"primary"} className="w-full">
-        {isEditMode ? "Save Changes" : "Create New Board"}
-      </Button>
-    </form>
+        <Button type={"submit"} intent={"primary"} className="w-full">
+          {isEditMode ? "Save Changes" : "Create New Board"}
+        </Button>
+      </form>
+    </FormProvider>
   )
 }

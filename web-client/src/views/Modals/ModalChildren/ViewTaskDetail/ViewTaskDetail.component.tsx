@@ -41,7 +41,7 @@ export const ViewTaskDetail = () => {
     event.preventDefault()
   }
 
-  const handleItemSelection = (item: DropdownItem) => {
+  const handleDropdownItemSelection = (item: DropdownItem) => {
     if (!activeTask) {
       return
     }
@@ -85,7 +85,7 @@ export const ViewTaskDetail = () => {
               title={"Current Status"}
               boardId={selectedBoard?.id}
               defaultValue={activeTask.columnId}
-              onItemSelect={handleItemSelection}
+              onItemSelect={handleDropdownItemSelection}
             />
           )}
         </form>

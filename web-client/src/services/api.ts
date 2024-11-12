@@ -12,8 +12,8 @@ import { mapBoardData } from "@/utils/helpers/mapData.helpers"
 import {
   Task,
   TaskDelete,
+  TaskDetail,
   taskDeleteSchema,
-  TaskDetailSchema,
   taskSchema,
 } from "@/types/tasks"
 
@@ -144,9 +144,7 @@ export const getTaskDetailById = async (
   return result.data
 }
 
-export const updateTaskDetailById = async (
-  data: TaskDetailSchema
-): Promise<Task> => {
+export const updateTaskDetailById = async (data: TaskDetail): Promise<Task> => {
   const response = await axiosInstance.put<{ task: Task }>(
     `/boards/${data.boardId}/tasks/${data.id}`,
     data

@@ -1,9 +1,9 @@
-import type { Subtask, Task, TaskDetailSchema } from "@/types/tasks"
+import type { Subtask, Task, TaskDetail } from "@/types/tasks"
 
 export const mergeTaskWithUpdatedColumnId = (
   task: Task,
   columnId: string
-): TaskDetailSchema => {
+): TaskDetail => {
   const {
     id,
     title,
@@ -25,7 +25,7 @@ export const mergeTaskWithUpdatedColumnId = (
 export const mergeTaskWithUpdatedSubtask = (
   task: Task,
   updatedSubtask: Subtask
-): TaskDetailSchema => {
+): TaskDetail => {
   const {
     id,
     columnId,

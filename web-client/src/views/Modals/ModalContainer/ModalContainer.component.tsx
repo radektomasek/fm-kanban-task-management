@@ -1,17 +1,18 @@
 import React, { useEffect, useRef } from "react"
 import { createPortal } from "react-dom"
-import { FormProvider } from "react-hook-form"
 import { useStore } from "@/store/store"
 import { useShallow } from "zustand/react/shallow"
 import * as modalChildren from "@/views/Modals/ModalChildren"
 import type { ModalScreenKey } from "@/types/modals"
-import { useBoardFormProvider } from "@/hooks/useBoardFormProvider"
 
 const ModalChild = (modalScreenKey: ModalScreenKey) => {
   switch (modalScreenKey) {
     case "AddBoardScreen":
     case "EditBoardScreen":
       return modalChildren["AddEditBoardForm"]
+    case "AddTaskScreen":
+    case "EditTaskScreen":
+      return modalChildren["AddEditTaskForm"]
     case "DeleteBoardScreen":
       return modalChildren["DeleteBoard"]
     case "ViewTaskDetailScreen":
@@ -32,8 +33,6 @@ export const ModalContainer = () => {
       clearSelectedTask: state.clearSelectedTask,
     }))
   )
-
-  const methods = useBoardFormProvider(activeModal)
 
   const modalRootId = document.getElementById("modal")
   const overlayRef = useRef<HTMLDivElement>(null)
@@ -121,9 +120,7 @@ export const ModalContainer = () => {
             ref={contentRef}
             className="w-[30rem] px-8 pt-8 pb-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-custom-white rounded-md"
           >
-            <FormProvider {...methods}>
-              {React.createElement(modalChild)}
-            </FormProvider>
+            {React.createElement(modalChild)}
           </div>
         </div>
       </>,

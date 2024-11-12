@@ -1,4 +1,5 @@
 import { z } from "zod"
+import { fieldErrorTooLong, fieldErrorTooShort } from "@/types/constants"
 
 export const subtaskSchema = z.object({
   id: z.string(),
@@ -36,8 +37,66 @@ export const taskDeleteSchema = z.object({
   message: z.string(),
 })
 
+export const taskFormSchema = z.discriminatedUnion("variant", [
+  z.object({
+    variant: z.literal("create"),
+    title: z
+      .string()
+      .min(1, { message: fieldErrorTooShort })
+      .max(20, { message: fieldErrorTooLong }),
+    description: z.string(),
+    subtasks: z.array(
+      z.object({
+        title: z
+          .string()
+          .min(1, { message: fieldErrorTooShort })
+          .max(20, { message: fieldErrorTooLong }),
+      })
+    ),
+    columnId: z.string(),
+  }),
+  z.object({
+    variant: z.literal("edit"),
+    title: z
+      .string()
+      .min(1, { message: fieldErrorTooShort })
+      .max(20, { message: fieldErrorTooLong }),
+    description: z.string(),
+    subtasks: z.array(
+      z.object({
+        title: z
+          .string()
+          .min(1, { message: fieldErrorTooShort })
+          .max(20, { message: fieldErrorTooLong }),
+      })
+    ),
+    columnId: z.string(),
+  }),
+])
+
 export type Task = z.infer<typeof taskSchema>
 export type Subtask = z.infer<typeof subtaskSchema>
 export type AggregatedSubtask = z.infer<typeof aggregatedSubtaskSchema>
-export type TaskDetailSchema = z.infer<typeof taskDetailSchema>
+export type TaskDetail = z.infer<typeof taskDetailSchema>
 export type TaskDelete = z.infer<typeof taskDeleteSchema>
+export type TaskForm = z.infer<typeof taskFormSchema>
+
+export const isCreateTaskForm = (
+  data: TaskForm
+): data is Extract<TaskForm, { variant: "create" }> => {
+  return data.variant === "create"
+}
+
+export const isEditTaskForm = (
+  data: TaskForm
+): data is Extract<TaskForm, { variant: "edit" }> => {
+  return data.variant === "edit"
+}
+
+export const defaultTaskFormValues: TaskForm = {
+  variant: "create",
+  title: "",
+  description: "",
+  subtasks: [{ title: "" }, { title: "" }],
+  columnId: "",
+}
