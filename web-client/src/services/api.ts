@@ -8,14 +8,16 @@ import {
   boardDeleteSchema,
   isCreateBoardForm,
 } from "@/types/boards"
-import { mapBoardData } from "@/utils/helpers/mapData.helpers"
 import {
-  Task,
-  TaskDelete,
-  TaskDetail,
-  taskDeleteSchema,
+  type Task,
+  type TaskForm,
+  type TaskDelete,
+  type TaskDetail,
   taskSchema,
+  taskDeleteSchema,
+  isCreateTaskForm,
 } from "@/types/tasks"
+import { mapBoardData, mapTaskData } from "@/utils/helpers/mapData.helpers"
 
 const BASE_URL = "http://localhost:4000/v1/"
 const axiosInstance = axios.create({ baseURL: BASE_URL })
@@ -35,7 +37,9 @@ export const getColumnsByBoardId = async (
   boardId?: string
 ): Promise<BoardColumn[]> => {
   if (!boardId) {
-    throw new ReferenceError("(boardId): the parameter is not provided")
+    throw new ReferenceError(
+      "(getColumnsByBoardId): boardId parameter is not provided"
+    )
   }
 
   const response = await axiosInstance.get<{ columns: BoardColumn[] }>(
@@ -44,9 +48,7 @@ export const getColumnsByBoardId = async (
   const result = boardColumnSchema.array().safeParse(response.data.columns)
 
   if (!result.success) {
-    throw new Error(
-      `[GET /boards/${boardId}/columns]: failed to parse the response`
-    )
+    throw new Error(`[getColumnsByBoardId]: failed to parse the response`)
   }
 
   return result.data
@@ -54,7 +56,7 @@ export const getColumnsByBoardId = async (
 
 export const createBoard = async (data: BoardForm): Promise<Board> => {
   if (!isCreateBoardForm(data)) {
-    throw new Error("[POST /boards]: unsupported variant for creating a board")
+    throw new Error("[createBoard]: unsupported variant for creating a board")
   }
 
   const response = await axiosInstance.post<{ board: Board }>(
@@ -63,15 +65,17 @@ export const createBoard = async (data: BoardForm): Promise<Board> => {
   )
   const result = boardSchema.safeParse(response.data.board)
   if (!result.success) {
-    throw new Error("[POST /boards]: failed to parse the response")
+    throw new Error("[createBoard]: failed to parse the response")
   }
 
   return result.data
 }
 
-export const updateBoard = async (data: BoardForm): Promise<Board> => {
+export const updateBoardById = async (data: BoardForm): Promise<Board> => {
   if (isCreateBoardForm(data)) {
-    throw new Error("[PUT /boards]: unsupported variant for updating the board")
+    throw new Error(
+      "[updateBoardById]: unsupported variant for updating the board"
+    )
   }
 
   const response = await axiosInstance.put<{ board: Board }>(
@@ -81,7 +85,7 @@ export const updateBoard = async (data: BoardForm): Promise<Board> => {
 
   const result = boardSchema.safeParse(response.data.board)
   if (!result.success) {
-    throw new Error("[PUT /boards]: failed to parse the response")
+    throw new Error("[updateBoardById]: failed to parse the response")
   }
 
   return result.data
@@ -92,7 +96,7 @@ export const deleteBoardById = async (id: string): Promise<BoardDelete> => {
 
   const result = boardDeleteSchema.safeParse(response.data)
   if (!result.success) {
-    throw new Error("[DELETE /boards]: failed to parse the response")
+    throw new Error("[deleteBoardById]: failed to parse the response")
   }
 
   return result.data
@@ -100,7 +104,9 @@ export const deleteBoardById = async (id: string): Promise<BoardDelete> => {
 
 export const getTasksByBoardId = async (boardId?: string): Promise<Task[]> => {
   if (!boardId) {
-    throw new ReferenceError("(boardId): the parameter is not provided")
+    throw new ReferenceError(
+      "(getTasksByBoardId): boardId parameter is not provided"
+    )
   }
 
   const response = await axiosInstance.get<{ tasks: Task[] }>(
@@ -111,7 +117,7 @@ export const getTasksByBoardId = async (boardId?: string): Promise<Task[]> => {
 
   if (!result.success) {
     throw new Error(
-      `[GET /boards/${boardId}/tasks]: failed to parse the response as Task[]`
+      `[getTasksByBoardId]: failed to parse the response as Task[]`
     )
   }
 
@@ -123,11 +129,15 @@ export const getTaskDetailById = async (
   taskId?: string
 ): Promise<Task> => {
   if (!boardId) {
-    throw new ReferenceError("(boardId): the parameter is not provided")
+    throw new ReferenceError(
+      "(getTaskDetailById): boardId parameter is not provided"
+    )
   }
 
   if (!taskId) {
-    throw new ReferenceError("(taskId): the parameter is not provided")
+    throw new ReferenceError(
+      "(getTaskDetailById): taskId parameter is not provided"
+    )
   }
 
   const response = await axiosInstance.get<{ task: Task }>(
@@ -136,9 +146,7 @@ export const getTaskDetailById = async (
 
   const result = taskSchema.safeParse(response.data.task)
   if (!result.success) {
-    throw new Error(
-      `[GET /boards/${boardId}/tasks/${taskId}]: failed to parse the response`
-    )
+    throw new Error(`[getTaskDetailById]: failed to parse the response`)
   }
 
   return result.data
@@ -152,9 +160,59 @@ export const updateTaskDetailById = async (data: TaskDetail): Promise<Task> => {
 
   const result = taskSchema.safeParse(response.data.task)
   if (!result.success) {
-    throw new Error(
-      `[PUT /boards/${data.boardId}/tasks/${data.id}]: failed to parse the response`
+    throw new Error(`[updateTaskDetailById]: failed to parse the response`)
+  }
+
+  return result.data
+}
+
+export const createTask = async (
+  data: TaskForm,
+  boardId?: string
+): Promise<Task> => {
+  if (!boardId) {
+    throw new ReferenceError("(createTask): boardId parameter is not provided")
+  }
+
+  if (!isCreateTaskForm(data)) {
+    throw new Error("[createTask]: unsupported variant for creating a task")
+  }
+
+  const response = await axiosInstance.post<{ task: Task }>(
+    `/boards/${boardId}/tasks`,
+    mapTaskData(data)
+  )
+
+  const result = taskSchema.safeParse(response.data.task)
+  if (!result.success) {
+    throw new Error("[createTask]: failed to parse the response")
+  }
+
+  return result.data
+}
+
+export const updateTaskById = async (
+  data: TaskForm,
+  boardId?: string
+): Promise<Task> => {
+  if (!boardId) {
+    throw new ReferenceError(
+      "(updateTaskById): boardId parameter is not provided"
     )
+  }
+
+  if (isCreateTaskForm(data)) {
+    throw new Error("[updateTaskById]: unsupported variant for updating a task")
+  }
+
+  const response = await axiosInstance.put<{ task: Task }>(
+    `/boards/${boardId}/tasks/${data.id}`,
+    mapTaskData(data)
+  )
+
+  const result = taskSchema.safeParse(response.data.task)
+  if (!result.success) {
+    throw new Error("[updateTaskById]: failed to parse the response")
   }
 
   return result.data
@@ -168,11 +226,15 @@ export const deleteTaskById = async ({
   taskId?: string
 }): Promise<TaskDelete> => {
   if (!boardId) {
-    throw new ReferenceError("(boardId): the parameter is not provided")
+    throw new ReferenceError(
+      "[deleteTaskById]: boardId parameter is not provided"
+    )
   }
 
   if (!taskId) {
-    throw new ReferenceError("(taskId): the parameter is not provided")
+    throw new ReferenceError(
+      "[deleteTaskById]: taskId parameter is not provided"
+    )
   }
 
   const response = await axiosInstance.delete<TaskDelete>(
@@ -181,9 +243,7 @@ export const deleteTaskById = async ({
 
   const result = taskDeleteSchema.safeParse(response.data)
   if (!result.success) {
-    throw new Error(
-      `(DELETE /boards/${boardId}/tasks/${taskId}): Failed to parse the response`
-    )
+    throw new Error(`[deleteTaskById]: Failed to parse the response`)
   }
 
   return result.data

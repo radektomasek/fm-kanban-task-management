@@ -44,30 +44,23 @@ export const taskFormSchema = z.discriminatedUnion("variant", [
       .string()
       .min(1, { message: fieldErrorTooShort })
       .max(20, { message: fieldErrorTooLong }),
-    description: z.string(),
+    description: z.string().min(1, { message: fieldErrorTooShort }),
     subtasks: z.array(
       z.object({
-        title: z
-          .string()
-          .min(1, { message: fieldErrorTooShort })
-          .max(20, { message: fieldErrorTooLong }),
+        title: z.string().min(1, { message: fieldErrorTooShort }),
       })
     ),
     columnId: z.string(),
   }),
   z.object({
     variant: z.literal("edit"),
-    title: z
-      .string()
-      .min(1, { message: fieldErrorTooShort })
-      .max(20, { message: fieldErrorTooLong }),
-    description: z.string(),
+    id: z.string(),
+    title: z.string().min(1, { message: fieldErrorTooShort }),
+    description: z.string().min(1, { message: fieldErrorTooShort }),
     subtasks: z.array(
       z.object({
-        title: z
-          .string()
-          .min(1, { message: fieldErrorTooShort })
-          .max(20, { message: fieldErrorTooLong }),
+        id: z.optional(z.string()),
+        title: z.string().min(1, { message: fieldErrorTooShort }),
       })
     ),
     columnId: z.string(),
