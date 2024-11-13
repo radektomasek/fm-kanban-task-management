@@ -16,7 +16,24 @@ export type BoardEdit = {
   }[]
 }
 
-export type BoardDelete = {
+export type TaskCreate = {
+  variant: "create"
+  title: string
+  description: string
+  columnId: string
+  subtasks: {
+    title: string
+  }[]
+}
+
+export type TaskEdit = {
+  variant: "edit"
   id: string
-  message: string
+  title: string
+  description: string
+  columnId: string
+  subtasks: {
+    id: string
+    title: string
+  }[]
 }

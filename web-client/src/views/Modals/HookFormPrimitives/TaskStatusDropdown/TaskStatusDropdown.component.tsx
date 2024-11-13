@@ -3,10 +3,12 @@ import {
   Controller,
   useFormContext,
   type FieldValues,
+  PathValue,
 } from "react-hook-form"
 
 import { Dropdown, type DropdownItem } from "@/components/forms"
 import { useBoardColumns } from "@/services/queries"
+import { useEffect, useState } from "react"
 
 type Props<T extends FieldValues> = {
   id: string
@@ -24,9 +26,19 @@ export function TaskStatusDropdown<T extends FieldValues>({
   onItemSelect,
   ...props
 }: Props<T>) {
-  const { control } = useFormContext<T>()
-
+  const { control, setValue } = useFormContext<T>()
   const { data: items = [] } = useBoardColumns(boardId)
+  const [selectedOption, setSelectedOption] = useState<
+    DropdownItem | undefined
+  >(items.find((element) => element.id === defaultValue) ?? items[0])
+
+  useEffect(() => {
+    const initialOption = items.find((element) => element.id === defaultValue)
+    if (initialOption) {
+      setSelectedOption(initialOption)
+      setValue(name, initialOption.id as PathValue<T, Path<T>>)
+    }
+  }, [defaultValue, items, name, setValue])
 
   return (
     <Controller
@@ -38,8 +50,12 @@ export function TaskStatusDropdown<T extends FieldValues>({
             {...field}
             {...props}
             items={items.map(({ id, name }) => ({ id, name }))}
-            onItemSelect={onItemSelect}
-            default={items.find((element) => element.id === defaultValue)}
+            onItemSelect={(item) => {
+              setSelectedOption(item)
+              field.onChange(item.id)
+              onItemSelect(item)
+            }}
+            default={selectedOption}
           />
         )
       }}

@@ -9,9 +9,10 @@ import { EmptyBoard } from "@/views/Placeholders"
 
 export const BoardPage = () => {
   const { boardId } = useParams()
-  const { setSelectedBoard } = useStore(
+  const { setSelectedBoard, handleOpenModal } = useStore(
     useShallow((state) => ({
       setSelectedBoard: state.setSelectedBoard,
+      handleOpenModal: state.handleOpenModal,
     }))
   )
   const { data: boards } = useBoards()
@@ -41,7 +42,11 @@ export const BoardPage = () => {
             )}
           />
         ))}
-        <Button className={"mt-8"} intent={"gridItem"}>
+        <Button
+          className={"mt-8"}
+          intent={"gridItem"}
+          onClick={() => handleOpenModal("EditBoardScreen")}
+        >
           + New Column
         </Button>
       </div>

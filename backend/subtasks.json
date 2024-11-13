@@ -1,206 +1,8 @@
 [
   {
-    "id": "UwsK18_5H8",
-    "taskId": "LG-cjbh-Cl",
-    "title": "Prepare competitor analysis report",
-    "completed": true
-  },
-  {
-    "id": "-xsKN-v_mS",
-    "taskId": "lDnfW_rhW4",
-    "title": "Finalize onboarding UI designs",
-    "completed": false
-  },
-  {
-    "id": "hes15u0fdr",
-    "taskId": "V2RutyHIVb",
-    "title": "Finalize UI for settings page",
-    "completed": false
-  },
-  {
-    "id": "MbrkTXx880",
-    "taskId": "gJ9FbOoFpo",
-    "title": "Execute QA tests for core features",
-    "completed": false
-  },
-  {
-    "id": "RBeGbqYqZO",
-    "taskId": "71GGdfqOEf",
-    "title": "Test business models in the market",
-    "completed": false
-  },
-  {
-    "id": "xn192-pfEU",
-    "taskId": "N8-XrVCpnQ",
-    "title": "Create wireframe",
-    "completed": false
-  },
-  {
-    "id": "2LENW-YLXr",
-    "taskId": "JCNrTtzuEc",
-    "title": "Make iterative UI updates",
-    "completed": true
-  },
-  {
-    "id": "ixyj24Y2f5",
-    "taskId": "V2RutyHIVb",
-    "title": "Refine search page designs",
-    "completed": false
-  },
-  {
-    "id": "ZPGOttnAVB",
-    "taskId": "j8xelUqoph",
-    "title": "Research authentication methods",
-    "completed": true
-  },
-  {
-    "id": "O6l1gRtsch",
-    "taskId": "BW7KvUIWYl",
-    "title": "Research market trends",
-    "completed": true
-  },
-  {
-    "id": "fJGzC7mtmg",
-    "taskId": "1fA-X67Fje",
-    "title": "Implement search endpoints",
-    "completed": false
-  },
-  {
-    "id": "GjjgRV3xAf",
-    "taskId": "LG-cjbh-Cl",
-    "title": "Analyze top competitors",
-    "completed": true
-  },
-  {
-    "id": "9IHC3o8l3j",
-    "taskId": "j8xelUqoph",
-    "title": "Develop authentication APIs",
-    "completed": false
-  },
-  {
-    "id": "gzCNRU6Ams",
-    "taskId": "vbFaTQ7QIx",
-    "title": "Sketch search UI mockups",
-    "completed": true
-  },
-  {
-    "id": "N6vVxfGCai",
-    "taskId": "N8-XrVCpnQ",
-    "title": "Review UI with team",
-    "completed": true
-  },
-  {
-    "id": "y83TAL_N5P",
-    "taskId": "gGbQ-MHEXD",
-    "title": "Conduct usability tests with customers",
-    "completed": true
-  },
-  {
-    "id": "Q_IjkCstMG",
+    "id": "sAn0-CFcbu",
     "taskId": "c1HB6nBcQo",
-    "title": "Review account security features",
-    "completed": false
-  },
-  {
-    "id": "oJaLVL2tAx",
-    "taskId": "I5xWHNYCuR",
-    "title": "Identify key market segments",
-    "completed": true
-  },
-  {
-    "id": "bvWPbRJP6T",
-    "taskId": "1fA-X67Fje",
-    "title": "Research search API designs",
-    "completed": true
-  },
-  {
-    "id": "QODRBL02Zr",
-    "taskId": "gGbQ-MHEXD",
-    "title": "Create paper prototype",
-    "completed": true
-  },
-  {
-    "id": "7TAPVK5_Kk",
-    "taskId": "WkdHjPfTSp",
-    "title": "Design main settings page",
-    "completed": false
-  },
-  {
-    "id": "3xO-kNbmVE",
-    "taskId": "WkdHjPfTSp",
-    "title": "Research user preferences for settings",
-    "completed": false
-  },
-  {
-    "id": "c314c456-30eb-4c79-962d-1382675e4233",
-    "taskId": "1b6edb0a-e7a1-40c9-8fb9-8e322c2c8b16",
-    "title": "Custom subtask2",
-    "completed": false
-  },
-  {
-    "id": "Z4RnRNPoAG",
-    "taskId": "V2RutyHIVb",
-    "title": "Design initial settings page mockups",
-    "completed": true
-  },
-  {
-    "id": "WURREwR6nV",
-    "taskId": "lDnfW_rhW4",
-    "title": "Design initial onboarding sketches",
-    "completed": true
-  },
-  {
-    "id": "XGsWdXWMSG",
-    "taskId": "c1HB6nBcQo",
-    "title": "Implement authentication API",
-    "completed": true
-  },
-  {
-    "id": "UPPSrjpB1K",
-    "taskId": "JCNrTtzuEc",
-    "title": "Collect feedback from usability tests",
-    "completed": true
-  },
-  {
-    "id": "blbJ6VpLUx",
-    "taskId": "JCNrTtzuEc",
-    "title": "Analyze test results",
-    "completed": true
-  },
-  {
-    "id": "xhKWfUUhk_",
-    "taskId": "N8-XrVCpnQ",
-    "title": "Design UI layout",
-    "completed": true
-  },
-  {
-    "id": "S7wprh2XZC",
-    "taskId": "71GGdfqOEf",
-    "title": "Create business model variations",
-    "completed": false
-  },
-  {
-    "id": "e5b2eead-495b-461a-b302-01b0372bf93b",
-    "taskId": "1b6edb0a-e7a1-40c9-8fb9-8e322c2c8b16",
-    "title": "Custom subtask1",
-    "completed": false
-  },
-  {
-    "id": "zekbXUZuNM",
-    "taskId": "71GGdfqOEf",
-    "title": "Analyze competitor pricing models",
-    "completed": true
-  },
-  {
-    "id": "TGh_f4CGeo",
-    "taskId": "BW7KvUIWYl",
-    "title": "Document market research findings",
-    "completed": true
-  },
-  {
-    "id": "L_kUmH2ZUR",
-    "taskId": "nyosLF2vw6",
-    "title": "Create high-fidelity wireframe prototype",
+    "title": "Research API endpoints for account management",
     "completed": true
   },
   {
@@ -210,9 +12,75 @@
     "completed": false
   },
   {
-    "id": "f0fabbda-eae2-42a2-8093-b6576b1ff265",
-    "taskId": "1b6edb0a-e7a1-40c9-8fb9-8e322c2c8b16",
-    "title": "Custom subtask3",
+    "id": "3599bfb4-92ea-4542-9e64-764c3aa19d19",
+    "taskId": "55c56dfb-d0ff-4406-9d77-37003a8caa44",
+    "title": "Make coffee",
+    "completed": false
+  },
+  {
+    "id": "705fc5ff-4d73-4bc3-bb0a-6124e3a88eaf",
+    "taskId": "3a44b04b-22e8-4eb3-8621-86d2f7786064",
+    "title": "Another subtask",
+    "completed": true
+  },
+  {
+    "id": "hJExqcIYMW",
+    "taskId": "gJ9FbOoFpo",
+    "title": "Compile test cases for user journeys",
+    "completed": false
+  },
+  {
+    "id": "-xsKN-v_mS",
+    "taskId": "lDnfW_rhW4",
+    "title": "Finalize onboarding UI designs",
+    "completed": false
+  },
+  {
+    "id": "O6l1gRtsch",
+    "taskId": "BW7KvUIWYl",
+    "title": "Research market trends",
+    "completed": true
+  },
+  {
+    "id": "L_kUmH2ZUR",
+    "taskId": "nyosLF2vw6",
+    "title": "Create high-fidelity wireframe prototype",
+    "completed": false
+  },
+  {
+    "id": "ixyj24Y2f5",
+    "taskId": "V2RutyHIVb",
+    "title": "Refine search page designs",
+    "completed": false
+  },
+  {
+    "id": "hes15u0fdr",
+    "taskId": "V2RutyHIVb",
+    "title": "Finalize UI for settings page",
+    "completed": false
+  },
+  {
+    "id": "f2650816-97fb-4920-9a85-45f4a8ddeef5",
+    "taskId": "3a44b04b-22e8-4eb3-8621-86d2f7786064",
+    "title": "Make chocolate",
+    "completed": true
+  },
+  {
+    "id": "XGsWdXWMSG",
+    "taskId": "c1HB6nBcQo",
+    "title": "Implement authentication API",
+    "completed": true
+  },
+  {
+    "id": "zekbXUZuNM",
+    "taskId": "71GGdfqOEf",
+    "title": "Analyze competitor pricing models",
+    "completed": true
+  },
+  {
+    "id": "fJGzC7mtmg",
+    "taskId": "1fA-X67Fje",
+    "title": "Implement search endpoints",
     "completed": false
   },
   {
@@ -222,15 +90,165 @@
     "completed": true
   },
   {
-    "id": "sAn0-CFcbu",
-    "taskId": "c1HB6nBcQo",
-    "title": "Research API endpoints for account management",
+    "id": "bvWPbRJP6T",
+    "taskId": "1fA-X67Fje",
+    "title": "Research search API designs",
     "completed": true
   },
   {
-    "id": "hJExqcIYMW",
+    "id": "Z4RnRNPoAG",
+    "taskId": "V2RutyHIVb",
+    "title": "Design initial settings page mockups",
+    "completed": true
+  },
+  {
+    "id": "N6vVxfGCai",
+    "taskId": "N8-XrVCpnQ",
+    "title": "Review UI with team",
+    "completed": true
+  },
+  {
+    "id": "Q_IjkCstMG",
+    "taskId": "c1HB6nBcQo",
+    "title": "Review account security features",
+    "completed": false
+  },
+  {
+    "id": "TGh_f4CGeo",
+    "taskId": "BW7KvUIWYl",
+    "title": "Document market research findings",
+    "completed": true
+  },
+  {
+    "id": "xhKWfUUhk_",
+    "taskId": "N8-XrVCpnQ",
+    "title": "Design UI layout",
+    "completed": true
+  },
+  {
+    "id": "QODRBL02Zr",
+    "taskId": "gGbQ-MHEXD",
+    "title": "Create paper prototype",
+    "completed": true
+  },
+  {
+    "id": "2LENW-YLXr",
+    "taskId": "JCNrTtzuEc",
+    "title": "Make iterative UI updates",
+    "completed": true
+  },
+  {
+    "id": "9IHC3o8l3j",
+    "taskId": "j8xelUqoph",
+    "title": "Develop authentication APIs",
+    "completed": false
+  },
+  {
+    "id": "S7wprh2XZC",
+    "taskId": "71GGdfqOEf",
+    "title": "Create business model variations",
+    "completed": false
+  },
+  {
+    "id": "ZPGOttnAVB",
+    "taskId": "j8xelUqoph",
+    "title": "Research authentication methods",
+    "completed": true
+  },
+  {
+    "id": "b9cc3a6c-1643-4e3a-bde5-330f8bccb91b",
+    "taskId": "f16a3786-90e1-48ed-8a11-a23c872feb6f",
+    "title": "Make coffee",
+    "completed": false
+  },
+  {
+    "id": "UwsK18_5H8",
+    "taskId": "LG-cjbh-Cl",
+    "title": "Prepare competitor analysis report",
+    "completed": true
+  },
+  {
+    "id": "8a875970-9c61-475a-bc25-9eb3db117f2b",
+    "taskId": "ba350d13-b5fe-4047-a969-aef053ad3a55",
+    "title": "subtask 1",
+    "completed": false
+  },
+  {
+    "id": "oJaLVL2tAx",
+    "taskId": "I5xWHNYCuR",
+    "title": "Identify key market segments",
+    "completed": false
+  },
+  {
+    "id": "GjjgRV3xAf",
+    "taskId": "LG-cjbh-Cl",
+    "title": "Analyze top competitors",
+    "completed": true
+  },
+  {
+    "id": "3xO-kNbmVE",
+    "taskId": "WkdHjPfTSp",
+    "title": "Research user preferences for settings",
+    "completed": false
+  },
+  {
+    "id": "MbrkTXx880",
     "taskId": "gJ9FbOoFpo",
-    "title": "Compile test cases for user journeys",
+    "title": "Execute QA tests for core features",
+    "completed": false
+  },
+  {
+    "id": "0020f2e3-4176-496e-ad1c-a78ffef8f3bd",
+    "taskId": "68136d44-7e42-4d77-a8ff-15b9adfa0220",
+    "title": "Make coffee",
+    "completed": false
+  },
+  {
+    "id": "blbJ6VpLUx",
+    "taskId": "JCNrTtzuEc",
+    "title": "Analyze test results",
+    "completed": true
+  },
+  {
+    "id": "gzCNRU6Ams",
+    "taskId": "vbFaTQ7QIx",
+    "title": "Sketch search UI mockups",
+    "completed": true
+  },
+  {
+    "id": "y83TAL_N5P",
+    "taskId": "gGbQ-MHEXD",
+    "title": "Conduct usability tests with customers",
+    "completed": true
+  },
+  {
+    "id": "7TAPVK5_Kk",
+    "taskId": "WkdHjPfTSp",
+    "title": "Design main settings page",
+    "completed": false
+  },
+  {
+    "id": "UPPSrjpB1K",
+    "taskId": "JCNrTtzuEc",
+    "title": "Collect feedback from usability tests",
+    "completed": true
+  },
+  {
+    "id": "xn192-pfEU",
+    "taskId": "N8-XrVCpnQ",
+    "title": "Create wireframe",
+    "completed": false
+  },
+  {
+    "id": "WURREwR6nV",
+    "taskId": "lDnfW_rhW4",
+    "title": "Design initial onboarding sketches",
+    "completed": true
+  },
+  {
+    "id": "RBeGbqYqZO",
+    "taskId": "71GGdfqOEf",
+    "title": "Test business models in the market",
     "completed": false
   }
 ]

@@ -1,11 +1,14 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query"
 import {
   createBoard,
-  updateBoard,
+  createTask,
+  updateBoardById,
+  updateTaskById,
   deleteBoardById,
   updateTaskDetailById,
   deleteTaskById,
 } from "@/services/api"
+import type { TaskForm } from "@/types/tasks"
 
 export function useCreateBoard() {
   const queryClient = useQueryClient()
@@ -25,7 +28,7 @@ export function useEditBoard() {
   const queryClient = useQueryClient()
 
   return useMutation({
-    mutationFn: updateBoard,
+    mutationFn: updateBoardById,
     onSuccess: async ({ id: boardId }, variables) => {
       await queryClient.invalidateQueries({ queryKey: ["boards"] })
 
@@ -51,6 +54,36 @@ export function useDeleteBoard() {
       await queryClient.invalidateQueries({ queryKey: ["boards"] })
       queryClient.removeQueries({
         queryKey: ["boards/columns", { boardId }],
+      })
+    },
+  })
+}
+
+export function useCreateTask(boardId?: string) {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: (data: TaskForm) => createTask(data, boardId),
+    onSuccess: async ({ boardId }) => {
+      await queryClient.invalidateQueries({
+        queryKey: ["boards/tasks", { boardId }],
+      })
+    },
+  })
+}
+
+export function useUpdateTask(boardId?: string) {
+  const queryClient = useQueryClient()
+
+  return useMutation({
+    mutationFn: (data: TaskForm) => updateTaskById(data, boardId),
+    onSuccess: async ({ id: taskId, boardId }) => {
+      await queryClient.invalidateQueries({
+        queryKey: ["boards/tasks", { boardId }],
+      })
+
+      await queryClient.invalidateQueries({
+        queryKey: ["boards/task", { boardId, taskId }],
       })
     },
   })

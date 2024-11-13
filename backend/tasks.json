@@ -79,7 +79,7 @@
   {
     "id": "nyosLF2vw6",
     "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
-    "columnId": "b7dbeee6-f5da-4609-aea1-2dfd1f10000c",
+    "columnId": "448526a9-1231-484a-aac0-e4e0d25aebdc",
     "title": "Create wireframe prototype",
     "description": "Develop a wireframe prototype to visualize the layout and functionality of the user interface for testing purposes."
   },
@@ -119,10 +119,38 @@
     "description": "Conduct thorough market research to gather insights into trends, customer needs, and competitive landscape."
   },
   {
-    "id": "1b6edb0a-e7a1-40c9-8fb9-8e322c2c8b16",
-    "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
-    "columnId": "b7dbeee6-f5da-4609-aea1-2dfd1f10000c",
+    "id": "f16a3786-90e1-48ed-8a11-a23c872feb6f",
+    "boardId": "5aecb2d6-8277-4098-85dd-305e2bef4629",
+    "columnId": "",
+    "title": "Test",
+    "description": "just a quick test"
+  },
+  {
+    "id": "ba350d13-b5fe-4047-a969-aef053ad3a55",
+    "boardId": "5aecb2d6-8277-4098-85dd-305e2bef4629",
+    "columnId": "",
     "title": "A task",
-    "description": "A description"
+    "description": "Task within a new board"
+  },
+  {
+    "id": "68136d44-7e42-4d77-a8ff-15b9adfa0220",
+    "boardId": "5aecb2d6-8277-4098-85dd-305e2bef4629",
+    "columnId": "",
+    "title": "Test task",
+    "description": "dsfdsfdsf"
+  },
+  {
+    "id": "55c56dfb-d0ff-4406-9d77-37003a8caa44",
+    "boardId": "5aecb2d6-8277-4098-85dd-305e2bef4629",
+    "columnId": "3ea55c2c-7ada-4756-ac60-a66a60b62a0e",
+    "title": "Test",
+    "description": "fdsfdsf"
+  },
+  {
+    "id": "3a44b04b-22e8-4eb3-8621-86d2f7786064",
+    "boardId": "5aecb2d6-8277-4098-85dd-305e2bef4629",
+    "columnId": "cc432c2a-821d-4b71-877a-7194ffeea0bd",
+    "title": "Another test",
+    "description": "fdsfsd"
   }
 ]
