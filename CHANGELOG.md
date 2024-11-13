@@ -2,6 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.8.0]
+
+- [web-client](./web-client) FEATURE: added a functionality for creating a new task/editing an existing one.
+- [web-client](./web-client) CHANGE: simplified the exception messages in the https functionality.
+
 ## [0.7.0]
 
 - [web-client](./web-client) FEATURE: replaced the mock for displaying the tasks on board by an actual data from backend.
