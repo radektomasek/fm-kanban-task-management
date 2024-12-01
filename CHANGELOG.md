@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.8.1]
+
+- [api-service-golang-rest](./api-service-golang-rest) CHANGE: renamed backend folder of the backend API to `api-service-golang-rest`.
+
 ## [0.8.0]
 
 - [web-client](./web-client) FEATURE: added a functionality for creating a new task/editing an existing one.
@@ -11,22 +15,22 @@ All notable changes to this project will be documented in this file.
 
 - [web-client](./web-client) FEATURE: replaced the mock for displaying the tasks on board by an actual data from backend.
 - [web-client](./web-client) FEATURE: added the task detail modal that allows to update either task or subtasks status
-- [backend](./backend) FEATURE: added more REST endpoints for fetching, updating and removing the task.
-- [backend](./backend) FIX: adjusted the types of the tasks to better manage the aggregated/non-aggregated results.
+- [api-service-golang-rest](./api-service-golang-rest) FEATURE: added more REST endpoints for fetching, updating and removing the task.
+- [api-service-golang-rest](./api-service-golang-rest) FIX: adjusted the types of the tasks to better manage the aggregated/non-aggregated results.
 
 ## [0.6.2]
 
 - [web-client](./web-client) FEATURE: implemented the initial flow of the board management. We are able to make basic CRUD operations when it comes to boards/columns
-- [backend](./backend) FIX: fixed the issue in data deletion when DELETE /boards/:id/columns was called.
+- [api-service-golang-rest](./api-service-golang-rest) FIX: fixed the issue in data deletion when DELETE /boards/:id/columns was called.
 
 ## [0.6.1]
 
-- [backend](./backend) CHANGE: adjust the endpoints for better represent the UI requirements. The boards and columns are separated to be utilized more appropriately.
+- [api-service-golang-rest](./api-service-golang-rest) CHANGE: adjust the endpoints for better represent the UI requirements. The boards and columns are separated to be utilized more appropriately.
 
 ## [0.6.0]
 
-- [backend](./web-client) FEATURE: added a basic implementation of the modal wrapper, including of the basic keyboard control 
-- [backend](./backend) FEATURE: added an initial implementation of the golang service, using mock data working with the boards + having a basic CRUD
+- [api-service-golang-rest](./web-client) FEATURE: added a basic implementation of the modal wrapper, including of the basic keyboard control 
+- [api-service-golang-rest](./api-service-golang-rest) FEATURE: added an initial implementation of the golang service, using mock data working with the boards + having a basic CRUD
 
 ## [0.5.0]
 
