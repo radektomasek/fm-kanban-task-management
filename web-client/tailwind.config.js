@@ -3,7 +3,7 @@
 import tailwindFormPlugin from "@tailwindcss/forms"
 
 module.exports = {
-  darkMode: ["class"],
+  darkMode: "selector",
   content: ["./src/**/*.{ts,tsx}", "index.html"],
   prefix: "",
   theme: {

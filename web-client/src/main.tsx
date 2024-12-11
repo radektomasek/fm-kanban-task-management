@@ -5,6 +5,7 @@ import { QueryClientProvider, QueryClient } from "@tanstack/react-query"
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools"
 import { ModalContainer } from "@/views/Modals"
 import { router } from "@/routes"
+import { ThemeProvider } from "@/providers/theme.provider"
 import "./index.css"
 
 const queryClient = new QueryClient({
@@ -13,6 +14,7 @@ const queryClient = new QueryClient({
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
+    <ThemeProvider />
     <QueryClientProvider client={queryClient}>
       <RouterProvider router={router} />
       <ModalContainer />
