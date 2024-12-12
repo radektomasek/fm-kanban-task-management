@@ -30,11 +30,11 @@ export const Navbar = ({
    * @TODO: Once we add auth mechanism, there should be a context menu with the Logout/Account option
    */
   const headerForEmptyProject = () => (
-    <nav className="flex items-center justify-end bg-custom-white pr-8 flex-grow"></nav>
+    <nav className="flex items-center justify-end bg-custom-white pr-8 flex-grow dark:bg-custom-dark-grey"></nav>
   )
 
   const headerForProjectWithBoards = (selectedBoard: Board) => (
-    <nav className="flex items-center justify-between bg-custom-white pl-8 flex-grow">
+    <nav className="flex items-center justify-between bg-custom-white pl-8 flex-grow dark:bg-custom-dark-grey dark:text-custom-white">
       <h1 className="text-xl ">{selectedBoard.name}</h1>
 
       <div className="mr-8 flex w-48 justify-between items-center relative">

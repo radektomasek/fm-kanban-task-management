@@ -20,7 +20,6 @@ export const CardItem = ({ id, title, subtasks }: Task) => {
   }
 
   const handleOnKeyDown = (event: React.KeyboardEvent) => {
-    // We can preserve the original Tab functionality
     if (event.key === "Tab") {
       return
     }
@@ -48,7 +47,7 @@ export const CardItem = ({ id, title, subtasks }: Task) => {
       role="button"
       onClick={handleOnClick}
       onKeyDown={handleOnKeyDown}
-      className="flex flex-col bg-custom-white rounded-lg px-5 py-5 gap-y-1.5 cursor-pointer"
+      className="flex flex-col bg-custom-white rounded-lg px-5 py-5 gap-y-1.5 cursor-pointer dark:bg-custom-dark-grey dark:text-custom-white"
       aria-label={`View Task: ${title}. ${getSubtasksLabel(subtasks)} ${getSubtasksSuffix(subtasks)}`}
     >
       <h3 className="text-base">{title}</h3>

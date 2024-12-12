@@ -43,11 +43,14 @@ export const Sidebar = ({
     toggleShowSidebar((showSidebar) => !showSidebar)
 
   return (
-    <aside data-testid={testId} className="border-r-2">
+    <aside
+      data-testid={testId}
+      className="border-r-[1px] dark:bg-custom-dark-grey dark:border-[#3E3F4E]"
+    >
       {showSidebar && (
         <div
           className={cn(
-            "flex flex-col w-[18.65rem] bg-custom-white justify-between h-[calc(100%-5rem)] relative pr-4"
+            "flex flex-col w-[18.65rem] bg-custom-white justify-between h-[calc(100%-5rem)] relative pr-4 dark:bg-custom-dark-grey"
           )}
         >
           <div>
@@ -78,7 +81,7 @@ export const Sidebar = ({
 
       <Button
         active={false}
-        className={"mt-4"}
+        className={"mt-4 "}
         intent={"sidebar"}
         wrapped={!showSidebar}
         iconName={"eye"}

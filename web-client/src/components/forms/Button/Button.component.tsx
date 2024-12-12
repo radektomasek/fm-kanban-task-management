@@ -81,7 +81,7 @@ const buttonStyles = cva(
       {
         intent: "sidebar",
         size: "large",
-        className: "w-[17.25rem] pl-8 rounded-r-3xl",
+        className: "w-[17.25rem] pl-8 rounded-r-3xl dark:bg-custom-dark-grey",
       },
       {
         intent: "sidebar",

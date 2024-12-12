@@ -42,7 +42,7 @@ export const ThemeSwitcher = forwardRef<HTMLInputElement, ThemeSwitcherProps>(
     return (
       <div
         className={cn([
-          "w-[15.69rem] h-12 bg-custom-light-grey inline-flex items-center justify-around rounded-md",
+          "w-[15.69rem] h-12 bg-custom-light-grey inline-flex items-center justify-around rounded-md dark:bg-custom-very-dark-grey",
           className,
         ])}
         tabIndex={0}

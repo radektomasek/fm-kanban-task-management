@@ -29,7 +29,7 @@ export const BoardPage = () => {
   }
 
   return (
-    <div className="bg-custom-light-grey flex-grow border-t-2 flex-col w-28">
+    <div className="bg-custom-light-grey flex-grow border-t-[1px] flex-col w-28 dark:bg-custom-very-dark-grey dark:border-t-[#3E3F4E]">
       <div className="grid grid-flow-col auto-cols-min gap-x-6 pl-6 pt-6">
         {columns?.map((column) => (
           <CardStack
@@ -43,7 +43,7 @@ export const BoardPage = () => {
           />
         ))}
         <Button
-          className={"mt-8"}
+          className={"mt-8 "}
           intent={"gridItem"}
           onClick={() => handleOpenModal("EditBoardScreen")}
         >
