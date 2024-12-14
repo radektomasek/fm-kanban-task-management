@@ -52,6 +52,8 @@ export const BoardsPage = () => {
     }
   }
 
+  console.log(selectedTheme)
+
   return (
     <>
       <header>

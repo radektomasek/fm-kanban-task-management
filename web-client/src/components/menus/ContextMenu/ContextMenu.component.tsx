@@ -121,6 +121,7 @@ export const ContextMenu = ({ items, testId, onItemSelect }: Props) => {
   return (
     <>
       <Button
+        className={"dark:text-custom-medium-grey"}
         data-testid={`${testId}-button`}
         intent={"svgOnly"}
         iconName="dots"
@@ -133,7 +134,7 @@ export const ContextMenu = ({ items, testId, onItemSelect }: Props) => {
         <ul
           role="listbox"
           data-testid={`${testId}-list`}
-          className="absolute flex flex-col justify-evenly px-2 w-48 min-h-24 top-14 right-4 bg-custom-white z-1 rounded-lg"
+          className="absolute flex flex-col justify-evenly px-2 w-48 min-h-24 top-14 right-4 bg-custom-white z-1 rounded-lg dark:bg-custom-very-dark-grey"
           onKeyDown={handleKeyDown}
         >
           {items.map((element, index) => (

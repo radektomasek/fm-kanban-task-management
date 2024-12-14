@@ -25,7 +25,11 @@ export function SubtaskStatusCheckboxList<T extends FieldValues>({
 
   return (
     <>
-      <h4 className={"mb-4 text-custom-medium-grey text-2xs"}>
+      <h4
+        className={
+          "mb-4 text-custom-medium-grey text-2xs dark:text-custom-white"
+        }
+      >
         Subtasks ({selectedTask?.subtasks.completed} of{" "}
         {selectedTask?.subtasks.total})
       </h4>

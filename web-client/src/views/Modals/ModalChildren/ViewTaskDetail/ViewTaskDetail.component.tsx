@@ -60,7 +60,7 @@ export const ViewTaskDetail = () => {
   return (
     <>
       <RowBlock>
-        <h3 className="text-lg">{activeTask?.title}</h3>
+        <h3 className="text-lg dark:text-custom-white">{activeTask?.title}</h3>
         <ContextMenu
           items={taskContextMenuItems}
           onItemSelect={(id: ModalScreenKey) => handleOpenModal(id)}

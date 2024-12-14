@@ -29,10 +29,11 @@ const buttonStyles = cva(
         primary:
           "bg-custom-dark-purple text-custom-white hover:bg-custom-light-purple justify-center",
         secondary:
-          "bg-custom-light-purple-10 text-custom-dark-purple hover:bg-custom-light-purple-25 justify-center",
+          "bg-custom-light-purple-10 text-custom-dark-purple hover:bg-custom-light-purple-25 justify-center dark:bg-custom-white dark:hover:bg-custom-white",
         destructive:
           "bg-custom-red text-custom-white hover:bg-custom-light-red justify-center",
-        sidebar: "gap-4 text-base h-12 justify-start",
+        sidebar:
+          "gap-4 text-base h-12 justify-start dark:hover:bg-custom-white",
         svgOnly: "h-10 inline-flex items-center justify-center cursor-pointer",
         gridItem: "bg-custom-grey",
       },
@@ -81,18 +82,18 @@ const buttonStyles = cva(
       {
         intent: "sidebar",
         size: "large",
-        className: "w-[17.25rem] pl-8 rounded-r-3xl",
+        className: "w-[17.25rem] pl-8 rounded-r-3xl dark:bg-custom-dark-grey",
       },
       {
         intent: "sidebar",
         size: "wrapped",
         className:
-          "w-14 rounded-r-3xl bg-custom-dark-purple text-custom-white fixed bottom-6 left-0",
+          "w-14 rounded-r-3xl bg-custom-dark-purple text-custom-white fixed bottom-6 left-0 dark:hover:bg-custom-light-purple",
       },
       {
         intent: "gridItem",
         className:
-          "text-xl text-custom-medium-grey w-32 bg-[linear-gradient(180deg,hsla(219,63%,95%,1)_0%,hsla(218,66%,95%,0.5)_100%)] w-[17.5rem] min-h-[200px] h-full rounded-lg hover:text-custom-dark-purple",
+          "text-xl text-custom-medium-grey w-32 bg-gradient-light dark:bg-gradient-dark w-[17.5rem] min-h-[200px] h-full rounded-lg hover:text-custom-dark-purple",
       },
     ],
     defaultVariants: {
