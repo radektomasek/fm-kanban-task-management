@@ -77,7 +77,7 @@ export const AddEditBoardForm = () => {
   return (
     <FormProvider {...methods}>
       <form className="flex flex-col " onSubmit={handleSubmit(onSubmit)}>
-        <h3 className="text-lg">
+        <h3 className="text-lg dark:text-custom-white">
           {isEditMode ? "Edit Board" : "Add New Board"}
         </h3>
 

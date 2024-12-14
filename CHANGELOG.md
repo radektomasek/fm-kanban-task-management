@@ -2,6 +2,10 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.9.0]
+
+- [web-client](./web-client) FEATURE: added support for the dark mode.
+
 ## [0.8.1]
 
 - [api-service-golang-rest](./api-service-golang-rest) CHANGE: renamed backend folder of the backend API to `api-service-golang-rest`.

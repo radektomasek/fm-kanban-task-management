@@ -118,7 +118,7 @@ export const ModalContainer = () => {
         >
           <div
             ref={contentRef}
-            className="w-[30rem] px-8 pt-8 pb-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-custom-white rounded-md"
+            className="w-[30rem] px-8 pt-8 pb-10 fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-custom-white rounded-md dark:bg-custom-dark-grey"
           >
             {React.createElement(modalChild)}
           </div>

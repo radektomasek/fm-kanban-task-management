@@ -32,7 +32,7 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
           value={value}
           onChange={handleInputChange}
           className={cn(
-            "w-full text-xs border-custom-medium-grey-25 placeholder-custom-medium-grey-25 text-black rounded",
+            "w-full text-xs border-custom-medium-grey-25 placeholder-custom-medium-grey-25 text-black rounded dark:bg-custom-dark-grey dark:placeholder:text-custom-white-25 dark:caret-custom-white dark:text-custom-white hover:cursor-pointer",
             canDisplayError() && "border-custom-red"
           )}
           {...props}

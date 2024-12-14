@@ -19,6 +19,7 @@ const navLinkStyles = cva(
     "disabled:opacity-50",
     "disabled:pointer-events-none",
     "ring-offset-background",
+    "dark:hover:bg-custom-white",
   ],
   {
     variants: {
@@ -32,7 +33,7 @@ const navLinkStyles = cva(
       active: {
         false:
           "text-custom-medium-grey hover:bg-custom-light-purple-10 hover:text-custom-dark-purple",
-        true: "bg-custom-dark-purple text-custom-white",
+        true: "bg-custom-dark-purple text-custom-white dark:hover:text-custom-dark-purple",
       },
     },
     compoundVariants: [

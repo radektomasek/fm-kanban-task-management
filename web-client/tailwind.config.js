@@ -48,6 +48,12 @@ module.exports = {
           },
         ],
       },
+      backgroundImage: {
+        "gradient-light":
+          "linear-gradient(180deg, hsla(219,63%,95%,1) 0%, hsla(218,66%,95%,0.5) 100%)",
+        "gradient-dark":
+          "linear-gradient(180deg, hsla(234, 13%, 19%, 1) 0%, hsla(234, 13%, 19%, 0.5) 100%)",
+      },
       colors: {
         custom: {
           "dark-purple": "hsl(242, 48%, 58%)",
@@ -65,6 +71,7 @@ module.exports = {
           "light-lines": "hsl(196, 69%, 94%)",
           "light-grey": "hsl(220, 69%, 97%)",
           white: "hsl(0, 0%, 100%)",
+          "white-25": "hsla(0, 0%, 100%, 0.25)",
           red: "hsl(0, 78%, 63%)",
           "light-red": "hsl(0, 100%, 80%)",
           "gradient-grey-start": "hsla(219, 63%, 95%, 1)",

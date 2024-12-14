@@ -70,7 +70,7 @@ export const ThemeSwitcher = forwardRef<HTMLInputElement, ThemeSwitcherProps>(
               "relative cursor-pointer w-10 h-[1.32rem] bg-custom-dark-purple",
               "peer-focus:outline-none peer-focus:ring-blue-300 rounded-full peer peer-checked:after:translate-x-full",
               "after:absolute after:top-[2.5px] after:start-[4px] after:bg-white after:border-gray-300 after:border",
-              "after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-custom-dark-purple"
+              "after:rounded-full after:h-4 after:w-4 after:transition-all dark:border-gray-600 peer-checked:bg-custom-dark-purple dark:hover:peer-checked:bg-custom-light-purple"
             )}
           />
           <Moon />

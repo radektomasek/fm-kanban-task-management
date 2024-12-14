@@ -102,10 +102,14 @@ export const AddEditTaskForm = () => {
   return (
     <FormProvider {...methods}>
       <form className="flex flex-col " onSubmit={handleSubmit(onSubmit)}>
-        <h3 className="text-lg">{isEditMode ? "Edit Task" : "Add New Task"}</h3>
+        <h3 className="text-lg dark:text-custom-white">
+          {isEditMode ? "Edit Task" : "Add New Task"}
+        </h3>
 
         <label
-          className={"text-2xs text-custom-medium-grey my-2"}
+          className={
+            "text-2xs text-custom-medium-grey my-2 dark:text-custom-white"
+          }
           htmlFor={"title"}
         >
           Title
@@ -119,7 +123,9 @@ export const AddEditTaskForm = () => {
         />
 
         <label
-          className={"text-2xs text-custom-medium-grey my-2"}
+          className={
+            "text-2xs text-custom-medium-grey my-2 dark:text-custom-white"
+          }
           htmlFor={"description"}
         >
           Description
@@ -132,7 +138,11 @@ export const AddEditTaskForm = () => {
           errorText={errors?.description?.message}
         />
 
-        <label className={"text-2xs text-custom-medium-grey my-4"}>
+        <label
+          className={
+            "text-2xs text-custom-medium-grey my-4 dark:text-custom-white"
+          }
+        >
           Subtasks
         </label>
 

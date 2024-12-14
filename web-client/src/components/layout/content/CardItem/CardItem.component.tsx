@@ -47,10 +47,12 @@ export const CardItem = ({ id, title, subtasks }: Task) => {
       role="button"
       onClick={handleOnClick}
       onKeyDown={handleOnKeyDown}
-      className="flex flex-col bg-custom-white rounded-lg px-5 py-5 gap-y-1.5 cursor-pointer dark:bg-custom-dark-grey dark:text-custom-white"
+      className="group flex flex-col bg-custom-white rounded-lg px-5 py-5 gap-y-1.5 cursor-pointer dark:bg-custom-dark-grey dark:text-custom-white"
       aria-label={`View Task: ${title}. ${getSubtasksLabel(subtasks)} ${getSubtasksSuffix(subtasks)}`}
     >
-      <h3 className="text-base">{title}</h3>
+      <h3 className="text-base dark:group-hover:text-custom-dark-purple">
+        {title}
+      </h3>
       <h4 className="text-2xs text-custom-medium-grey">
         {getSubtasksLabel(subtasks)}
       </h4>

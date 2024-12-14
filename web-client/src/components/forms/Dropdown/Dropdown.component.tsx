@@ -133,7 +133,7 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
     return (
       <>
         {props.title && (
-          <h4 className="mt-6 mb-2 text-custom-medium-grey text-2xs">
+          <h4 className="mt-6 mb-2 text-custom-medium-grey text-2xs dark:text-custom-white">
             {props.title}
           </h4>
         )}
@@ -141,7 +141,7 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
         <div
           data-testid={props.testId}
           className={cn(
-            "relative min-w-96 ",
+            "relative min-w-96",
             isOpen && "border border-custom-dark-purple overflow rounded"
           )}
           ref={(el) => {
@@ -154,13 +154,13 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
         >
           <button
             role="combobox"
-            className="bg-white border border-custom-medium-grey-25 rounded px-3 py-2 w-full text-left text-xs text-custom-black"
+            className="bg-white border border-custom-medium-grey-25 rounded px-3 py-2 w-full text-left text-xs text-custom-black dark:bg-custom-dark-grey dark:text-custom-white"
             onClick={handleToggleDropdown}
           >
             {selectedOption.name}
           </button>
           <div
-            className="absolute top-4 right-4 w-2.5 cursor-pointer"
+            className="absolute top-4 right-4 w-2.5 cursor-pointer "
             onClick={handleToggleDropdown}
           >
             <Chevron />
@@ -176,7 +176,7 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
                   key={option.id}
                   role="option"
                   className={cn(
-                    "px-3 py-2 cursor-pointer text-xs text-custom-medium-grey",
+                    "px-3 py-2 cursor-pointer text-xs text-custom-medium-grey dark:bg-custom-dark-grey",
                     interactionType === "mouse" &&
                       "hover:border-custom-dark-purple",
                     interactionType === "keyboard" &&
