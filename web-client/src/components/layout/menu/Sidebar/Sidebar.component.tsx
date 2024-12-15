@@ -45,15 +45,15 @@ export const Sidebar = ({
   return (
     <aside
       data-testid={testId}
-      className="border-r-[1px] dark:bg-custom-dark-grey dark:border-[#3E3F4E]"
+      className="border-r-[1px] dark:bg-custom-dark-grey dark:border-[#3E3F4E] relative"
     >
       {showSidebar && (
         <div
           className={cn(
-            "flex flex-col w-[18.65rem] bg-custom-white justify-between h-[calc(100%-5rem)] relative pr-4 dark:bg-custom-dark-grey"
+            "flex flex-col w-[18.65rem] bg-custom-white relative pr-4 dark:bg-custom-dark-grey"
           )}
         >
-          <div>
+          <div className="px-4">
             <SidebarHeader
               className="ml-8 mb-3"
               title={"All Boards"}
@@ -71,24 +71,28 @@ export const Sidebar = ({
               </Button>
             </li>
           </div>
-          <ThemeSwitcher
-            className={"ml-8"}
-            default={selectedTheme}
-            onThemeUpdate={onThemeUpdate}
-          />
+
+          <div className="fixed bottom-20 left-4">
+            <ThemeSwitcher
+              className={"mx-auto"}
+              default={selectedTheme}
+              onThemeUpdate={onThemeUpdate}
+            />
+          </div>
         </div>
       )}
-
-      <Button
-        active={false}
-        className={"mt-4 "}
-        intent={"sidebar"}
-        wrapped={!showSidebar}
-        iconName={"eye"}
-        onClick={toggleShowSidebarHandler}
-      >
-        Hide Sidebar
-      </Button>
+      <div className="fixed bottom-4">
+        <Button
+          active={false}
+          className={""}
+          intent={"sidebar"}
+          wrapped={!showSidebar}
+          iconName={"eye"}
+          onClick={toggleShowSidebarHandler}
+        >
+          Hide Sidebar
+        </Button>
+      </div>
     </aside>
   )
 }

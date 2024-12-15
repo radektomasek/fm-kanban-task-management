@@ -1,6 +1,6 @@
 import { Logo } from "@/components/layout/navigation"
 import { Button } from "@/components/forms"
-import { ContextMenu } from "@/components/menus"
+import { ContextMenu } from "@/components/layout/menu"
 import { Board } from "@/types/boards"
 import { useStore } from "@/store/store"
 import { useShallow } from "zustand/react/shallow"

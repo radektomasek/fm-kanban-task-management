@@ -1,7 +1,7 @@
 import { useStore } from "@/store/store"
 import { useShallow } from "zustand/react/shallow"
 import { RowBlock } from "@/components/grid"
-import { ContextMenu } from "@/components/menus"
+import { ContextMenu } from "@/components/layout/menu"
 import { taskContextMenuItems } from "@/types/contextMenus"
 import { FormProvider } from "react-hook-form"
 import { useTaskDetailProvider } from "@/hooks/useTaskDetailProvider"
