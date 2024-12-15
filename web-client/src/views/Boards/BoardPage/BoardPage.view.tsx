@@ -29,8 +29,8 @@ export const BoardPage = () => {
   }
 
   return (
-    <div className="bg-custom-light-grey flex-grow border-t-[1px] flex-col w-28 dark:bg-custom-very-dark-grey dark:border-t-[#3E3F4E]">
-      <div className="grid grid-flow-col auto-cols-min gap-x-6 pl-6 pt-6">
+    <div className="bg-custom-light-grey flex-grow border-t-[1px] flex w-full dark:bg-custom-very-dark-grey dark:border-t-[#3E3F4E]">
+      <div className="grid grid-flow-col auto-cols-min gap-x-6 p-6 overflow-x-auto">
         {columns?.map((column) => (
           <CardStack
             key={column.id}

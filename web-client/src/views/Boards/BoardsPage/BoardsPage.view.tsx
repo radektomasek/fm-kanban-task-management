@@ -52,8 +52,6 @@ export const BoardsPage = () => {
     }
   }
 
-  console.log(selectedTheme)
-
   return (
     <>
       <header>
@@ -63,7 +61,7 @@ export const BoardsPage = () => {
           onContextMenuClick={(id: ModalScreenKey) => handleOpenModal(id)}
         />
       </header>
-      <main className="flex w-screen h-[calc(100vh-6rem)]">
+      <main className="flex w-screen min-h-[calc(100vh-6rem)] overflow-auto">
         <Sidebar
           boards={boards}
           selectedTheme={selectedTheme}
