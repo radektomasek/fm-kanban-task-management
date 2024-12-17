@@ -45,7 +45,7 @@ export const Sidebar = ({
   return (
     <aside
       data-testid={testId}
-      className="border-r-[1px] dark:bg-custom-dark-grey dark:border-[#3E3F4E] relative"
+      className="hidden border-r-[1px] dark:bg-custom-dark-grey dark:border-[#3E3F4E] relative md:block"
     >
       {showSidebar && (
         <div

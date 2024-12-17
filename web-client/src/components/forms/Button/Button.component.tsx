@@ -52,7 +52,7 @@ const buttonStyles = cva(
       {
         intent: "primary",
         size: "regular",
-        className: "w-[15.9375rem] rounded-[1.25rem]",
+        className: "md:w-[15.9375rem] rounded-[1.25rem]",
       },
       {
         intent: "secondary",

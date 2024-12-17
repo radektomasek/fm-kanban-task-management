@@ -6,6 +6,7 @@ import { useStore } from "@/store/store"
 import { useShallow } from "zustand/react/shallow"
 import type { ContextMenuElement } from "@/types/contextMenus"
 import type { ModalScreenKey } from "@/types/modals"
+import PlusIcon from "@/assets/plus.svg"
 
 type Props = {
   readonly testId?: string
@@ -35,14 +36,21 @@ export const Navbar = ({
 
   const headerForProjectWithBoards = (selectedBoard: Board) => (
     <nav className="flex items-center justify-between bg-custom-white pl-8 flex-grow dark:bg-custom-dark-grey dark:text-custom-white">
-      <h1 className="text-xl ">{selectedBoard.name}</h1>
+      <h1 className="text-xl">{selectedBoard.name}</h1>
 
       <div className="mr-8 flex w-48 justify-between items-center relative">
         <Button
-          className="w-40"
+          className="w-40 hidden md:flex"
           onClick={() => handleOpenModal("AddTaskScreen")}
         >
           + Add New Task
+        </Button>
+
+        <Button
+          className="w-14 md:hidden"
+          onClick={() => handleOpenModal("AddTaskScreen")}
+        >
+          <PlusIcon />
         </Button>
 
         <ContextMenu
