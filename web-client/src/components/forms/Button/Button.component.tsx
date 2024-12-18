@@ -52,32 +52,32 @@ const buttonStyles = cva(
       {
         intent: "primary",
         size: "regular",
-        className: "md:w-[15.9375rem] rounded-[1.25rem]",
+        className: "rounded-[1.25rem]",
       },
       {
         intent: "secondary",
         size: "regular",
-        className: "w-[15.9375rem] rounded-[1.25rem]",
+        className: "rounded-[1.25rem]",
       },
       {
         intent: "destructive",
         size: "regular",
-        className: "w-[15.9375rem] rounded-[1.25rem]",
+        className: "rounded-[1.25rem]",
       },
       {
         intent: "primary",
         size: "large",
-        className: "w-[17.25rem] rounded-3xl",
+        className: "rounded-3xl",
       },
       {
         intent: "secondary",
         size: "large",
-        className: "w-[17.25rem] rounded-3xl",
+        className: "rounded-3xl",
       },
       {
         intent: "destructive",
         size: "large",
-        className: "w-[17.25rem] rounded-3xl",
+        className: "rounded-3xl",
       },
       {
         intent: "sidebar",

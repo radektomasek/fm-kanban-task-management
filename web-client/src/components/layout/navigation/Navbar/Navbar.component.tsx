@@ -35,10 +35,10 @@ export const Navbar = ({
   )
 
   const headerForProjectWithBoards = (selectedBoard: Board) => (
-    <nav className="flex items-center justify-between bg-custom-white pl-8 flex-grow dark:bg-custom-dark-grey dark:text-custom-white">
-      <h1 className="text-xl">{selectedBoard.name}</h1>
+    <nav className="flex items-center justify-between bg-custom-white flex-grow dark:bg-custom-dark-grey dark:text-custom-white">
+      <h1 className="text-xl pl-0 md:pl-6">{selectedBoard.name}</h1>
 
-      <div className="mr-8 flex w-48 justify-between items-center relative">
+      <div className="mr-8 flex w-48 gap-6 justify-end relative">
         <Button
           className="w-40 hidden md:flex"
           onClick={() => handleOpenModal("AddTaskScreen")}
@@ -63,12 +63,10 @@ export const Navbar = ({
 
   return (
     <>
-      <div data-testid={testId} className="flex h-24">
-        <Logo />
-        {selectedBoard
-          ? headerForProjectWithBoards(selectedBoard)
-          : headerForEmptyProject()}
-      </div>
+      <Logo />
+      {selectedBoard
+        ? headerForProjectWithBoards(selectedBoard)
+        : headerForEmptyProject()}
     </>
   )
 }

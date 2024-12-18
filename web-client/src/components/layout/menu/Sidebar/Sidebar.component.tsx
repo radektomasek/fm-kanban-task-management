@@ -53,7 +53,7 @@ export const Sidebar = ({
             "flex flex-col w-[18.65rem] bg-custom-white relative pr-4 dark:bg-custom-dark-grey"
           )}
         >
-          <div className="px-4">
+          <div>
             <SidebarHeader
               className="ml-8 mb-3"
               title={"All Boards"}

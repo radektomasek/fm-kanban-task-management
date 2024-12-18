@@ -54,7 +54,7 @@ export const BoardsPage = () => {
 
   return (
     <>
-      <header>
+      <header className="flex h-24 dark:bg-custom-dark-grey dark:text-custom-white">
         <Navbar
           selectedBoard={selectedBoard}
           contextMenuItems={boardContextMenuItems}
