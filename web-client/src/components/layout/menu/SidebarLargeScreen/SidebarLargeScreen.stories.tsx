@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react"
-import { Sidebar } from "./Sidebar.component"
+import { SidebarLargeScreen } from "@/components/layout/menu"
 import { boards } from "@/utils/mocks/boards.mocks"
 
-const meta: Meta<typeof Sidebar> = {
-  title: "Layout/Sidebar",
-  component: Sidebar,
+const meta: Meta<typeof SidebarLargeScreen> = {
+  title: "Layout/SidebarLargeScreen",
+  component: SidebarLargeScreen,
   parameters: {
     layout: "left",
   },
@@ -18,5 +18,5 @@ export const Default: Story = {
   args: {
     boards,
   },
-  render: (args) => <Sidebar {...args} />,
+  render: (args) => <SidebarLargeScreen {...args} />,
 }

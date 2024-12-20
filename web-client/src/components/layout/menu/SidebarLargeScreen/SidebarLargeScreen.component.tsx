@@ -29,7 +29,7 @@ const getBoardButtonLinks = (boards: Board[], selectedBoard?: Board) =>
     </li>
   ))
 
-export const Sidebar = ({
+export const SidebarLargeScreen = ({
   testId,
   boards,
   selectedTheme,

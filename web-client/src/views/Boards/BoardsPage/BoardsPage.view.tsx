@@ -1,7 +1,10 @@
 import { useEffect } from "react"
 import { useShallow } from "zustand/react/shallow"
 import { Navbar } from "@/components/layout/navigation"
-import { Sidebar } from "@/components/layout/menu"
+import {
+  SidebarLargeScreen,
+  SidebarSmallScreen,
+} from "@/components/layout/menu"
 import { Outlet, useNavigate } from "react-router"
 import { EmptyProject, NoActiveBoard } from "@/views/Placeholders"
 import { useBoards, useBoardColumnsParallel } from "@/services/queries"
@@ -14,12 +17,23 @@ export const BoardsPage = () => {
   const { boardId } = useParams()
   const navigate = useNavigate()
   const { isPending, isError, error, data: boards } = useBoards()
-  const { selectedTheme, setTheme, handleOpenModal, selectedBoard } = useStore(
+  const {
+    selectedTheme,
+    setTheme,
+    handleOpenModal,
+    selectedBoard,
+    activeSidebarMobile,
+    handleOpenSidebarMobile,
+    handleCloseSidebarMobile,
+  } = useStore(
     useShallow((state) => ({
       setTheme: state.setTheme,
       selectedBoard: state.selectedBoard,
       selectedTheme: state.selectedTheme,
       handleOpenModal: state.handleOpenModal,
+      activeSidebarMobile: state.activeSidebarMobile,
+      handleOpenSidebarMobile: state.handleOpenMobileSidebar,
+      handleCloseSidebarMobile: state.handleCloseMobileSidebar,
     }))
   )
 
@@ -58,16 +72,28 @@ export const BoardsPage = () => {
         <Navbar
           selectedBoard={selectedBoard}
           contextMenuItems={boardContextMenuItems}
+          hasActiveSidebarMobile={activeSidebarMobile}
           onContextMenuClick={(id: ModalScreenKey) => handleOpenModal(id)}
+          onModalOpen={handleOpenModal}
+          onSidebarMobileOpen={handleOpenSidebarMobile}
         />
       </header>
       <main className="flex w-screen min-h-[calc(100vh-6rem)] overflow-auto">
-        <Sidebar
+        <SidebarLargeScreen
           boards={boards}
           selectedTheme={selectedTheme}
           selectedBoard={selectedBoard}
           onThemeUpdate={setTheme}
           onBoardCreateClick={() => handleOpenModal("AddBoardScreen")}
+        />
+        <SidebarSmallScreen
+          boards={boards}
+          selectedTheme={selectedTheme}
+          selectedBoard={selectedBoard}
+          isActive={activeSidebarMobile}
+          onThemeUpdate={setTheme}
+          onBoardCreateClick={() => handleOpenModal("AddBoardScreen")}
+          onSidebarClose={handleCloseSidebarMobile}
         />
         {renderChildComponent()}
       </main>
