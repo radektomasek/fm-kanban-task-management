@@ -61,7 +61,7 @@ export const SidebarInactive: Story = {
 export const SidebarToggleDefault: Story = {
   args: {
     intent: "sidebar",
-    children: "Hide Sidebar",
+    children: "Hide SidebarLargeScreen",
     iconName: "eye",
     wrapped: false,
     active: false,
@@ -71,7 +71,7 @@ export const SidebarToggleDefault: Story = {
 export const SidebarToggleWrapped: Story = {
   args: {
     intent: "sidebar",
-    children: "Hide Sidebar",
+    children: "Hide SidebarLargeScreen",
     iconName: "eye",
     wrapped: true,
     active: false,

@@ -1,15 +1,15 @@
 import { nanoid } from "nanoid"
-import { render, screen } from "@testing-library/react"
-import { Sidebar } from "@/components/layout/menu"
-import { boards } from "@/utils/mocks/boards.mocks"
 import { MemoryRouter } from "react-router-dom"
+import { render, screen } from "@testing-library/react"
+import { boards } from "@/utils/mocks/boards.mocks"
+import { SidebarLargeScreen } from "@/components/layout/menu"
 
-describe("Sidebar.component: rendering", () => {
+describe("SidebarLargeScreen.component: rendering", () => {
   it("renders the component", () => {
     const testId = nanoid()
     render(
       <MemoryRouter>
-        <Sidebar
+        <SidebarLargeScreen
           selectedTheme={"light"}
           selectedBoard={undefined}
           onBoardCreateClick={() => {}}
