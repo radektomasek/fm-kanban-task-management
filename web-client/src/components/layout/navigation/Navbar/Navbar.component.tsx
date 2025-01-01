@@ -53,7 +53,7 @@ export const Navbar = ({
         isActive={hasActiveSidebarMobile}
       />
 
-      <div className="mr-8 flex w-48 gap-6 justify-end relative">
+      <div className="mr-8 flex w-48 gap-6 items-center justify-end relative">
         <Button
           className="w-40 hidden md:flex"
           onClick={() => handleOpenModal("AddTaskScreen")}
@@ -62,7 +62,7 @@ export const Navbar = ({
         </Button>
 
         <Button
-          className="w-14 md:hidden"
+          className="w-12 h-8 md:hidden"
           onClick={() => handleOpenModal("AddTaskScreen")}
         >
           <PlusIcon />

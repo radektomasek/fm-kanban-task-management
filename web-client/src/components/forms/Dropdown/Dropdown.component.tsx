@@ -141,7 +141,7 @@ export const Dropdown = forwardRef<HTMLDivElement, DropdownProps>(
         <div
           data-testid={props.testId}
           className={cn(
-            "relative min-w-96",
+            "relative",
             isOpen && "border border-custom-dark-purple overflow rounded"
           )}
           ref={(el) => {
