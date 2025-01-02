@@ -1,43 +1,50 @@
 import { StateCreator } from "zustand"
 import type { ModalScreenKey } from "@/types/modals"
 
-type ModalState = {
+type LayoutState = {
   activeModal: ModalScreenKey
-  activeSidebarMobile: boolean
+  activeSidebarLargeScreen: boolean
+  activeSidebarSmallScreen: boolean
 }
 
-type ModalActions = {
+type LayoutActions = {
   handleOpenModal: (modalScreen: ModalScreenKey) => void
   handleCloseModal: () => void
+  toggleLargeSidebarVisibility: () => void
   handleOpenMobileSidebar: () => void
   handleCloseMobileSidebar: () => void
 }
 
-export type ModalSlice = ModalState & ModalActions
+export type LayoutSlice = LayoutState & LayoutActions
 
-export const createModalSlice: StateCreator<
-  ModalSlice,
+export const createLayoutSlice: StateCreator<
+  LayoutSlice,
   [["zustand/immer", never]],
   [],
-  ModalSlice
+  LayoutSlice
 > = (set) => ({
   activeModal: "None",
-  activeSidebarMobile: false,
+  activeSidebarLargeScreen: true,
+  activeSidebarSmallScreen: false,
   handleOpenModal: (modalScreen: ModalScreenKey) =>
     set((state) => {
       state.activeModal = modalScreen
-      state.activeSidebarMobile = false
+      state.activeSidebarSmallScreen = false
     }),
   handleCloseModal: () =>
     set((state) => {
       state.activeModal = "None"
     }),
+  toggleLargeSidebarVisibility: () =>
+    set((state) => {
+      state.activeSidebarLargeScreen = !state.activeSidebarLargeScreen
+    }),
   handleOpenMobileSidebar: () =>
     set((state) => {
-      state.activeSidebarMobile = true
+      state.activeSidebarSmallScreen = true
     }),
   handleCloseMobileSidebar: () =>
     set((state) => {
-      state.activeSidebarMobile = false
+      state.activeSidebarSmallScreen = false
     }),
 })

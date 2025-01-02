@@ -31,7 +31,7 @@ export const SidebarSmallScreen = ({
   onThemeUpdate,
   onBoardCreateClick,
 }: Props) => {
-  const modalRootId = document.getElementById("modal")
+  const modalRootId = document.getElementById("layout")
   const overlayRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const previouslyFocusedElement = useRef<HTMLElement | null>(null)

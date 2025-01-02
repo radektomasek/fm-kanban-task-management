@@ -22,16 +22,20 @@ export const BoardsPage = () => {
     setTheme,
     handleOpenModal,
     selectedBoard,
-    activeSidebarMobile,
+    activeSidebarSmallScreen,
+    activeSidebarLargeScreen,
     handleOpenSidebarMobile,
     handleCloseSidebarMobile,
+    toggleLargeSidebarVisibility,
   } = useStore(
     useShallow((state) => ({
       setTheme: state.setTheme,
       selectedBoard: state.selectedBoard,
       selectedTheme: state.selectedTheme,
       handleOpenModal: state.handleOpenModal,
-      activeSidebarMobile: state.activeSidebarMobile,
+      activeSidebarSmallScreen: state.activeSidebarSmallScreen,
+      activeSidebarLargeScreen: state.activeSidebarLargeScreen,
+      toggleLargeSidebarVisibility: state.toggleLargeSidebarVisibility,
       handleOpenSidebarMobile: state.handleOpenMobileSidebar,
       handleCloseSidebarMobile: state.handleCloseMobileSidebar,
     }))
@@ -68,29 +72,31 @@ export const BoardsPage = () => {
 
   return (
     <>
-      <header className="flex h-16 md:h-24 dark:bg-custom-dark-grey dark:text-custom-white">
+      <header className="flex h-16 md:h-24 dark:bg-custom-dark-grey dark:text-custom-white border-b dark:border-b-custom-dark-lines fixed left-0 right-0 top-0">
         <Navbar
           selectedBoard={selectedBoard}
           contextMenuItems={boardContextMenuItems}
-          hasActiveSidebarMobile={activeSidebarMobile}
+          hasActiveSidebarMobile={activeSidebarSmallScreen}
           onContextMenuClick={(id: ModalScreenKey) => handleOpenModal(id)}
           onModalOpen={handleOpenModal}
           onSidebarMobileOpen={handleOpenSidebarMobile}
         />
       </header>
-      <main className="flex w-screen min-h-[calc(100vh-6rem)] overflow-auto">
+      <main className="flex w-screen min-h-screen overflow-auto">
         <SidebarLargeScreen
           boards={boards}
           selectedTheme={selectedTheme}
           selectedBoard={selectedBoard}
           onThemeUpdate={setTheme}
+          isActive={activeSidebarLargeScreen}
+          toggleLargeSidebarVisibility={toggleLargeSidebarVisibility}
           onBoardCreateClick={() => handleOpenModal("AddBoardScreen")}
         />
         <SidebarSmallScreen
           boards={boards}
           selectedTheme={selectedTheme}
           selectedBoard={selectedBoard}
-          isActive={activeSidebarMobile}
+          isActive={activeSidebarSmallScreen}
           onThemeUpdate={setTheme}
           onBoardCreateClick={() => handleOpenModal("AddBoardScreen")}
           onSidebarClose={handleCloseSidebarMobile}

@@ -1,4 +1,3 @@
-import { useState } from "react"
 import {
   MenuLink,
   SidebarHeader,
@@ -16,6 +15,8 @@ type Props = {
   selectedBoard?: Board
   onThemeUpdate: (theme: ThemeMode) => void
   onBoardCreateClick: () => void
+  isActive: boolean
+  toggleLargeSidebarVisibility: () => void
 }
 
 const getBoardButtonLinks = (boards: Board[], selectedBoard?: Board) =>
@@ -31,26 +32,23 @@ const getBoardButtonLinks = (boards: Board[], selectedBoard?: Board) =>
 
 export const SidebarLargeScreen = ({
   testId,
+  isActive,
   boards,
   selectedTheme,
   selectedBoard,
   onThemeUpdate,
   onBoardCreateClick,
+  toggleLargeSidebarVisibility,
 }: Props) => {
-  const [showSidebar, toggleShowSidebar] = useState(true)
-
-  const toggleShowSidebarHandler = () =>
-    toggleShowSidebar((showSidebar) => !showSidebar)
-
   return (
     <aside
       data-testid={testId}
-      className="hidden border-r-[1px] dark:bg-custom-dark-grey dark:border-[#3E3F4E] relative md:block"
+      className="hidden border-r dark:bg-custom-dark-grey dark:border-custom-dark-lines relative md:block"
     >
-      {showSidebar && (
+      {isActive && (
         <div
           className={cn(
-            "flex flex-col w-[18.65rem] bg-custom-white relative pr-4 dark:bg-custom-dark-grey"
+            "flex flex-col fixed w-[18.65rem] bg-custom-white pr-4 pt-4 dark:bg-custom-dark-grey bottom-0 top-[5.9rem] border-r dark:border-custom-dark-lines"
           )}
         >
           <div>
@@ -86,9 +84,9 @@ export const SidebarLargeScreen = ({
           active={false}
           className={""}
           intent={"sidebar"}
-          wrapped={!showSidebar}
+          wrapped={!isActive}
           iconName={"eye"}
-          onClick={toggleShowSidebarHandler}
+          onClick={toggleLargeSidebarVisibility}
         >
           Hide Sidebar
         </Button>

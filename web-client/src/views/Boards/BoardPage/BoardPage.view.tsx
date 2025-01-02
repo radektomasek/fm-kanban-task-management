@@ -9,10 +9,11 @@ import { EmptyBoard } from "@/views/Placeholders"
 
 export const BoardPage = () => {
   const { boardId } = useParams()
-  const { setSelectedBoard, handleOpenModal } = useStore(
+  const { setSelectedBoard, handleOpenModal, activeSidebar } = useStore(
     useShallow((state) => ({
       setSelectedBoard: state.setSelectedBoard,
       handleOpenModal: state.handleOpenModal,
+      activeSidebar: state.activeSidebarLargeScreen,
     }))
   )
   const { data: boards } = useBoards()
@@ -29,7 +30,9 @@ export const BoardPage = () => {
   }
 
   return (
-    <div className="bg-custom-light-grey flex-grow border-t-[1px] flex w-full dark:bg-custom-very-dark-grey dark:border-t-[#3E3F4E]">
+    <div
+      className={`bg-custom-light-grey pt-16 flex-grow flex w-full dark:bg-custom-very-dark-grey md:pt-24 ${activeSidebar ? "md:pl-72" : "md:pl-0"}`}
+    >
       <div className="grid grid-flow-col auto-cols-min gap-x-6 p-6 overflow-x-auto">
         {columns?.map((column) => (
           <CardStack
