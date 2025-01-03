@@ -1,4 +1,3 @@
-import { useState } from "react"
 import {
   MenuLink,
   SidebarHeader,
@@ -16,6 +15,8 @@ type Props = {
   selectedBoard?: Board
   onThemeUpdate: (theme: ThemeMode) => void
   onBoardCreateClick: () => void
+  isActive: boolean
+  toggleLargeSidebarVisibility: () => void
 }
 
 const getBoardButtonLinks = (boards: Board[], selectedBoard?: Board) =>
@@ -29,28 +30,25 @@ const getBoardButtonLinks = (boards: Board[], selectedBoard?: Board) =>
     </li>
   ))
 
-export const Sidebar = ({
+export const SidebarLargeScreen = ({
   testId,
+  isActive,
   boards,
   selectedTheme,
   selectedBoard,
   onThemeUpdate,
   onBoardCreateClick,
+  toggleLargeSidebarVisibility,
 }: Props) => {
-  const [showSidebar, toggleShowSidebar] = useState(true)
-
-  const toggleShowSidebarHandler = () =>
-    toggleShowSidebar((showSidebar) => !showSidebar)
-
   return (
     <aside
       data-testid={testId}
-      className="border-r-[1px] dark:bg-custom-dark-grey dark:border-[#3E3F4E]"
+      className="hidden border-r dark:bg-custom-dark-grey dark:border-custom-dark-lines relative md:block"
     >
-      {showSidebar && (
+      {isActive && (
         <div
           className={cn(
-            "flex flex-col w-[18.65rem] bg-custom-white justify-between h-[calc(100%-5rem)] relative pr-4 dark:bg-custom-dark-grey"
+            "flex flex-col fixed w-[18.65rem] bg-custom-white pr-4 pt-4 dark:bg-custom-dark-grey bottom-0 top-[5.9rem] border-r dark:border-custom-dark-lines"
           )}
         >
           <div>
@@ -71,24 +69,28 @@ export const Sidebar = ({
               </Button>
             </li>
           </div>
-          <ThemeSwitcher
-            className={"ml-8"}
-            default={selectedTheme}
-            onThemeUpdate={onThemeUpdate}
-          />
+
+          <div className="fixed bottom-20 left-4">
+            <ThemeSwitcher
+              className={"mx-auto"}
+              default={selectedTheme}
+              onThemeUpdate={onThemeUpdate}
+            />
+          </div>
         </div>
       )}
-
-      <Button
-        active={false}
-        className={"mt-4 "}
-        intent={"sidebar"}
-        wrapped={!showSidebar}
-        iconName={"eye"}
-        onClick={toggleShowSidebarHandler}
-      >
-        Hide Sidebar
-      </Button>
+      <div className="fixed bottom-4">
+        <Button
+          active={false}
+          className={""}
+          intent={"sidebar"}
+          wrapped={!isActive}
+          iconName={"eye"}
+          onClick={toggleLargeSidebarVisibility}
+        >
+          Hide Sidebar
+        </Button>
+      </div>
     </aside>
   )
 }

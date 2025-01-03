@@ -16,17 +16,5 @@
     "boardId": "328ba7fa-0508-4c04-865b-d4630d6255aa",
     "name": "Done",
     "color": "hsl(13,98%,42%)"
-  },
-  {
-    "id": "3ea55c2c-7ada-4756-ac60-a66a60b62a0e",
-    "boardId": "5aecb2d6-8277-4098-85dd-305e2bef4629",
-    "name": "Test",
-    "color": "hsl(107,42%,42%)"
-  },
-  {
-    "id": "cc432c2a-821d-4b71-877a-7194ffeea0bd",
-    "boardId": "5aecb2d6-8277-4098-85dd-305e2bef4629",
-    "name": "Done",
-    "color": "hsl(241,91%,55%)"
   }
 ]

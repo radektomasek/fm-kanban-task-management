@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.10.0]
+
+- [web-client](./web-client) FEATURE: added responsive layout for multiple screen sizes.
+- [web-client](./web-client) CHANGE: update of the layout settings, making sure the menus are always visible and the board scrollable.
+- [web-client](./web-client) FIX: adjusted the dark mode settings across the app.
+
 ## [0.9.0]
 
 - [web-client](./web-client) FEATURE: added support for the dark mode.

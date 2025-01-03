@@ -1,30 +1,40 @@
 import { Logo } from "@/components/layout/navigation"
 import { Button } from "@/components/forms"
-import { ContextMenu } from "@/components/menus"
+import {
+  BoardTitleLargeScreen,
+  BoardTitleSmallScreen,
+  ContextMenu,
+} from "@/components/layout/menu"
 import { Board } from "@/types/boards"
-import { useStore } from "@/store/store"
-import { useShallow } from "zustand/react/shallow"
 import type { ContextMenuElement } from "@/types/contextMenus"
 import type { ModalScreenKey } from "@/types/modals"
+import PlusIcon from "@/assets/plus.svg"
 
 type Props = {
   readonly testId?: string
+  hasActiveSidebarMobile: boolean
   selectedBoard?: Board
   contextMenuItems: ContextMenuElement[]
   onContextMenuClick?: (id: ModalScreenKey) => void
+  onSidebarMobileOpen?: () => void
+  onModalOpen?: (modalScreenKey: ModalScreenKey) => void
 }
 
 export const Navbar = ({
-  testId,
   selectedBoard,
+  onModalOpen,
   contextMenuItems,
   onContextMenuClick,
+  onSidebarMobileOpen,
+  hasActiveSidebarMobile,
 }: Props) => {
-  const { handleOpenModal } = useStore(
-    useShallow((state) => ({
-      handleOpenModal: state.handleOpenModal,
-    }))
-  )
+  const handleOpenModal = (modalScreenKey: ModalScreenKey) => {
+    if (!onModalOpen) {
+      return
+    }
+
+    onModalOpen(modalScreenKey)
+  }
 
   /**
    * @TODO: Once we add auth mechanism, there should be a context menu with the Logout/Account option
@@ -34,15 +44,28 @@ export const Navbar = ({
   )
 
   const headerForProjectWithBoards = (selectedBoard: Board) => (
-    <nav className="flex items-center justify-between bg-custom-white pl-8 flex-grow dark:bg-custom-dark-grey dark:text-custom-white">
-      <h1 className="text-xl ">{selectedBoard.name}</h1>
+    <nav className="flex items-center justify-between bg-custom-white flex-grow dark:bg-custom-dark-grey dark:text-custom-white">
+      <BoardTitleLargeScreen boardName={selectedBoard.name} />
 
-      <div className="mr-8 flex w-48 justify-between items-center relative">
+      <BoardTitleSmallScreen
+        boardName={selectedBoard.name}
+        onClick={onSidebarMobileOpen}
+        isActive={hasActiveSidebarMobile}
+      />
+
+      <div className="mr-8 flex w-48 gap-6 items-center justify-end relative">
         <Button
-          className="w-40"
+          className="w-40 hidden md:flex"
           onClick={() => handleOpenModal("AddTaskScreen")}
         >
           + Add New Task
+        </Button>
+
+        <Button
+          className="w-12 h-8 md:hidden"
+          onClick={() => handleOpenModal("AddTaskScreen")}
+        >
+          <PlusIcon />
         </Button>
 
         <ContextMenu
@@ -55,12 +78,10 @@ export const Navbar = ({
 
   return (
     <>
-      <div data-testid={testId} className="flex h-24">
-        <Logo />
-        {selectedBoard
-          ? headerForProjectWithBoards(selectedBoard)
-          : headerForEmptyProject()}
-      </div>
+      <Logo />
+      {selectedBoard
+        ? headerForProjectWithBoards(selectedBoard)
+        : headerForEmptyProject()}
     </>
   )
 }
