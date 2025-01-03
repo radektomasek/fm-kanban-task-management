@@ -34,7 +34,7 @@ export const ModalContainer = () => {
     }))
   )
 
-  const modalRootId = document.getElementById("layout")
+  const modalRootId = document.getElementById("modal")
   const overlayRef = useRef<HTMLDivElement>(null)
   const contentRef = useRef<HTMLDivElement>(null)
   const previouslyFocusedElement = useRef<HTMLElement | null>(null)
