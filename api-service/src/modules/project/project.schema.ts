@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "zod"
 import { createSelectSchema, createUpdateSchema } from "drizzle-zod"
 import { projects } from "../../db/schema"
 import { errorResponses } from "../../utils/http"
@@ -6,23 +6,22 @@ import { errorResponses } from "../../utils/http"
 export const createProjectSchema = {
   tags: ["project"],
   body: z.object({
-    name: z.string()
+    name: z.string(),
   }),
   response: {
     201: createSelectSchema(projects),
-    ...errorResponses
-  }
-} as const;
+    ...errorResponses,
+  },
+} as const
 
-export type CreateProjectBody = z.infer<
-  typeof createProjectSchema.body
->
+export type CreateProjectBody = z.infer<typeof createProjectSchema.body>
 
 export const updateProjectSchema = {
   tags: ["project"],
   params: z.object({
-    projectId: z.string()
+    projectId: z.string(),
   }),
+
   body: createUpdateSchema(projects).omit({
     id: true,
     createdAt: true,
@@ -31,13 +30,9 @@ export const updateProjectSchema = {
   response: {
     200: createSelectSchema(projects),
     ...errorResponses,
-  }
-} as const;
+  },
+} as const
 
-export type UpdateProjectParams = z.infer<
-  typeof updateProjectSchema.params
->
+export type UpdateProjectParams = z.infer<typeof updateProjectSchema.params>
 
-export type UpdateProjectBody = z.infer<
-  typeof updateProjectSchema.body
->
+export type UpdateProjectBody = z.infer<typeof updateProjectSchema.body>

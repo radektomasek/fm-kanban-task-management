@@ -3,5 +3,5 @@ import { config } from "../config"
 
 export const logger = pino({
   level: config.LOG_LEVEL,
-  redact: ["DATABASE_URL"]
+  redact: ["DATABASE_URL"],
 })
