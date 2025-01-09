@@ -16,10 +16,7 @@ async function main() {
     process.exit(1)
   }
 
-  /**
-   * @TODO: pass the db parameter once ready.
-   */
-  const server = await buildServer()
+  const server = await buildServer({ db })
 
   try {
     await server.listen({ port: PORT, host: HOST })
