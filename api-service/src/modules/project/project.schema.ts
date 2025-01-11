@@ -4,7 +4,7 @@ import { projects } from "../../db/schema"
 import { errorResponses } from "../../utils/http"
 
 export const createProjectSchema = {
-  tags: ["project"],
+  tags: ["projects"],
   body: z.object({
     name: z.string(),
   }),
@@ -17,7 +17,7 @@ export const createProjectSchema = {
 export type CreateProjectBody = z.infer<typeof createProjectSchema.body>
 
 export const updateProjectSchema = {
-  tags: ["project"],
+  tags: ["projects"],
   params: z.object({
     projectId: z.string(),
   }),
