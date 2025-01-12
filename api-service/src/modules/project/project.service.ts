@@ -19,7 +19,7 @@ export async function createProject(
 }
 
 export async function updateProjectById(
-  id: string,
+  projectId: string,
   props: Partial<Pick<InferInsertModel<typeof projects>, "name">>,
   db: DB
 ) {
@@ -27,25 +27,31 @@ export async function updateProjectById(
     const result = await db
       .update(projects)
       .set(props)
-      .where(eq(projects.id, id))
+      .where(eq(projects.id, projectId))
       .returning()
 
     return result[0]
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown error"
-    logger.error({ id, message }, "createProject: failed to update data")
+    logger.error(
+      { id: projectId, message },
+      "updateProjectById: failed to update data"
+    )
   }
 }
 
-export async function getProjectById(id: string, db: DB) {
+export async function getProjectById(projectId: string, db: DB) {
   try {
     const result = await db.query.projects.findFirst({
-      where: eq(projects.id, id),
+      where: eq(projects.id, projectId),
     })
 
     return result
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown error"
-    logger.error({ id, message }, "getProjectById: failed to get data")
+    logger.error(
+      { id: projectId, message },
+      "getProjectById: failed to get data"
+    )
   }
 }
