@@ -14,8 +14,6 @@ export const createProjectSchema = {
   },
 } as const
 
-export type CreateProjectBody = z.infer<typeof createProjectSchema.body>
-
 export const updateProjectSchema = {
   tags: ["projects"],
   params: z.object({
@@ -32,7 +30,3 @@ export const updateProjectSchema = {
     ...errorResponses,
   },
 } as const
-
-export type UpdateProjectParams = z.infer<typeof updateProjectSchema.params>
-
-export type UpdateProjectBody = z.infer<typeof updateProjectSchema.body>

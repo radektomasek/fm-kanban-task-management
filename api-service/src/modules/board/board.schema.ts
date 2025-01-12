@@ -17,16 +17,10 @@ export const createBoardSchema = {
   },
 } as const
 
-export type CreateBoardQueryString = z.infer<
-  typeof createBoardSchema.queryString
->
-
-export type CreateBoardBody = z.infer<typeof createBoardSchema.body>
-
 export const updateBoardSchema = {
   tags: ["boards"],
   queryString: z.object({
-    projectId: z.string(),
+    projectId: z.string().optional(),
   }),
   params: z.object({
     boardId: z.string(),
@@ -45,7 +39,7 @@ export const updateBoardSchema = {
 export const getBoardsSchema = {
   tags: ["boards"],
   queryString: z.object({
-    projectId: z.string(),
+    projectId: z.string().optional(),
   }),
   response: {
     200: createSelectSchema(boards),
@@ -56,7 +50,7 @@ export const getBoardsSchema = {
 export const getBoardSchema = {
   tags: ["boards"],
   queryString: z.object({
-    projectId: z.string(),
+    projectId: z.string().optional(),
   }),
   params: z.object({
     boardId: z.string(),
@@ -70,7 +64,7 @@ export const getBoardSchema = {
 export const deleteBoardSchema = {
   tags: ["boards"],
   queryString: z.object({
-    projectId: z.string(),
+    projectId: z.string().optional(),
   }),
   params: z.object({
     boardId: z.string(),

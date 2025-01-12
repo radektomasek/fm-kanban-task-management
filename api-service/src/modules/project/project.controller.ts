@@ -2,11 +2,7 @@ import { FastifyReply, FastifyRequest } from "fastify"
 import { PostgresError as PostgresErrorEnum } from "pg-error-enum"
 import { PostgresError } from "postgres"
 import { StatusCodes } from "http-status-codes"
-import {
-  CreateProjectBody,
-  UpdateProjectBody,
-  UpdateProjectParams,
-} from "./project.schema"
+import { createProjectSchema, updateProjectSchema } from "./project.schema"
 import {
   createProject,
   getProjectById,
@@ -14,9 +10,10 @@ import {
 } from "./project.service"
 import { httpError } from "../../utils/http"
 import { logger } from "../../utils/logger"
+import { z } from "zod"
 
 export async function createProjectHandler(
-  request: FastifyRequest<{ Body: CreateProjectBody }>,
+  request: FastifyRequest<{ Body: z.infer<typeof createProjectSchema.body> }>,
   reply: FastifyReply
 ) {
   try {
@@ -56,13 +53,14 @@ export async function createProjectHandler(
 
 export async function updateProjectHandler(
   request: FastifyRequest<{
-    Params: UpdateProjectParams
-    Body: UpdateProjectBody
+    Params: z.infer<typeof updateProjectSchema.params>
+    Body: z.infer<typeof updateProjectSchema.body>
   }>,
   reply: FastifyReply
 ) {
   try {
-    const project = await getProjectById(request.params.projectId, request.db)
+    const { projectId } = request.params
+    const project = await getProjectById(projectId, request.db)
 
     if (!project) {
       return httpError({
@@ -72,11 +70,7 @@ export async function updateProjectHandler(
       })
     }
 
-    const result = await updateProjectById(
-      request.params.projectId,
-      request.body,
-      request.db
-    )
+    const result = await updateProjectById(projectId, request.body, request.db)
 
     return reply.send(result)
   } catch (error) {
