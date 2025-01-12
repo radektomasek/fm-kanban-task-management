@@ -6,7 +6,7 @@ import { errorResponses } from "../../utils/http"
 export const createBoardSchema = {
   tags: ["boards"],
   queryString: z.object({
-    projectId: z.string(),
+    projectId: z.string().optional(),
   }),
   body: z.object({
     name: z.string(),
@@ -16,6 +16,12 @@ export const createBoardSchema = {
     ...errorResponses,
   },
 } as const
+
+export type CreateBoardQueryString = z.infer<
+  typeof createBoardSchema.queryString
+>
+
+export type CreateBoardBody = z.infer<typeof createBoardSchema.body>
 
 export const updateBoardSchema = {
   tags: ["boards"],
