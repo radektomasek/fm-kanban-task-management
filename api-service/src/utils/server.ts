@@ -5,6 +5,7 @@ import {
   validatorCompiler,
 } from "fastify-type-provider-zod"
 import { projectRouter } from "../modules/project/project.router"
+import { boardRouter } from "../modules/board/board.router"
 
 declare module "fastify" {
   interface FastifyRequest {
@@ -26,6 +27,7 @@ export async function buildServer({ db }: { db: DB }) {
 
   fastify.after(() => {
     fastify.register(projectRouter, { prefix: "/v1/projects" })
+    fastify.register(boardRouter, { prefix: "/v1/boards" })
 
     fastify.get("/healthcheck", async () => {
       return { status: "ok" }
