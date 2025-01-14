@@ -34,7 +34,7 @@ export async function updateProjectById(
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown error"
     logger.error(
-      { id: projectId, message },
+      { projectId, message },
       "updateProjectById: failed to update data"
     )
   }
@@ -49,9 +49,6 @@ export async function getProjectById(projectId: string, db: DB) {
     return result
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown error"
-    logger.error(
-      { id: projectId, message },
-      "getProjectById: failed to get data"
-    )
+    logger.error({ projectId, message }, "getProjectById: failed to get data")
   }
 }

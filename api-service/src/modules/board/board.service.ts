@@ -33,10 +33,7 @@ export async function updateBoardById(
     return result[0]
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown error"
-    logger.error(
-      { id: boardId, message },
-      "updateBoardById: failed to update data"
-    )
+    logger.error({ boardId, message }, "updateBoardById: failed to update data")
   }
 }
 
@@ -49,7 +46,7 @@ export async function getBoardById(boardId: string, db: DB) {
     return result
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown error"
-    logger.error({ id: boardId, message }, "getBoardById: failed to get data")
+    logger.error({ boardId, message }, "getBoardById: failed to get data")
   }
 }
 
@@ -63,7 +60,7 @@ export async function getBoardsByProjectId(projectId: string, db: DB) {
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown error"
     logger.error(
-      { id: projectId, message },
+      { projectId, message },
       "getBoardsByProjectId: failed to get data"
     )
   }
@@ -79,9 +76,6 @@ export async function deleteBoardById(boardId: string, db: DB) {
     return result[0]
   } catch (error) {
     const message = error instanceof Error ? error.message : "Unknown error"
-    logger.error(
-      { id: boardId, message },
-      "deleteBoardById: failed to delete data"
-    )
+    logger.error({ boardId, message }, "deleteBoardById: failed to delete data")
   }
 }
