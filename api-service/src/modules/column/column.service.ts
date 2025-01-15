@@ -3,6 +3,10 @@ import { eq } from "drizzle-orm"
 import { columns } from "../../db/schema"
 import { logger } from "../../utils/logger"
 
+export async function createColumns() {}
+
+export async function updateColumns() {}
+
 export async function getColumnsByBoardId(boardId: string, db: DB) {
   try {
     const result = await db.query.columns.findMany({
