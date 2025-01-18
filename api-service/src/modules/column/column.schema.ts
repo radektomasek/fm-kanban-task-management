@@ -12,6 +12,7 @@ export const updateColumnSchema = z.array(
   z.object({
     projectId: z.string(),
     boardId: z.string(),
+    name: z.string(),
     columnId: z.string().optional(),
   })
 )

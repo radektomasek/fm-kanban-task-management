@@ -4,15 +4,21 @@ import { columns } from "../../db/schema"
 import { logger } from "../../utils/logger"
 import { createColumnSchema, updateColumnSchema } from "./column.schema"
 import { DB } from "../../db"
+import { generateStatusColor } from "./column.utils"
 
 export async function createColumns(
   input: z.infer<typeof createColumnSchema>,
   db: DB
 ) {
-  /**
-   * @TODO: need to add color function
-   */
-  const result = await db.insert(columns).values(input).returning()
+  const result = await db
+    .insert(columns)
+    .values(
+      input.map((element) => ({
+        ...element,
+        color: generateStatusColor(),
+      }))
+    )
+    .returning()
 
   return result
 }
