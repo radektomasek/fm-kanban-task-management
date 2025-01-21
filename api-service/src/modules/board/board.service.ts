@@ -1,14 +1,15 @@
 import { InferInsertModel, eq } from "drizzle-orm"
+import { PgTransaction } from "drizzle-orm/pg-core"
 import { boards } from "../../db/schema"
 import { DB } from "../../db"
 import { logger } from "../../utils/logger"
 
 export async function createBoard(
   input: InferInsertModel<typeof boards>,
-  db: DB
+  trx: Parameters<Parameters<DB["transaction"]>[0]>[0]
 ) {
   try {
-    const result = await db.insert(boards).values(input).returning()
+    const result = await trx.insert(boards).values(input).returning()
 
     return result[0]
   } catch (error) {

@@ -1,5 +1,6 @@
 import { z } from "zod"
 import { eq, sql } from "drizzle-orm"
+import { PgTransaction } from "drizzle-orm/pg-core"
 import { columns } from "../../db/schema"
 import { logger } from "../../utils/logger"
 import { createColumnSchema, updateColumnSchema } from "./column.schema"
@@ -8,10 +9,10 @@ import { generateStatusColor } from "./column.utils"
 
 export async function createColumns(
   input: z.infer<typeof createColumnSchema>,
-  db: DB
+  trx: Parameters<Parameters<DB["transaction"]>[0]>[0]
 ) {
   try {
-    const result = await db
+    const result = await trx
       .insert(columns)
       .values(
         input.map((element) => ({

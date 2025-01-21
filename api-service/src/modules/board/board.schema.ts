@@ -10,6 +10,7 @@ export const createBoardSchema = {
   }),
   body: z.object({
     name: z.string(),
+    columns: z.array(z.object({ name: z.string() })),
   }),
   response: {
     201: createSelectSchema(boards),
@@ -24,6 +25,7 @@ export const updateBoardSchema = {
   }),
   params: z.object({
     boardId: z.string(),
+    columns: z.array(z.object({ id: z.string().optional(), name: z.string() })),
   }),
   body: createUpdateSchema(boards).omit({
     id: true,

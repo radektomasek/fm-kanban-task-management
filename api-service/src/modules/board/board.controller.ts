@@ -1,10 +1,10 @@
+import { z } from "zod"
 import { FastifyReply, FastifyRequest } from "fastify"
 import { StatusCodes } from "http-status-codes"
 import { PostgresError } from "postgres"
-import { logger } from "../../utils/logger"
 import { PostgresError as PostgresErrorEnum } from "pg-error-enum/dist/PostgresError"
 import { httpError } from "../../utils/http"
-import { z } from "zod"
+import { logger } from "../../utils/logger"
 import {
   createBoardSchema,
   deleteBoardSchema,
@@ -19,6 +19,7 @@ import {
   getBoardsByProjectId,
   updateBoardById,
 } from "./board.service"
+import { createColumns } from "../column/column.service"
 
 export async function createBoardHandler(
   request: FastifyRequest<{
@@ -35,15 +36,29 @@ export async function createBoardHandler(
       )
     }
 
-    const result = await createBoard(
-      {
-        ...request.body,
-        projectId,
-      },
-      request.db
-    )
+    const { name, columns } = request.body
 
-    return reply.status(StatusCodes.CREATED).send(result)
+    const transactionResult = await request.db.transaction(async (trx) => {
+      const boardResult = await createBoard(
+        {
+          name,
+          projectId,
+        },
+        trx
+      )
+
+      const columnsInput = columns.map((element) => ({
+        name: element.name,
+        boardId: boardResult.id,
+        projectId: projectId,
+      }))
+
+      const columnsResult = await createColumns(columnsInput, trx)
+
+      return { board: boardResult, columns: columnsResult }
+    })
+
+    return reply.status(StatusCodes.CREATED).send(transactionResult)
   } catch (error) {
     if (error instanceof ReferenceError) {
       logger.error(

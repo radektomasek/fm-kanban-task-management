@@ -14,8 +14,6 @@ import {
   getBoardsHandler,
   updateBoardHandler,
 } from "./board.controller"
-import { getBoardsByProjectId } from "./board.service"
-import { ZodType } from "zod"
 
 /**
  * @TODO: Add auth mechanism to the `preHandler` array
