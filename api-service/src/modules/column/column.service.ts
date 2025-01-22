@@ -31,10 +31,10 @@ export async function createColumns(
 
 export async function updateColumns(
   input: z.infer<typeof updateColumnSchema>,
-  db: DB
+  trx: Parameters<Parameters<DB["transaction"]>[0]>[0]
 ) {
   try {
-    const result = await db
+    const result = await trx
       .insert(columns)
       .values(
         input.map((element) => ({

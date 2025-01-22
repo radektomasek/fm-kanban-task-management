@@ -22,10 +22,10 @@ export async function createBoard(
 export async function updateBoardById(
   boardId: string,
   props: Partial<Pick<InferInsertModel<typeof boards>, "name" | "projectId">>,
-  db: DB
+  trx: Parameters<Parameters<DB["transaction"]>[0]>[0]
 ) {
   try {
-    const result = await db
+    const result = await trx
       .update(boards)
       .set(props)
       .where(eq(boards.id, boardId))

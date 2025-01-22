@@ -25,12 +25,10 @@ export const updateBoardSchema = {
   }),
   params: z.object({
     boardId: z.string(),
-    columns: z.array(z.object({ id: z.string().optional(), name: z.string() })),
   }),
-  body: createUpdateSchema(boards).omit({
-    id: true,
-    createdAt: true,
-    updatedAt: true,
+  body: z.object({
+    name: z.string(),
+    columns: z.array(z.object({ id: z.string().optional(), name: z.string() })),
   }),
   response: {
     200: createSelectSchema(boards),

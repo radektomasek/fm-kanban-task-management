@@ -19,7 +19,7 @@ import {
   getBoardsByProjectId,
   updateBoardById,
 } from "./board.service"
-import { createColumns } from "../column/column.service"
+import { createColumns, updateColumns } from "../column/column.service"
 
 export async function createBoardHandler(
   request: FastifyRequest<{
@@ -125,9 +125,28 @@ export async function updateBoardHandler(
       })
     }
 
-    const result = await updateBoardById(boardId, request.body, request.db)
+    const { name, columns } = request.body
 
-    return reply.send(result)
+    const transactionResult = await request.db.transaction(async (trx) => {
+      const boardResult = await updateBoardById(
+        boardId,
+        { name, projectId },
+        trx
+      )
+
+      const columnsInput = columns.map((element) => ({
+        columnId: element.id,
+        name: element.name,
+        boardId: boardId,
+        projectId: projectId,
+      }))
+
+      const columnsResult = await updateColumns(columnsInput, trx)
+
+      return { board: boardResult, columns: columnsResult }
+    })
+
+    return reply.send(transactionResult)
   } catch (error) {
     if (error instanceof ReferenceError) {
       logger.error(
