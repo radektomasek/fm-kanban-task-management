@@ -1,6 +1,5 @@
 import { z } from "zod"
 import { eq, sql } from "drizzle-orm"
-import { PgTransaction } from "drizzle-orm/pg-core"
 import { columns } from "../../db/schema"
 import { logger } from "../../utils/logger"
 import { createColumnSchema, updateColumnSchema } from "./column.schema"

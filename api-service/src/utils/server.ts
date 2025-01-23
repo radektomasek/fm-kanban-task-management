@@ -6,6 +6,7 @@ import {
 } from "fastify-type-provider-zod"
 import { projectRouter } from "../modules/project/project.router"
 import { boardRouter } from "../modules/board/board.router"
+import { columnRouter } from "../modules/column/column.router"
 
 declare module "fastify" {
   interface FastifyRequest {
@@ -28,6 +29,7 @@ export async function buildServer({ db }: { db: DB }) {
   fastify.after(() => {
     fastify.register(projectRouter, { prefix: "/v1/projects" })
     fastify.register(boardRouter, { prefix: "/v1/boards" })
+    fastify.register(columnRouter, { prefix: "/v1/columns" })
 
     fastify.get("/healthcheck", async () => {
       return { status: "ok" }
