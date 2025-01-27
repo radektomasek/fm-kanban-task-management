@@ -41,3 +41,17 @@ export async function updateTaskById(
     logger.error({ taskId, message }, "updateTaskById: failed to update data")
   }
 }
+
+export async function deleteTaskById(taskId: string, db: DB) {
+  try {
+    const result = await db
+      .delete(tasks)
+      .where(eq(tasks.id, taskId))
+      .returning()
+
+    return result[0]
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown error"
+    logger.error({ taskId, message }, "deleteTaskById: failed to delete data")
+  }
+}
