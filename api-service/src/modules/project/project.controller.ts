@@ -1,3 +1,4 @@
+import { z } from "zod"
 import { FastifyReply, FastifyRequest } from "fastify"
 import { PostgresError as PostgresErrorEnum } from "pg-error-enum"
 import { PostgresError } from "postgres"
@@ -10,7 +11,6 @@ import {
 } from "./project.service"
 import { httpError } from "../../utils/http"
 import { logger } from "../../utils/logger"
-import { z } from "zod"
 
 export async function createProjectHandler(
   request: FastifyRequest<{ Body: z.infer<typeof createProjectSchema.body> }>,

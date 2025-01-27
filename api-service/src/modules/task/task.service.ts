@@ -42,6 +42,35 @@ export async function updateTaskById(
   }
 }
 
+export async function getTaskById(taskId: string, db: DB) {
+  try {
+    const result = await db.query.tasks.findFirst({
+      where: eq(tasks.id, taskId),
+    })
+
+    return result
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown error"
+    logger.error({ taskId, message }, "getTaskById: failed to select data")
+  }
+}
+
+export async function getTasksByBoardId(boardId: string, db: DB) {
+  try {
+    const result = await db.query.tasks.findMany({
+      where: eq(tasks.boardId, boardId),
+    })
+
+    return result
+  } catch (error) {
+    const message = error instanceof Error ? error.message : "Unknown error"
+    logger.error(
+      { boardId, message },
+      "getTasksByBoardId: failed to select data"
+    )
+  }
+}
+
 export async function deleteTaskById(taskId: string, db: DB) {
   try {
     const result = await db
