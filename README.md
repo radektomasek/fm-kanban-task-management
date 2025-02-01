@@ -27,7 +27,7 @@ The frontend part of the app will be available in the [web-client](./web-client)
 
 ### Backend Service
 
-- [Golang](https://go.dev)
+- [Node.js](https://nodejs.org/en)
 
 ### Native Mobile App
 
