@@ -29,10 +29,6 @@ The frontend part of the app will be available in the [web-client](./web-client)
 
 - [Node.js](https://nodejs.org/en)
 
-### Native Mobile App
-
-- [React Native](https://reactnative.dev)
-
 ## Contact
 
 If you have any question, feel free to drop an email at [radek.tomasek@gmail.com](mailto:radek.tomasek@gmail.com).
