@@ -28,6 +28,9 @@ The frontend part of the app will be available in the [web-client](./web-client)
 ### Backend Service
 
 - [Node.js](https://nodejs.org/en)
+- [DrizzleORM](https://orm.drizzle.team)
+- [PostgreSQL](https://www.postgresql.org)
+- [Zod](https://zod.dev)
 
 ## Contact
 
