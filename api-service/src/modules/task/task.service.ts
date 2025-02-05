@@ -5,10 +5,10 @@ import { logger } from "../../utils/logger"
 
 export async function createTask(
   input: InferInsertModel<typeof tasks>,
-  db: DB
+  trx: Parameters<Parameters<DB["transaction"]>[0]>[0]
 ) {
   try {
-    const result = await db.insert(tasks).values(input).returning()
+    const result = await trx.insert(tasks).values(input).returning()
 
     return result[0]
   } catch (error) {
@@ -26,10 +26,10 @@ export async function updateTaskById(
       "boardId" | "title" | "columnId" | "description" | "position"
     >
   >,
-  db: DB
+  trx: Parameters<Parameters<DB["transaction"]>[0]>[0]
 ) {
   try {
-    const result = await db
+    const result = await trx
       .update(tasks)
       .set(props)
       .where(eq(tasks.id, taskId))
